@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fake Kaiser Quizzer - Modern Light Edition</title>
     <!-- Tailwind CSS CDN -->
+    <!-- WELCOME SCREEN -->
+<div id="welcome-view" class="view-panel active">
+  <div class="hero-badge">Ready for this insanely hard questions?</div>
+  <h1 class="main-title">not very responsive ahh quiz</h1>
+  <p class="subtitle">Test your knowledge with my sloppily made quiz.</p>
+
+  <!--  -->
+  <img src="YOUR_IMAGE_URL_HERE" alt="Quiz Banner" class="welcome-image" />
+
+  ...
+</div>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -76,6 +87,15 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        .welcome-image {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 1.25rem 0;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+} 
 
         /* Smooth View Transitions */
         .view-transition {
