@@ -3,65 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Master - Modern Dark Edition</title>
+    <title>Fake Kaiser Quizzer - Modern Light Edition</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Font Inter & Plus Jakarta Sans -->
+    <!-- Font Plus Jakarta Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-       body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #f8fafc; /* Crisp light gray background */
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.08) 0px, transparent 50%);
-  color: #0f172a; /* Dark text */
-  min-height: 100vh;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
         }
 
-        /* Ambient Glow & Radial Backdrops */
+        /* Subtle Ambient Glow Backdrops for Light Theme */
         .glow-bg {
-            background: 
-                radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.08) 0%, transparent 60%);
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.08) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(168, 85, 247, 0.05) 0px, transparent 60%);
+            background-attachment: fixed;
         }
 
-        /* Glassmorphism Cards */
+        /* Modern Frosted White Glass Cards */
         .glass-card {
-            background: rgba(15, 23, 42, 0.65);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.07), 0 1px 3px rgba(0, 0, 0, 0.03);
         }
 
         .glass-card-sm {
-            background: rgba(30, 41, 59, 0.4);
+            background: rgba(248, 250, 252, 0.7);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(226, 232, 240, 0.8);
         }
 
-        /* Subtle Hover Glow Effects */
-        .hover-glow {
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Hover & Elevate Styling */
+        .option-btn {
+            background-color: #f1f5f9;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .hover-glow:hover {
-            border-color: rgba(99, 102, 241, 0.4);
-            box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.3);
+
+        .option-btn:hover:not(:disabled) {
+            border-color: rgba(99, 102, 241, 0.6);
+            background-color: #ffffff;
+            box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.15);
             transform: translateY(-2px);
+        }
+
+        /* Keyboard Badge Styling */
+        .key-badge {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         /* Animated Progress Bar Gradient */
         .gradient-bar {
-            background: linear-gradient(90deg, #6366f1, #a855f7, #3b82f6);
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6, #06b6d4);
             background-size: 200% 100%;
             animation: gradientMove 4s ease infinite;
         }
@@ -72,15 +77,15 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Smooth View Fade Transitions */
+        /* Smooth View Transitions */
         .view-transition {
-            animation: fadeInScale 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeInScale 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes fadeInScale {
             from {
                 opacity: 0;
-                transform: scale(0.97) translateY(10px);
+                transform: scale(0.98) translateY(8px);
             }
             to {
                 opacity: 1;
@@ -93,42 +98,36 @@
             width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #080c14;
+            background: #f1f5f9;
         }
         ::-webkit-scrollbar-thumb {
-            background: #1e293b;
+            background: #cbd5e1;
             border-radius: 9999px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #334155;
+            background: #94a3b8;
         }
     </style>
 </head>
-<body class="bg-[#080c14] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white glow-bg">
-
-    <!-- Ambient Lighting Effects -->
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px]"></div>
-        <div class="absolute top-1/2 -right-40 w-96 h-96 bg-purple-600/15 rounded-full blur-[120px]"></div>
-    </div>
+<body class="bg-[#f8fafc] text-slate-900 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white glow-bg">
 
     <!-- Header Navigation -->
-    <header class="border-b border-slate-800/80 bg-[#080c14]/70 backdrop-blur-xl sticky top-0 z-40">
+    <header class="border-b border-slate-200/80 bg-white/70 backdrop-blur-xl sticky top-0 z-40">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer group" onclick="resetToHome()">
-                <div class="bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-2.5 rounded-2xl text-white shadow-lg shadow-indigo-500/20 group-hover:shadow-indigo-500/40 transition duration-300">
+                <div class="bg-indigo-600 p-2.5 rounded-2xl text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition duration-300">
                     <i data-lucide="zap" class="w-5 h-5 fill-white"></i>
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                    <span class="font-extrabold text-lg tracking-tight text-slate-900">
                         QuizStudio
                     </span>
-                    <span class="text-[10px] text-indigo-400 tracking-wider uppercase font-semibold">Interactive Learning</span>
+                    <span class="text-[10px] text-indigo-600 tracking-wider uppercase font-bold">Interactive Learning</span>
                 </div>
             </div>
             
-            <button onclick="toggleInstructionsModal(true)" class="flex items-center space-x-2 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800/50 hover:bg-slate-800 border border-slate-700/60 px-3.5 py-2 rounded-xl transition duration-200 shadow-sm hover:border-slate-600">
-                <i data-lucide="code-2" class="w-4 h-4 text-indigo-400"></i>
+            <button onclick="toggleInstructionsModal(true)" class="flex items-center space-x-2 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 px-3.5 py-2 rounded-xl transition shadow-sm">
+                <i data-lucide="code-2" class="w-4 h-4 text-indigo-600"></i>
                 <span class="hidden sm:inline">Edit Questions</span>
             </button>
         </div>
@@ -140,74 +139,74 @@
         <!-- 1. START / LANDING VIEW -->
         <section id="start-card" class="w-full glass-card rounded-3xl p-6 sm:p-12 transition-all duration-300 view-transition">
             <div class="text-center space-y-6 max-w-2xl mx-auto">
-                <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold">
-                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                    <span>Customizable & Instant Feedback</span>
+                <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-600"></i>
+                    <span>Supports 1-4 & Enter Shortcuts</span>
                 </div>
 
-                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-                    Test Your Knowledge with <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Style</span>
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                    Test Your Knowledge with <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-600 bg-clip-text text-transparent">Precision</span>
                 </h1>
                 
-                <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
-                    Challenge yourself or test others. Customize your experience below before stepping into the arena.
+                <p class="text-slate-500 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
+                    Challenge yourself with an ultra-responsive quiz interface. Use your keyboard numbers <span class="font-bold text-slate-700">[1-4]</span> and <span class="font-bold text-slate-700">[Enter]</span> for lighting-fast navigation!
                 </p>
 
                 <!-- Settings Controls -->
-                <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
-                    <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer border border-slate-800/80 hover:border-slate-700 transition">
+                <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+                    <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer hover:border-slate-300 transition">
                         <div class="space-y-0.5">
-                            <span class="text-sm font-semibold text-slate-200 block">Shuffle Questions</span>
-                            <span class="text-xs text-slate-400 block">Randomize question order</span>
+                            <span class="text-sm font-semibold text-slate-800 block">Shuffle Questions</span>
+                            <span class="text-xs text-slate-500 block">Randomize question order</span>
                         </div>
-                        <input type="checkbox" id="setting-shuffle-questions" checked class="w-5 h-5 accent-indigo-500 rounded cursor-pointer">
+                        <input type="checkbox" id="setting-shuffle-questions" checked class="w-5 h-5 accent-indigo-600 rounded cursor-pointer">
                     </label>
 
-                    <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer border border-slate-800/80 hover:border-slate-700 transition">
+                    <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer hover:border-slate-300 transition">
                         <div class="space-y-0.5">
-                            <span class="text-sm font-semibold text-slate-200 block">Shuffle Options</span>
-                            <span class="text-xs text-slate-400 block">Randomize answer locations</span>
+                            <span class="text-sm font-semibold text-slate-800 block">Shuffle Options</span>
+                            <span class="text-xs text-slate-500 block">Randomize answer locations</span>
                         </div>
-                        <input type="checkbox" id="setting-shuffle-answers" checked class="w-5 h-5 accent-indigo-500 rounded cursor-pointer">
+                        <input type="checkbox" id="setting-shuffle-answers" checked class="w-5 h-5 accent-indigo-600 rounded cursor-pointer">
                     </label>
                 </div>
 
                 <!-- Instant Feedback Mode Toggle -->
-                <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer border border-slate-800/80 hover:border-slate-700 transition text-left">
+                <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer hover:border-slate-300 transition text-left">
                     <div class="space-y-0.5">
-                        <span class="text-sm font-semibold text-slate-200 block">Instant Answer Feedback</span>
-                        <span class="text-xs text-slate-400 block">Show correct/incorrect colors immediately upon clicking an option</span>
+                        <span class="text-sm font-semibold text-slate-800 block">Instant Answer Feedback</span>
+                        <span class="text-xs text-slate-500 block">Highlight correct/incorrect answers immediately when clicked</span>
                     </div>
-                    <input type="checkbox" id="setting-instant-feedback" checked class="w-5 h-5 accent-indigo-500 rounded cursor-pointer">
+                    <input type="checkbox" id="setting-instant-feedback" checked class="w-5 h-5 accent-indigo-600 rounded cursor-pointer">
                 </label>
 
                 <!-- Start Action Button -->
                 <div class="pt-4">
-                    <button onclick="startQuiz()" class="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-xl shadow-indigo-600/30 transition duration-200 active:scale-[0.98] inline-flex items-center justify-center space-x-3 text-base sm:text-lg">
+                    <button onclick="startQuiz()" class="w-full sm:w-auto px-10 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-600/20 transition duration-200 active:scale-[0.98] inline-flex items-center justify-center space-x-3 text-base sm:text-lg">
                         <span>Begin Quiz</span>
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        <span class="text-xs bg-indigo-500/40 text-white px-2 py-0.5 rounded font-mono font-normal">[Enter]</span>
                     </button>
                 </div>
             </div>
         </section>
 
         <!-- 2. ACTIVE QUIZ CARD -->
-        <section id="quiz-card" class="hidden w-full glass-card rounded-3xl p-6 sm:p-10 shadow-2xl transition-all duration-300">
+        <section id="quiz-card" class="hidden w-full glass-card rounded-3xl p-6 sm:p-10 transition-all duration-300">
             <!-- Header Progress & Counter -->
             <div class="space-y-3 mb-8">
-                <div class="flex justify-between items-center text-xs sm:text-sm font-bold tracking-wider text-slate-400">
-                    <span id="question-tracker" class="uppercase text-slate-300">QUESTION 1 OF 5</span>
-                    <span id="progress-percentage" class="text-indigo-400">20%</span>
+                <div class="flex justify-between items-center text-xs sm:text-sm font-bold tracking-wider text-slate-500">
+                    <span id="question-tracker" class="uppercase text-slate-600">QUESTION 1 OF 5</span>
+                    <span id="progress-percentage" class="text-indigo-600 font-extrabold">20%</span>
                 </div>
                 <!-- Animated Progress Bar -->
-                <div class="w-full bg-slate-800/80 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-700/40">
+                <div class="w-full bg-slate-200/80 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-200">
                     <div id="progress-bar" class="gradient-bar h-full w-0 transition-all duration-500 ease-out rounded-full"></div>
                 </div>
             </div>
 
             <!-- Question Card -->
             <div class="mb-8 space-y-3">
-                <h2 id="question-text" class="text-xl sm:text-2xl font-bold text-white leading-relaxed tracking-tight">
+                <h2 id="question-text" class="text-xl sm:text-2xl font-bold text-slate-900 leading-relaxed tracking-tight">
                     <!-- Question populates dynamically -->
                 </h2>
             </div>
@@ -217,64 +216,66 @@
                 <!-- Options populate dynamically -->
             </div>
 
-            <!-- Explanatory Feedback Box (shown on instant feedback mode) -->
-            <div id="explanation-box" class="hidden mb-8 p-4 rounded-2xl glass-card-sm border border-slate-700/60 text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <!-- Explanatory Feedback Box -->
+            <div id="explanation-box" class="hidden mb-8 p-4 rounded-2xl bg-indigo-50/70 border border-indigo-100 text-xs sm:text-sm text-slate-700 leading-relaxed">
                 <!-- Dynamic feedback comment -->
             </div>
 
             <!-- Footer Controls -->
-            <div class="flex justify-between items-center border-t border-slate-800/80 pt-6">
-                <button id="btn-prev" onclick="navigateQuestion(-1)" class="opacity-0 pointer-events-none px-4 py-2.5 text-slate-400 hover:text-white flex items-center space-x-2 rounded-xl transition text-sm font-semibold">
+            <div class="flex justify-between items-center border-t border-slate-200/80 pt-6">
+                <button id="btn-prev" onclick="navigateQuestion(-1)" class="opacity-0 pointer-events-none px-4 py-2.5 text-slate-500 hover:text-slate-800 flex items-center space-x-2 rounded-xl transition text-sm font-semibold">
                     <i data-lucide="chevron-left" class="w-4 h-4"></i>
                     <span>Previous</span>
                 </button>
 
-                <button id="btn-next" onclick="navigateQuestion(1)" disabled class="px-7 py-3.5 bg-slate-800/80 text-slate-500 font-semibold rounded-2xl transition border border-slate-700/50 flex items-center space-x-2 text-sm">
+                <button id="btn-next" onclick="navigateQuestion(1)" disabled class="px-7 py-3.5 bg-slate-200 text-slate-400 font-semibold rounded-2xl transition flex items-center space-x-2 text-sm">
                     <span id="next-btn-text">Next Question</span>
+                    <span id="next-key-badge" class="hidden text-[10px] bg-white/30 text-white px-1.5 py-0.5 rounded font-mono">[Enter]</span>
                     <i data-lucide="chevron-right" class="w-4 h-4"></i>
                 </button>
             </div>
         </section>
 
         <!-- 3. RESULTS SUMMARY CARD -->
-        <section id="results-card" class="hidden w-full glass-card rounded-3xl p-6 sm:p-12 shadow-2xl transition-all duration-300">
+        <section id="results-card" class="hidden w-full glass-card rounded-3xl p-6 sm:p-12 transition-all duration-300">
             <div class="text-center space-y-8 max-w-2xl mx-auto">
-                <div class="inline-flex p-5 rounded-3xl bg-slate-800/80 border border-slate-700/60 shadow-2xl shadow-indigo-500/10">
-                    <i id="result-icon" data-lucide="trophy" class="w-14 h-14 text-amber-400"></i>
+                <div class="inline-flex p-5 rounded-3xl bg-indigo-50 border border-indigo-100 shadow-sm">
+                    <i id="result-icon" data-lucide="trophy" class="w-14 h-14 text-amber-500"></i>
                 </div>
 
                 <div class="space-y-2">
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Quiz Completed!</h2>
-                    <p id="result-feedback" class="text-slate-400 text-sm sm:text-base">Outstanding job finishing the assessment!</p>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Quiz Completed!</h2>
+                    <p id="result-feedback" class="text-slate-500 text-sm sm:text-base">Outstanding job finishing the assessment!</p>
                 </div>
 
                 <!-- Score Metric Card -->
-                <div class="p-8 glass-card-sm border border-slate-800 rounded-3xl inline-block w-full sm:w-auto min-w-[280px]">
-                    <div class="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-1">Final Score</div>
-                    <div class="text-5xl font-black text-white tracking-tight" id="final-score-text">0 / 0</div>
-                    <div class="text-sm font-semibold text-slate-400 mt-2" id="final-percentage-text">(0%)</div>
+                <div class="p-8 glass-card-sm border border-slate-200 rounded-3xl inline-block w-full sm:w-auto min-w-[280px]">
+                    <div class="text-xs font-extrabold text-indigo-600 uppercase tracking-widest mb-1">Final Score</div>
+                    <div class="text-5xl font-black text-slate-900 tracking-tight" id="final-score-text">0 / 0</div>
+                    <div class="text-sm font-bold text-slate-500 mt-2" id="final-percentage-text">(0%)</div>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap justify-center gap-4 pt-2">
-                    <button onclick="startQuiz()" class="px-7 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-2xl transition shadow-lg shadow-indigo-600/20 inline-flex items-center space-x-2 text-sm">
+                    <button onclick="startQuiz()" class="px-7 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl transition shadow-lg shadow-indigo-600/20 inline-flex items-center space-x-2 text-sm">
                         <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
-                        <span>Retake Assessment</span>
+                        <span>Retake Quiz</span>
+                        <span class="text-xs bg-indigo-500/40 text-white px-2 py-0.5 rounded font-mono font-normal">[Enter]</span>
                     </button>
-                    <button onclick="toggleReviewSection()" class="px-7 py-3.5 bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 font-semibold rounded-2xl border border-slate-700/60 transition inline-flex items-center space-x-2 text-sm">
-                        <i data-lucide="eye" class="w-4 h-4"></i>
+                    <button onclick="toggleReviewSection()" class="px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-2xl border border-slate-200 transition inline-flex items-center space-x-2 text-sm shadow-sm">
+                        <i data-lucide="eye" class="w-4 h-4 text-slate-500"></i>
                         <span id="review-btn-text">Review Answers</span>
                     </button>
                 </div>
 
                 <!-- Review Section -->
-                <div id="review-container" class="hidden text-left pt-6 border-t border-slate-800/80 space-y-4 max-h-[420px] overflow-y-auto pr-2">
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center space-x-2">
-                        <i data-lucide="check-circle-2" class="w-5 h-5 text-indigo-400"></i>
+                <div id="review-container" class="hidden text-left pt-6 border-t border-slate-200/80 space-y-4 max-h-[420px] overflow-y-auto pr-2">
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 flex items-center space-x-2">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-indigo-600"></i>
                         <span>Detailed Breakdown</span>
                     </h3>
                     <div id="review-list" class="space-y-4">
-                        <!-- Dynamic Nodes -->
+                        <!-- Dynamic Review Items -->
                     </div>
                 </div>
             </div>
@@ -283,53 +284,50 @@
     </main>
 
     <!-- Footer -->
-    <footer class="relative z-10 border-t border-slate-800/60 py-5 text-center text-xs text-slate-500">
+    <footer class="relative z-10 border-t border-slate-200/80 py-5 text-center text-xs text-slate-500">
         QuizStudio &bull; Crafted with HTML, Tailwind CSS & Vanilla JS
     </footer>
 
     <!-- INSTRUCTIONS / EDIT MODAL -->
-    <div id="instructions-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-card rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto border border-slate-700/60">
-            <button onclick="toggleInstructionsModal(false)" class="absolute top-6 right-6 text-slate-400 hover:text-white p-1 rounded-xl hover:bg-slate-800/60 transition">
+    <div id="instructions-modal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-card rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto border border-slate-200">
+            <button onclick="toggleInstructionsModal(false)" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 p-1 rounded-xl hover:bg-slate-100 transition">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
 
-            <div class="flex items-center space-x-3 text-indigo-400">
+            <div class="flex items-center space-x-3 text-indigo-600">
                 <i data-lucide="edit-3" class="w-6 h-6"></i>
-                <h3 class="text-xl font-bold text-white">How to Edit Questions</h3>
+                <h3 class="text-xl font-bold text-slate-900">How to Edit Questions</h3>
             </div>
 
-            <div class="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <div class="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
                 <p>
-                    Questions are defined at the very top of the script tag in this <code class="text-indigo-300 font-mono">index.html</code> file.
+                    Questions are stored at the top of the script block in this <code class="text-indigo-600 font-mono font-bold">index.html</code> file.
                 </p>
-                <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 space-y-1 font-mono text-xs">
-                    <span class="text-slate-500">// Open index.html and locate:</span><br>
+                <div class="bg-slate-900 text-slate-100 rounded-2xl p-4 space-y-1 font-mono text-xs">
+                    <span class="text-slate-400">// Open index.html and locate:</span><br>
                     <span class="text-purple-400">const</span> <span class="text-blue-400">QUIZ_DATA</span> = [ ... ];
                 </div>
-                <p>Structure format for each question:</p>
-                <pre class="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 overflow-x-auto text-xs font-mono text-slate-300">
+                <p>Format structure for each item:</p>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 overflow-x-auto text-xs font-mono">
 {
   id: 1,
   question: "Your custom question here?",
   options: ["Option A", "Option B", "Option C", "Option D"],
-  answer: 2, // 0 = Option A, 1 = Option B, 2 = Option C, etc.
-  explanation: "Optional explanation displayed after selecting an answer."
+  answer: 2, // 0 = A, 1 = B, 2 = C, 3 = D
+  explanation: "Optional brief explanation text."
 }</pre>
-                <p class="text-slate-400">
-                    Once modified, commit your changes back to GitHub and your host will automatically publish the new version!
-                </p>
             </div>
 
             <div class="pt-2">
-                <button onclick="toggleInstructionsModal(false)" class="w-full py-3.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-2xl border border-slate-700 transition">
+                <button onclick="toggleInstructionsModal(false)" class="w-full py-3.5 bg-slate-900 text-white font-semibold rounded-2xl hover:bg-slate-800 transition">
                     Close
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT QUIZ ENGINE -->
+    <!-- JAVASCRIPT ENGINE -->
     <script>
         /**
          * =================================================================
@@ -339,48 +337,48 @@
         const QUIZ_DATA = [
             {
                 id: 1,
-                question: "Which language runs natively in web browsers?",
+                question: "Which language runs natively inside web browsers?",
                 options: ["Java", "C++", "Python", "JavaScript"],
                 answer: 3,
-                explanation: "JavaScript is the primary programming language natively interpreted by modern web browsers."
+                explanation: "JavaScript is the primary programming language natively executed by modern web browsers."
             },
             {
                 id: 2,
-                question: "What does CSS stand for?",
+                question: "What does CSS stand for in web development?",
                 options: ["Cascading Style Sheets", "Central Style Service", "Control Sheet System", "Colorful Style System"],
                 answer: 0,
-                explanation: "CSS stands for Cascading Style Sheets, used for describing the presentation of HTML documents."
+                explanation: "CSS stands for Cascading Style Sheets, used to style HTML markup."
             },
             {
                 id: 3,
-                question: "What year was JavaScript originally created?",
-                options: ["1996", "1995", "1994", "2001"],
-                answer: 1,
-                explanation: "JavaScript was created in May 1995 by Brendan Eich in just 10 days while working at Netscape."
+                question: "Which HTML tag is used to attach client-side scripts?",
+                options: ["<script>", "<style>", "<code_block>", "<js>"],
+                answer: 0,
+                explanation: "The <script> tag embeds executable JavaScript code."
             },
             {
                 id: 4,
-                question: "Which HTML tag is used to embed client-side scripts?",
-                options: ["<script>", "<style>", "<code_block>", "<js>"],
-                answer: 0,
-                explanation: "The <script> tag is used to embed executable client-side scripts such as JavaScript."
+                question: "What CSS layout model provides a 1-dimensional alignment mechanism?",
+                options: ["Grid", "Flexbox", "Table", "Position"],
+                answer: 1,
+                explanation: "Flexbox (Flexible Box Layout) arranges items along a single axis (row or column)."
             },
             {
                 id: 5,
-                question: "Which CSS layout module provides a 1-dimensional layout system?",
-                options: ["Grid", "Flexbox", "Table", "Position"],
-                answer: 1,
-                explanation: "Flexbox (Flexible Box Layout) is designed for 1D layout along rows or columns."
+                question: "Which HTTP status code represents 'Not Found'?",
+                options: ["200", "500", "404", "403"],
+                answer: 2,
+                explanation: "HTTP 404 indicates that the requested server resource could not be found."
             }
         ];
 
-        // --- GAME STATE VARIABLES ---
+        // --- STATE CONTROL ---
         let currentQuestions = [];
         let currentIndex = 0;
-        let userAnswers = {}; // Map of index -> chosen option index
+        let userAnswers = {}; // Index mapping -> chosen option index
         let instantFeedbackEnabled = true;
 
-        // --- DOM ELEMENTS ---
+        // --- DOM REFERENCE ---
         const startCard = document.getElementById('start-card');
         const quizCard = document.getElementById('quiz-card');
         const resultsCard = document.getElementById('results-card');
@@ -395,8 +393,9 @@
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
         const nextBtnText = document.getElementById('next-btn-text');
+        const nextKeyBadge = document.getElementById('next-key-badge');
 
-        // --- UTILITY FUNCTIONS ---
+        // --- UTILITY ---
         function shuffleArray(array) {
             const arr = [...array];
             for (let i = arr.length - 1; i > 0; i--) {
@@ -408,9 +407,58 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
+            setupKeyboardListeners();
         });
 
-        // --- CORE QUIZ LOGIC ---
+        // --- KEYBOARD SHORTCUTS ENGINE ---
+        function setupKeyboardListeners() {
+            window.addEventListener('keydown', (e) => {
+                // Ignore keypresses if user is typing inside an input field
+                if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+                const key = e.key;
+
+                // 1. WELCOME SCREEN: [Enter] to start
+                if (!startCard.classList.contains('hidden')) {
+                    if (key === 'Enter') {
+                        e.preventDefault();
+                        startQuiz();
+                    }
+                    return;
+                }
+
+                // 2. RESULTS SCREEN: [Enter] to restart
+                if (!resultsCard.classList.contains('hidden')) {
+                    if (key === 'Enter') {
+                        e.preventDefault();
+                        startQuiz();
+                    }
+                    return;
+                }
+
+                // 3. QUIZ SCREEN: Options 1-4 & Enter navigation
+                if (!quizCard.classList.contains('hidden')) {
+                    // Option Selection (Keys 1, 2, 3, 4 or Numpad 1-4)
+                    if (['1', '2', '3', '4'].includes(key)) {
+                        const optIdx = parseInt(key, 10) - 1;
+                        if (currentQuestions[currentIndex] && optIdx < currentQuestions[currentIndex].options.length) {
+                            selectOption(optIdx);
+                        }
+                    }
+
+                    // Confirm / Next Question (Enter or Space)
+                    if (key === 'Enter' || key === ' ') {
+                        e.preventDefault();
+                        const hasAnswered = userAnswers.hasOwnProperty(currentIndex);
+                        if (hasAnswered) {
+                            navigateQuestion(1);
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- QUIZ LOGIC ---
         function startQuiz() {
             const shouldShuffleQuestions = document.getElementById('setting-shuffle-questions').checked;
             const shouldShuffleAnswers = document.getElementById('setting-shuffle-answers').checked;
@@ -451,7 +499,7 @@
             const q = currentQuestions[currentIndex];
             const total = currentQuestions.length;
 
-            // Tracker & Progress Bar
+            // Progress Header
             questionTracker.innerText = `QUESTION ${currentIndex + 1} OF ${total}`;
             const percentage = Math.round(((currentIndex + 1) / total) * 100);
             progressPercentage.innerText = `${percentage}%`;
@@ -471,56 +519,59 @@
                 const btn = document.createElement('button');
                 btn.onclick = () => selectOption(optIndex);
 
-                let styling = "w-full text-left p-4 rounded-2xl border transition-all duration-200 flex items-center justify-between group hover-glow ";
+                let styling = "w-full text-left p-4 option-btn flex items-center justify-between group ";
 
                 if (hasAnswered && instantFeedbackEnabled) {
                     if (isCorrect) {
-                        styling += "bg-emerald-500/15 border-emerald-500/60 text-white shadow-lg shadow-emerald-500/10 ";
+                        styling += "bg-emerald-50 border-emerald-500 text-emerald-900 shadow-md shadow-emerald-500/10 ";
                     } else if (isSelected && !isCorrect) {
-                        styling += "bg-rose-500/15 border-rose-500/60 text-white shadow-lg shadow-rose-500/10 ";
+                        styling += "bg-rose-50 border-rose-400 text-rose-900 shadow-md shadow-rose-500/10 ";
                     } else {
-                        styling += "glass-card-sm border-slate-800/80 text-slate-400 opacity-60 ";
+                        styling += "opacity-50 border-slate-200 text-slate-400 ";
                     }
                 } else if (isSelected) {
-                    styling += "bg-indigo-600/25 border-indigo-500 text-white shadow-lg shadow-indigo-500/20 ring-1 ring-indigo-500/50 ";
+                    styling += "bg-indigo-50/90 border-indigo-600 text-indigo-950 shadow-md shadow-indigo-600/10 ring-1 ring-indigo-600/30 ";
                 } else {
-                    styling += "glass-card-sm border-slate-700/50 text-slate-200 hover:border-slate-500 hover:bg-slate-800/60 ";
+                    styling += "text-slate-800 ";
                 }
 
                 btn.className = styling;
 
-                // Status Icon or Marker
-                let endIcon = `<div class="w-5 h-5 rounded-full border border-slate-600 flex items-center justify-center transition ${isSelected ? 'border-indigo-400 bg-indigo-500' : ''}">${isSelected ? '<i data-lucide="check" class="w-3.5 h-3.5 text-white"></i>' : ''}</div>`;
+                // Status Marker or Checkmark
+                let endIcon = `<div class="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center transition ${isSelected ? 'border-indigo-600 bg-indigo-600' : ''}">${isSelected ? '<i data-lucide="check" class="w-3.5 h-3.5 text-white"></i>' : ''}</div>`;
                 
                 if (hasAnswered && instantFeedbackEnabled) {
                     if (isCorrect) {
-                        endIcon = `<div class="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-emerald-400"><i data-lucide="check" class="w-4 h-4"></i></div>`;
+                        endIcon = `<div class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center"><i data-lucide="check" class="w-4 h-4"></i></div>`;
                     } else if (isSelected && !isCorrect) {
-                        endIcon = `<div class="w-6 h-6 rounded-full bg-rose-500/20 border border-rose-400 flex items-center justify-center text-rose-400"><i data-lucide="x" class="w-4 h-4"></i></div>`;
+                        endIcon = `<div class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></div>`;
                     }
                 }
 
                 btn.innerHTML = `
                     <div class="flex items-center space-x-3.5">
-                        <span class="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold ${
-                            isSelected ? 'bg-indigo-500 text-white' : 'bg-slate-800/80 border border-slate-700/80 text-slate-400'
+                        <span class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold ${
+                            isSelected ? 'bg-indigo-600 text-white' : 'bg-slate-200/80 text-slate-600'
                         }">
                             ${String.fromCharCode(65 + optIndex)}
                         </span>
                         <span class="text-sm sm:text-base font-medium">${optText}</span>
                     </div>
-                    ${endIcon}
+                    <div class="flex items-center space-x-2">
+                        <span class="key-badge text-[11px] font-semibold text-slate-500 px-1.5 py-0.5 rounded">${optIndex + 1}</span>
+                        ${endIcon}
+                    </div>
                 `;
                 optionsContainer.appendChild(btn);
             });
 
-            // Show explanation if answered and feature enabled
+            // Display Explanation Box if present
             if (hasAnswered && instantFeedbackEnabled && q.explanation) {
                 explanationBox.innerHTML = `
                     <div class="flex items-start space-x-2.5">
-                        <i data-lucide="info" class="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5"></i>
+                        <i data-lucide="info" class="w-4 h-4 text-indigo-600 flex-shrink-0 mt-0.5"></i>
                         <div>
-                            <span class="font-bold text-white block mb-0.5">Explanation</span>
+                            <span class="font-bold text-indigo-950 block mb-0.5">Explanation</span>
                             ${q.explanation}
                         </div>
                     </div>
@@ -530,20 +581,22 @@
 
             lucide.createIcons();
 
-            // Prev Button
+            // Previous Button visibility
             if (currentIndex > 0) {
                 btnPrev.classList.remove('opacity-0', 'pointer-events-none');
             } else {
                 btnPrev.classList.add('opacity-0', 'pointer-events-none');
             }
 
-            // Next Button enable state
+            // Next Button State
             if (hasAnswered) {
                 btnNext.removeAttribute('disabled');
-                btnNext.className = "px-7 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-600/25 transition flex items-center space-x-2 text-sm cursor-pointer active:scale-95";
+                btnNext.className = "px-7 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-600/20 transition flex items-center space-x-2 text-sm cursor-pointer active:scale-95";
+                nextKeyBadge.classList.remove('hidden');
             } else {
                 btnNext.setAttribute('disabled', 'true');
-                btnNext.className = "px-7 py-3.5 bg-slate-800/60 text-slate-500 font-semibold rounded-2xl border border-slate-800 transition flex items-center space-x-2 text-sm cursor-not-allowed";
+                btnNext.className = "px-7 py-3.5 bg-slate-200 text-slate-400 font-semibold rounded-2xl transition flex items-center space-x-2 text-sm cursor-not-allowed";
+                nextKeyBadge.classList.add('hidden');
             }
 
             nextBtnText.innerText = currentIndex === total - 1 ? 'View Results' : 'Next Question';
@@ -587,15 +640,15 @@
             const feedbackEl = document.getElementById('result-feedback');
 
             if (percentage === 100) {
-                feedbackEl.innerText = "Flawless performance! You mastered every question!";
+                feedbackEl.innerText = "Flawless score! You mastered every single question!";
                 iconEl.setAttribute('data-lucide', 'award');
-                iconEl.className = "w-14 h-14 text-amber-400";
+                iconEl.className = "w-14 h-14 text-amber-500";
             } else if (percentage >= 70) {
-                feedbackEl.innerText = "Great work! You demonstrated strong knowledge.";
+                feedbackEl.innerText = "Great work! You demonstrated solid understanding.";
                 iconEl.setAttribute('data-lucide', 'thumbs-up');
-                iconEl.className = "w-14 h-14 text-indigo-400";
+                iconEl.className = "w-14 h-14 text-indigo-600";
             } else {
-                feedbackEl.innerText = "Good try! Review your answers below and give it another go.";
+                feedbackEl.innerText = "Good effort! Review your breakdown below and try again.";
                 iconEl.setAttribute('data-lucide', 'refresh-cw');
                 iconEl.className = "w-14 h-14 text-slate-400";
             }
@@ -614,31 +667,31 @@
 
                 const card = document.createElement('div');
                 card.className = `p-4 sm:p-5 rounded-2xl border ${
-                    isCorrect ? 'bg-emerald-500/5 border-emerald-500/20' : 'bg-rose-500/5 border-rose-500/20'
+                    isCorrect ? 'bg-emerald-50/60 border-emerald-200' : 'bg-rose-50/60 border-rose-200'
                 }`;
 
                 card.innerHTML = `
                     <div class="flex items-start justify-between mb-2">
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Question ${idx + 1}</span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Question ${idx + 1}</span>
                         <span class="inline-flex items-center space-x-1 text-xs font-bold px-2.5 py-1 rounded-lg ${
-                            isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'
+                            isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
                         }">
                             <i data-lucide="${isCorrect ? 'check' : 'x'}" class="w-3.5 h-3.5"></i>
                             <span>${isCorrect ? 'Correct' : 'Incorrect'}</span>
                         </span>
                     </div>
-                    <p class="font-semibold text-white mb-3 text-sm sm:text-base">${q.question}</p>
+                    <p class="font-semibold text-slate-900 mb-3 text-sm sm:text-base">${q.question}</p>
                     <div class="space-y-1 text-xs sm:text-sm">
-                        <div class="text-slate-300">
-                            <span class="text-slate-500">Your Answer:</span> 
-                            <span class="${isCorrect ? 'text-emerald-400 font-semibold' : 'text-rose-400 font-semibold'}">
+                        <div class="text-slate-600">
+                            <span class="text-slate-400">Your Answer:</span> 
+                            <span class="${isCorrect ? 'text-emerald-700 font-semibold' : 'text-rose-700 font-semibold'}">
                                 ${userChoiceIndex !== undefined ? q.options[userChoiceIndex] : 'None'}
                             </span>
                         </div>
                         ${!isCorrect ? `
-                            <div class="text-slate-300">
-                                <span class="text-slate-500">Correct Answer:</span> 
-                                <span class="text-emerald-400 font-semibold">${q.options[q.answer]}</span>
+                            <div class="text-slate-600">
+                                <span class="text-slate-400">Correct Answer:</span> 
+                                <span class="text-emerald-700 font-semibold">${q.options[q.answer]}</span>
                             </div>
                         ` : ''}
                     </div>
