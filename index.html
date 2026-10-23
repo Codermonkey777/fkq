@@ -3,93 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Master - Custom Multiple Choice Quiz</title>
+    <title>Quiz Master - Modern Dark Edition</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Font Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Inter & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #080c14;
         }
-        /* Custom smooth scroll bar */
+
+        /* Ambient Glow & Radial Backdrops */
+        .glow-bg {
+            background: 
+                radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.08) 0%, transparent 60%);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-card-sm {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* Subtle Hover Glow Effects */
+        .hover-glow {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-glow:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Animated Progress Bar Gradient */
+        .gradient-bar {
+            background: linear-gradient(90deg, #6366f1, #a855f7, #3b82f6);
+            background-size: 200% 100%;
+            animation: gradientMove 4s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Smooth View Fade Transitions */
+        .view-transition {
+            animation: fadeInScale 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.97) translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #0f172a;
+            background: #080c14;
         }
         ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
+            background: #1e293b;
+            border-radius: 9999px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
+            background: #334155;
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+<body class="bg-[#080c14] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white glow-bg">
+
+    <!-- Ambient Lighting Effects -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/20 rounded-full blur-[120px]"></div>
+        <div class="absolute top-1/2 -right-40 w-96 h-96 bg-purple-600/15 rounded-full blur-[120px]"></div>
+    </div>
 
     <!-- Header Navigation -->
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="resetToHome()">
-                <div class="bg-gradient-to-tr from-indigo-500 to-purple-500 p-2 rounded-xl text-white shadow-lg shadow-indigo-500/20">
-                    <i data-lucide="help-circle" class="w-6 h-6"></i>
+    <header class="border-b border-slate-800/80 bg-[#080c14]/70 backdrop-blur-xl sticky top-0 z-40">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer group" onclick="resetToHome()">
+                <div class="bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 p-2.5 rounded-2xl text-white shadow-lg shadow-indigo-500/20 group-hover:shadow-indigo-500/40 transition duration-300">
+                    <i data-lucide="zap" class="w-5 h-5 fill-white"></i>
                 </div>
-                <span class="font-bold text-xl tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-                    Quiz App
-                </span>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                        QuizStudio
+                    </span>
+                    <span class="text-[10px] text-indigo-400 tracking-wider uppercase font-semibold">Interactive Learning</span>
+                </div>
             </div>
             
-            <button onclick="toggleInstructionsModal(true)" class="flex items-center space-x-2 text-sm text-slate-400 hover:text-indigo-400 bg-slate-800/60 hover:bg-slate-800 border border-slate-700/50 px-3.5 py-2 rounded-xl transition duration-200">
-                <i data-lucide="code-2" class="w-4 h-4"></i>
-                <span>How to Edit Questions</span>
+            <button onclick="toggleInstructionsModal(true)" class="flex items-center space-x-2 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800/50 hover:bg-slate-800 border border-slate-700/60 px-3.5 py-2 rounded-xl transition duration-200 shadow-sm hover:border-slate-600">
+                <i data-lucide="code-2" class="w-4 h-4 text-indigo-400"></i>
+                <span class="hidden sm:inline">Edit Questions</span>
             </button>
         </div>
     </header>
 
     <!-- Main Container -->
-    <main class="flex-grow max-w-4xl w-full mx-auto p-4 sm:p-6 flex items-center justify-center">
+    <main class="relative z-10 flex-grow max-w-4xl w-full mx-auto p-4 sm:p-6 flex items-center justify-center">
 
         <!-- 1. START / LANDING VIEW -->
-        <section id="start-card" class="w-full bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl transition-all duration-300">
-            <div class="text-center space-y-4 max-w-2xl mx-auto">
-                <div class="inline-flex items-center justify-center p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-indigo-400 mb-2">
-                    <i data-lucide="sparkles" class="w-8 h-8"></i>
+        <section id="start-card" class="w-full glass-card rounded-3xl p-6 sm:p-12 transition-all duration-300 view-transition">
+            <div class="text-center space-y-6 max-w-2xl mx-auto">
+                <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Customizable & Instant Feedback</span>
                 </div>
-                <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-                    Ready to Test Your Knowledge?
+
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                    Test Your Knowledge with <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Style</span>
                 </h1>
-                <p class="text-slate-400 text-base sm:text-lg">
-                    Welcome! Customize your game settings below before diving into the quiz.
+                
+                <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
+                    Challenge yourself or test others. Customize your experience below before stepping into the arena.
                 </p>
 
                 <!-- Settings Controls -->
-                <div class="pt-6 pb-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
-                    <label class="flex items-center justify-between p-4 bg-slate-800/50 border border-slate-700/50 rounded-2xl cursor-pointer hover:border-slate-600 transition">
+                <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+                    <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer border border-slate-800/80 hover:border-slate-700 transition">
                         <div class="space-y-0.5">
                             <span class="text-sm font-semibold text-slate-200 block">Shuffle Questions</span>
-                            <span class="text-xs text-slate-400 block">Randomize the order of questions</span>
+                            <span class="text-xs text-slate-400 block">Randomize question order</span>
                         </div>
                         <input type="checkbox" id="setting-shuffle-questions" checked class="w-5 h-5 accent-indigo-500 rounded cursor-pointer">
                     </label>
 
-                    <label class="flex items-center justify-between p-4 bg-slate-800/50 border border-slate-700/50 rounded-2xl cursor-pointer hover:border-slate-600 transition">
+                    <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer border border-slate-800/80 hover:border-slate-700 transition">
                         <div class="space-y-0.5">
-                            <span class="text-sm font-semibold text-slate-200 block">Shuffle Answers</span>
-                            <span class="text-xs text-slate-400 block">Randomize choice position</span>
+                            <span class="text-sm font-semibold text-slate-200 block">Shuffle Options</span>
+                            <span class="text-xs text-slate-400 block">Randomize answer locations</span>
                         </div>
                         <input type="checkbox" id="setting-shuffle-answers" checked class="w-5 h-5 accent-indigo-500 rounded cursor-pointer">
                     </label>
                 </div>
 
+                <!-- Instant Feedback Mode Toggle -->
+                <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer border border-slate-800/80 hover:border-slate-700 transition text-left">
+                    <div class="space-y-0.5">
+                        <span class="text-sm font-semibold text-slate-200 block">Instant Answer Feedback</span>
+                        <span class="text-xs text-slate-400 block">Show correct/incorrect colors immediately upon clicking an option</span>
+                    </div>
+                    <input type="checkbox" id="setting-instant-feedback" checked class="w-5 h-5 accent-indigo-500 rounded cursor-pointer">
+                </label>
+
                 <!-- Start Action Button -->
                 <div class="pt-4">
-                    <button onclick="startQuiz()" class="w-full sm:w-auto px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-600/30 transition duration-200 active:scale-[0.98] inline-flex items-center justify-center space-x-2 text-lg">
-                        <span>Start Quiz</span>
+                    <button onclick="startQuiz()" class="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-2xl shadow-xl shadow-indigo-600/30 transition duration-200 active:scale-[0.98] inline-flex items-center justify-center space-x-3 text-base sm:text-lg">
+                        <span>Begin Quiz</span>
                         <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </button>
                 </div>
@@ -97,79 +182,89 @@
         </section>
 
         <!-- 2. ACTIVE QUIZ CARD -->
-        <section id="quiz-card" class="hidden w-full bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl transition-all duration-300">
-            <!-- Header: Progress & Counter -->
+        <section id="quiz-card" class="hidden w-full glass-card rounded-3xl p-6 sm:p-10 shadow-2xl transition-all duration-300">
+            <!-- Header Progress & Counter -->
             <div class="space-y-3 mb-8">
-                <div class="flex justify-between items-center text-sm font-medium text-slate-400">
-                    <span id="question-tracker">Question 1 of 5</span>
+                <div class="flex justify-between items-center text-xs sm:text-sm font-bold tracking-wider text-slate-400">
+                    <span id="question-tracker" class="uppercase text-slate-300">QUESTION 1 OF 5</span>
                     <span id="progress-percentage" class="text-indigo-400">20%</span>
                 </div>
-                <!-- Progress Bar -->
-                <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="bg-indigo-500 h-full w-0 transition-all duration-300 rounded-full"></div>
+                <!-- Animated Progress Bar -->
+                <div class="w-full bg-slate-800/80 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-700/40">
+                    <div id="progress-bar" class="gradient-bar h-full w-0 transition-all duration-500 ease-out rounded-full"></div>
                 </div>
             </div>
 
-            <!-- Question Text -->
-            <h2 id="question-text" class="text-xl sm:text-2xl font-bold text-white mb-6 leading-relaxed">
-                <!-- Question will populate here dynamically -->
-            </h2>
-
-            <!-- Answer Options Grid -->
-            <div id="options-container" class="grid grid-cols-1 gap-3 sm:gap-4 mb-8">
-                <!-- Options will populate here dynamically -->
+            <!-- Question Card -->
+            <div class="mb-8 space-y-3">
+                <h2 id="question-text" class="text-xl sm:text-2xl font-bold text-white leading-relaxed tracking-tight">
+                    <!-- Question populates dynamically -->
+                </h2>
             </div>
 
-            <!-- Quiz Controls Footer -->
+            <!-- Options Grid -->
+            <div id="options-container" class="grid grid-cols-1 gap-3 sm:gap-4 mb-8">
+                <!-- Options populate dynamically -->
+            </div>
+
+            <!-- Explanatory Feedback Box (shown on instant feedback mode) -->
+            <div id="explanation-box" class="hidden mb-8 p-4 rounded-2xl glass-card-sm border border-slate-700/60 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                <!-- Dynamic feedback comment -->
+            </div>
+
+            <!-- Footer Controls -->
             <div class="flex justify-between items-center border-t border-slate-800/80 pt-6">
-                <button id="btn-prev" onclick="navigateQuestion(-1)" class="opacity-0 pointer-events-none px-4 py-2 text-slate-400 hover:text-white flex items-center space-x-2 rounded-xl transition">
-                    <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                <button id="btn-prev" onclick="navigateQuestion(-1)" class="opacity-0 pointer-events-none px-4 py-2.5 text-slate-400 hover:text-white flex items-center space-x-2 rounded-xl transition text-sm font-semibold">
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
                     <span>Previous</span>
                 </button>
 
-                <button id="btn-next" onclick="navigateQuestion(1)" disabled class="px-6 py-3 bg-slate-800 text-slate-500 font-semibold rounded-xl transition cursor-not-allowed flex items-center space-x-2">
-                    <span id="next-btn-text">Next</span>
-                    <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                <button id="btn-next" onclick="navigateQuestion(1)" disabled class="px-7 py-3.5 bg-slate-800/80 text-slate-500 font-semibold rounded-2xl transition border border-slate-700/50 flex items-center space-x-2 text-sm">
+                    <span id="next-btn-text">Next Question</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
                 </button>
             </div>
         </section>
 
         <!-- 3. RESULTS SUMMARY CARD -->
-        <section id="results-card" class="hidden w-full bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl transition-all duration-300">
-            <div class="text-center space-y-6 max-w-2xl mx-auto">
-                <div class="inline-flex p-4 rounded-full bg-slate-800/80 border border-slate-700/50 shadow-inner">
-                    <i id="result-icon" data-lucide="trophy" class="w-12 h-12 text-yellow-400"></i>
+        <section id="results-card" class="hidden w-full glass-card rounded-3xl p-6 sm:p-12 shadow-2xl transition-all duration-300">
+            <div class="text-center space-y-8 max-w-2xl mx-auto">
+                <div class="inline-flex p-5 rounded-3xl bg-slate-800/80 border border-slate-700/60 shadow-2xl shadow-indigo-500/10">
+                    <i id="result-icon" data-lucide="trophy" class="w-14 h-14 text-amber-400"></i>
                 </div>
 
                 <div class="space-y-2">
-                    <h2 class="text-3xl font-extrabold text-white">Quiz Completed!</h2>
-                    <p id="result-feedback" class="text-slate-400">Great job completing the quiz!</p>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Quiz Completed!</h2>
+                    <p id="result-feedback" class="text-slate-400 text-sm sm:text-base">Outstanding job finishing the assessment!</p>
                 </div>
 
-                <!-- Score Badge -->
-                <div class="p-6 bg-slate-800/40 border border-slate-800 rounded-2xl inline-block w-full sm:w-auto min-w-[240px]">
-                    <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Your Final Score</div>
-                    <div class="text-4xl sm:text-5xl font-black text-indigo-400" id="final-score-text">0 / 0</div>
-                    <div class="text-sm text-slate-400 mt-2" id="final-percentage-text">(0%)</div>
+                <!-- Score Metric Card -->
+                <div class="p-8 glass-card-sm border border-slate-800 rounded-3xl inline-block w-full sm:w-auto min-w-[280px]">
+                    <div class="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-1">Final Score</div>
+                    <div class="text-5xl font-black text-white tracking-tight" id="final-score-text">0 / 0</div>
+                    <div class="text-sm font-semibold text-slate-400 mt-2" id="final-percentage-text">(0%)</div>
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex flex-wrap justify-center gap-3 pt-2">
-                    <button onclick="startQuiz()" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl transition shadow-lg shadow-indigo-600/20 inline-flex items-center space-x-2">
+                <div class="flex flex-wrap justify-center gap-4 pt-2">
+                    <button onclick="startQuiz()" class="px-7 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-2xl transition shadow-lg shadow-indigo-600/20 inline-flex items-center space-x-2 text-sm">
                         <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
-                        <span>Retake Quiz</span>
+                        <span>Retake Assessment</span>
                     </button>
-                    <button onclick="toggleReviewSection()" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl border border-slate-700 transition inline-flex items-center space-x-2">
+                    <button onclick="toggleReviewSection()" class="px-7 py-3.5 bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 font-semibold rounded-2xl border border-slate-700/60 transition inline-flex items-center space-x-2 text-sm">
                         <i data-lucide="eye" class="w-4 h-4"></i>
                         <span id="review-btn-text">Review Answers</span>
                     </button>
                 </div>
 
-                <!-- Review List Container (Hidden by default) -->
-                <div id="review-container" class="hidden text-left pt-6 border-t border-slate-800 space-y-4 max-h-[400px] overflow-y-auto pr-1">
-                    <h3 class="text-lg font-bold text-white mb-2">Detailed Answer Review</h3>
+                <!-- Review Section -->
+                <div id="review-container" class="hidden text-left pt-6 border-t border-slate-800/80 space-y-4 max-h-[420px] overflow-y-auto pr-2">
+                    <h3 class="text-lg font-bold text-white mb-2 flex items-center space-x-2">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-indigo-400"></i>
+                        <span>Detailed Breakdown</span>
+                    </h3>
                     <div id="review-list" class="space-y-4">
-                        <!-- Review item nodes will inject here -->
+                        <!-- Dynamic Nodes -->
                     </div>
                 </div>
             </div>
@@ -178,49 +273,47 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800/60 py-4 text-center text-xs text-slate-500">
-        Custom Quiz App &bull; Powered by HTML, CSS, and Vanilla JavaScript
+    <footer class="relative z-10 border-t border-slate-800/60 py-5 text-center text-xs text-slate-500">
+        QuizStudio &bull; Crafted with HTML, Tailwind CSS & Vanilla JS
     </footer>
 
-    <!-- INSTRUCTIONS MODAL -->
-    <div id="instructions-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto">
-            <button onclick="toggleInstructionsModal(false)" class="absolute top-6 right-6 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition">
+    <!-- INSTRUCTIONS / EDIT MODAL -->
+    <div id="instructions-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-card rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto border border-slate-700/60">
+            <button onclick="toggleInstructionsModal(false)" class="absolute top-6 right-6 text-slate-400 hover:text-white p-1 rounded-xl hover:bg-slate-800/60 transition">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
 
             <div class="flex items-center space-x-3 text-indigo-400">
                 <i data-lucide="edit-3" class="w-6 h-6"></i>
-                <h3 class="text-xl font-bold text-white">How to Edit or Add Questions</h3>
+                <h3 class="text-xl font-bold text-white">How to Edit Questions</h3>
             </div>
 
-            <div class="space-y-4 text-sm text-slate-300 leading-relaxed">
+            <div class="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
                 <p>
-                    All your questions live right inside this file! You don't need a database or back-end server.
+                    Questions are defined at the very top of the script tag in this <code class="text-indigo-300 font-mono">index.html</code> file.
                 </p>
-                <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 space-y-2 font-mono text-xs">
-                    <span class="text-slate-500">// 1. Open index.html in any text editor or VSCode</span><br>
-                    <span class="text-slate-500">// 2. Scroll to the bottom and locate:</span><br>
+                <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 space-y-1 font-mono text-xs">
+                    <span class="text-slate-500">// Open index.html and locate:</span><br>
                     <span class="text-purple-400">const</span> <span class="text-blue-400">QUIZ_DATA</span> = [ ... ];
                 </div>
-                <p>
-                    Each question object follows this simple structure:
-                </p>
-                <pre class="bg-slate-950 border border-slate-800 rounded-2xl p-4 overflow-x-auto text-xs font-mono text-slate-200">
+                <p>Structure format for each question:</p>
+                <pre class="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 overflow-x-auto text-xs font-mono text-slate-300">
 {
   id: 1,
-  question: "Your custom question text goes here?",
+  question: "Your custom question here?",
   options: ["Option A", "Option B", "Option C", "Option D"],
-  answer: 2 // Index of correct option (0 = Option A, 1 = Option B, etc.)
+  answer: 2, // 0 = Option A, 1 = Option B, 2 = Option C, etc.
+  explanation: "Optional explanation displayed after selecting an answer."
 }</pre>
-                <p>
-                    Simply edit the strings, save the file, commit your changes back to GitHub, and Vercel will auto-update your live web link in seconds!
+                <p class="text-slate-400">
+                    Once modified, commit your changes back to GitHub and your host will automatically publish the new version!
                 </p>
             </div>
 
             <div class="pt-2">
-                <button onclick="toggleInstructionsModal(false)" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl border border-slate-700 transition">
-                    Got it, close instructions
+                <button onclick="toggleInstructionsModal(false)" class="w-full py-3.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-2xl border border-slate-700 transition">
+                    Close
                 </button>
             </div>
         </div>
@@ -232,48 +325,50 @@
          * =================================================================
          * 📝 EDIT YOUR QUIZ QUESTIONS HERE!
          * =================================================================
-         * - 'question': The text shown to users.
-         * - 'options': Array of choices.
-         * - 'answer': The ZERO-BASED index of the correct answer in options.
-         *   (0 = 1st option, 1 = 2nd option, 2 = 3rd option, 3 = 4th option)
          */
         const QUIZ_DATA = [
             {
                 id: 1,
-                question: "yes bro?",
-                options: ["no", "yes", "bruh", "nah"],
-                answer: 2
+                question: "Which language runs natively in web browsers?",
+                options: ["Java", "C++", "Python", "JavaScript"],
+                answer: 3,
+                explanation: "JavaScript is the primary programming language natively interpreted by modern web browsers."
             },
             {
                 id: 2,
                 question: "What does CSS stand for?",
                 options: ["Cascading Style Sheets", "Central Style Service", "Control Sheet System", "Colorful Style System"],
-                answer: 0
+                answer: 0,
+                explanation: "CSS stands for Cascading Style Sheets, used for describing the presentation of HTML documents."
             },
             {
                 id: 3,
-                question: "What year was JavaScript launched?",
+                question: "What year was JavaScript originally created?",
                 options: ["1996", "1995", "1994", "2001"],
-                answer: 1
+                answer: 1,
+                explanation: "JavaScript was created in May 1995 by Brendan Eich in just 10 days while working at Netscape."
             },
             {
                 id: 4,
-                question: "Which HTML tag is used to define an inline style sheet?",
-                options: ["<script>", "<style>", "<css>", "<design>"],
-                answer: 1
+                question: "Which HTML tag is used to embed client-side scripts?",
+                options: ["<script>", "<style>", "<code_block>", "<js>"],
+                answer: 0,
+                explanation: "The <script> tag is used to embed executable client-side scripts such as JavaScript."
             },
             {
                 id: 5,
-                question: "Which platform allows you to deploy frontend web apps directly for free?",
-                options: ["Docker Engine", "Vercel", "Kubernetes", "Apache HTTP Server"],
-                answer: 1
+                question: "Which CSS layout module provides a 1-dimensional layout system?",
+                options: ["Grid", "Flexbox", "Table", "Position"],
+                answer: 1,
+                explanation: "Flexbox (Flexible Box Layout) is designed for 1D layout along rows or columns."
             }
         ];
 
         // --- GAME STATE VARIABLES ---
         let currentQuestions = [];
         let currentIndex = 0;
-        let userAnswers = {}; // Map of question index -> chosen option index
+        let userAnswers = {}; // Map of index -> chosen option index
+        let instantFeedbackEnabled = true;
 
         // --- DOM ELEMENTS ---
         const startCard = document.getElementById('start-card');
@@ -285,13 +380,13 @@
         const progressBar = document.getElementById('progress-bar');
         const questionText = document.getElementById('question-text');
         const optionsContainer = document.getElementById('options-container');
+        const explanationBox = document.getElementById('explanation-box');
 
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
         const nextBtnText = document.getElementById('next-btn-text');
 
         // --- UTILITY FUNCTIONS ---
-        // Helper to shuffle array elements in place (Fisher-Yates)
         function shuffleArray(array) {
             const arr = [...array];
             for (let i = arr.length - 1; i > 0; i--) {
@@ -301,7 +396,6 @@
             return arr;
         }
 
-        // Initialize icons
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
         });
@@ -310,11 +404,10 @@
         function startQuiz() {
             const shouldShuffleQuestions = document.getElementById('setting-shuffle-questions').checked;
             const shouldShuffleAnswers = document.getElementById('setting-shuffle-answers').checked;
+            instantFeedbackEnabled = document.getElementById('setting-instant-feedback').checked;
 
-            // Clone base question set
             let preparedQuestions = JSON.parse(JSON.stringify(QUIZ_DATA));
 
-            // Optional answer option shuffling
             if (shouldShuffleAnswers) {
                 preparedQuestions = preparedQuestions.map(q => {
                     const originalCorrectText = q.options[q.answer];
@@ -328,7 +421,6 @@
                 });
             }
 
-            // Optional question order shuffling
             if (shouldShuffleQuestions) {
                 preparedQuestions = shuffleArray(preparedQuestions);
             }
@@ -337,10 +429,10 @@
             currentIndex = 0;
             userAnswers = {};
 
-            // Hide main landing/results and render first question
             startCard.classList.add('hidden');
             resultsCard.classList.add('hidden');
             quizCard.classList.remove('hidden');
+            quizCard.classList.add('view-transition');
 
             renderQuestion();
         }
@@ -349,71 +441,102 @@
             const q = currentQuestions[currentIndex];
             const total = currentQuestions.length;
 
-            // Update Progress Tracking
-            questionTracker.innerText = `Question ${currentIndex + 1} of ${total}`;
+            // Tracker & Progress Bar
+            questionTracker.innerText = `QUESTION ${currentIndex + 1} OF ${total}`;
             const percentage = Math.round(((currentIndex + 1) / total) * 100);
             progressPercentage.innerText = `${percentage}%`;
             progressBar.style.width = `${percentage}%`;
 
-            // Update Question Title
             questionText.innerText = q.question;
-
-            // Clear and Render Answer Options
             optionsContainer.innerHTML = '';
+            explanationBox.classList.add('hidden');
+
+            const hasAnswered = userAnswers.hasOwnProperty(currentIndex);
+            const selectedOptIndex = userAnswers[currentIndex];
+
             q.options.forEach((optText, optIndex) => {
-                const isSelected = userAnswers[currentIndex] === optIndex;
+                const isSelected = selectedOptIndex === optIndex;
+                const isCorrect = q.answer === optIndex;
 
                 const btn = document.createElement('button');
                 btn.onclick = () => selectOption(optIndex);
 
-                // Default styling
-                btn.className = `w-full text-left p-4 rounded-2xl border transition duration-200 flex items-center justify-between group ${
-                    isSelected 
-                    ? 'bg-indigo-600/20 border-indigo-500 text-white shadow-lg shadow-indigo-500/10 ring-2 ring-indigo-500/50' 
-                    : 'bg-slate-800/40 border-slate-700/60 text-slate-200 hover:border-slate-500 hover:bg-slate-800/80'
-                }`;
+                let styling = "w-full text-left p-4 rounded-2xl border transition-all duration-200 flex items-center justify-between group hover-glow ";
+
+                if (hasAnswered && instantFeedbackEnabled) {
+                    if (isCorrect) {
+                        styling += "bg-emerald-500/15 border-emerald-500/60 text-white shadow-lg shadow-emerald-500/10 ";
+                    } else if (isSelected && !isCorrect) {
+                        styling += "bg-rose-500/15 border-rose-500/60 text-white shadow-lg shadow-rose-500/10 ";
+                    } else {
+                        styling += "glass-card-sm border-slate-800/80 text-slate-400 opacity-60 ";
+                    }
+                } else if (isSelected) {
+                    styling += "bg-indigo-600/25 border-indigo-500 text-white shadow-lg shadow-indigo-500/20 ring-1 ring-indigo-500/50 ";
+                } else {
+                    styling += "glass-card-sm border-slate-700/50 text-slate-200 hover:border-slate-500 hover:bg-slate-800/60 ";
+                }
+
+                btn.className = styling;
+
+                // Status Icon or Marker
+                let endIcon = `<div class="w-5 h-5 rounded-full border border-slate-600 flex items-center justify-center transition ${isSelected ? 'border-indigo-400 bg-indigo-500' : ''}">${isSelected ? '<i data-lucide="check" class="w-3.5 h-3.5 text-white"></i>' : ''}</div>`;
+                
+                if (hasAnswered && instantFeedbackEnabled) {
+                    if (isCorrect) {
+                        endIcon = `<div class="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-emerald-400"><i data-lucide="check" class="w-4 h-4"></i></div>`;
+                    } else if (isSelected && !isCorrect) {
+                        endIcon = `<div class="w-6 h-6 rounded-full bg-rose-500/20 border border-rose-400 flex items-center justify-center text-rose-400"><i data-lucide="x" class="w-4 h-4"></i></div>`;
+                    }
+                }
 
                 btn.innerHTML = `
-                    <div class="flex items-center space-x-3">
+                    <div class="flex items-center space-x-3.5">
                         <span class="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold ${
-                            isSelected ? 'bg-indigo-500 text-white' : 'bg-slate-800 border border-slate-700 text-slate-400 group-hover:border-slate-500'
+                            isSelected ? 'bg-indigo-500 text-white' : 'bg-slate-800/80 border border-slate-700/80 text-slate-400'
                         }">
                             ${String.fromCharCode(65 + optIndex)}
                         </span>
                         <span class="text-sm sm:text-base font-medium">${optText}</span>
                     </div>
-                    <div class="w-5 h-5 rounded-full border border-slate-600 flex items-center justify-center ${isSelected ? 'border-indigo-400 bg-indigo-500' : ''}">
-                        ${isSelected ? '<i data-lucide="check" class="w-3.5 h-3.5 text-white"></i>' : ''}
-                    </div>
+                    ${endIcon}
                 `;
                 optionsContainer.appendChild(btn);
             });
 
+            // Show explanation if answered and feature enabled
+            if (hasAnswered && instantFeedbackEnabled && q.explanation) {
+                explanationBox.innerHTML = `
+                    <div class="flex items-start space-x-2.5">
+                        <i data-lucide="info" class="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <span class="font-bold text-white block mb-0.5">Explanation</span>
+                            ${q.explanation}
+                        </div>
+                    </div>
+                `;
+                explanationBox.classList.remove('hidden');
+            }
+
             lucide.createIcons();
 
-            // Handle Previous Button visibility
+            // Prev Button
             if (currentIndex > 0) {
                 btnPrev.classList.remove('opacity-0', 'pointer-events-none');
             } else {
                 btnPrev.classList.add('opacity-0', 'pointer-events-none');
             }
 
-            // Handle Next Button state
-            const hasAnsweredCurrent = userAnswers.hasOwnProperty(currentIndex);
-            if (hasAnsweredCurrent) {
+            // Next Button enable state
+            if (hasAnswered) {
                 btnNext.removeAttribute('disabled');
-                btnNext.className = "px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/20 transition flex items-center space-x-2 cursor-pointer";
+                btnNext.className = "px-7 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-600/25 transition flex items-center space-x-2 text-sm cursor-pointer active:scale-95";
             } else {
                 btnNext.setAttribute('disabled', 'true');
-                btnNext.className = "px-6 py-3 bg-slate-800 text-slate-500 font-semibold rounded-xl transition cursor-not-allowed flex items-center space-x-2";
+                btnNext.className = "px-7 py-3.5 bg-slate-800/60 text-slate-500 font-semibold rounded-2xl border border-slate-800 transition flex items-center space-x-2 text-sm cursor-not-allowed";
             }
 
-            // Next button text toggle for final question
-            if (currentIndex === total - 1) {
-                nextBtnText.innerText = 'See Results';
-            } else {
-                nextBtnText.innerText = 'Next';
-            }
+            nextBtnText.innerText = currentIndex === total - 1 ? 'View Results' : 'Next Question';
         }
 
         function selectOption(index) {
@@ -435,8 +558,8 @@
         function showResults() {
             quizCard.classList.add('hidden');
             resultsCard.classList.remove('hidden');
+            resultsCard.classList.add('view-transition');
 
-            // Calculate Score
             let score = 0;
             currentQuestions.forEach((q, idx) => {
                 if (userAnswers[idx] === q.answer) {
@@ -450,22 +573,21 @@
             document.getElementById('final-score-text').innerText = `${score} / ${total}`;
             document.getElementById('final-percentage-text').innerText = `(${percentage}%)`;
 
-            // Dynamic icons & feedback according to score
             const iconEl = document.getElementById('result-icon');
             const feedbackEl = document.getElementById('result-feedback');
 
             if (percentage === 100) {
-                feedbackEl.innerText = "Flawless performance! You got every single question right!";
+                feedbackEl.innerText = "Flawless performance! You mastered every question!";
                 iconEl.setAttribute('data-lucide', 'award');
-                iconEl.className = "w-12 h-12 text-amber-400";
+                iconEl.className = "w-14 h-14 text-amber-400";
             } else if (percentage >= 70) {
-                feedbackEl.innerText = "Great work! You scored high on this quiz.";
+                feedbackEl.innerText = "Great work! You demonstrated strong knowledge.";
                 iconEl.setAttribute('data-lucide', 'thumbs-up');
-                iconEl.className = "w-12 h-12 text-indigo-400";
+                iconEl.className = "w-14 h-14 text-indigo-400";
             } else {
-                feedbackEl.innerText = "Good try! Give it another shot to boost your score.";
+                feedbackEl.innerText = "Good try! Review your answers below and give it another go.";
                 iconEl.setAttribute('data-lucide', 'refresh-cw');
-                iconEl.className = "w-12 h-12 text-slate-400";
+                iconEl.className = "w-14 h-14 text-slate-400";
             }
 
             lucide.createIcons();
@@ -481,13 +603,13 @@
                 const isCorrect = userChoiceIndex === q.answer;
 
                 const card = document.createElement('div');
-                card.className = `p-4 rounded-2xl border ${
+                card.className = `p-4 sm:p-5 rounded-2xl border ${
                     isCorrect ? 'bg-emerald-500/5 border-emerald-500/20' : 'bg-rose-500/5 border-rose-500/20'
                 }`;
 
                 card.innerHTML = `
                     <div class="flex items-start justify-between mb-2">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Question ${idx + 1}</span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Question ${idx + 1}</span>
                         <span class="inline-flex items-center space-x-1 text-xs font-bold px-2.5 py-1 rounded-lg ${
                             isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'
                         }">
@@ -495,8 +617,8 @@
                             <span>${isCorrect ? 'Correct' : 'Incorrect'}</span>
                         </span>
                     </div>
-                    <p class="font-semibold text-white mb-3 text-sm">${q.question}</p>
-                    <div class="space-y-1.5 text-xs">
+                    <p class="font-semibold text-white mb-3 text-sm sm:text-base">${q.question}</p>
+                    <div class="space-y-1 text-xs sm:text-sm">
                         <div class="text-slate-300">
                             <span class="text-slate-500">Your Answer:</span> 
                             <span class="${isCorrect ? 'text-emerald-400 font-semibold' : 'text-rose-400 font-semibold'}">
@@ -523,7 +645,7 @@
             
             if (container.classList.contains('hidden')) {
                 container.classList.remove('hidden');
-                btnText.innerText = "Hide Review";
+                btnText.innerText = "Hide Breakdown";
             } else {
                 container.classList.add('hidden');
                 btnText.innerText = "Review Answers";
@@ -534,6 +656,7 @@
             quizCard.classList.add('hidden');
             resultsCard.classList.add('hidden');
             startCard.classList.remove('hidden');
+            startCard.classList.add('view-transition');
         }
 
         function toggleInstructionsModal(show) {
