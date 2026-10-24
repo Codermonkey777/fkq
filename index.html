@@ -3,19 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fahhh</title>
-    <!-- Tailwind CSS CDN -->
+    <title>fahhhhhhhhhhhh</title> 
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Font Plus Jakarta Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f8fafc;
-        }
-
+        
         /* Subtle Ambient Glow Backdrops for Light Theme */
         .glow-bg {
             background-color: #f8fafc;
@@ -107,16 +100,33 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .screen {
+            display: none;
+            width: 100%;
+        }
+
+        .screen.active {
+            display: block;
+        }
     </style>
 </head>
-<body class="bg-[#f8fafc] text-slate-900 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white glow-bg">
+<body class="glow-bg text-slate-900">
 
     <!-- Header Navigation -->
     <header class="border-b border-slate-200/80 bg-white/70 backdrop-blur-xl sticky top-0 z-40">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer group" onclick="resetToHome()">
                 <div class="bg-indigo-600 p-2.5 rounded-2xl text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition duration-300">
-                    <i data-lucide="zap" class="w-5 h-5 fill-white"></i>
+                    <i id="random-header-icon" data-lucide="zap" class="w-5 h-5 fill-white"></i>
                 </div>
                 <div class="flex flex-col">
                     <span class="font-extrabold text-lg tracking-tight text-slate-900">
@@ -126,18 +136,16 @@
                 </div>
             </div>
             
-            <button onclick="toggleInstructionsModal(true)" class="flex items-center space-x-2 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 px-3.5 py-2 rounded-xl transition shadow-sm">
+            <button onclick="toggleInstructionsModal(true)" class="flex items-center space-x-2 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 px-3.5 py-2 rounded-xl transition shadow-sm cursor-pointer">
                 <i data-lucide="code-2" class="w-4 h-4 text-indigo-600"></i>
                 <span class="hidden sm:inline">instructions 4 me</span>
             </button>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="relative z-10 flex-grow max-w-4xl w-full mx-auto p-4 sm:p-6 flex items-center justify-center">
-
+    <main class="w-full max-w-2xl mx-auto my-auto p-4 sm:p-6">
         <!-- 1. START / LANDING VIEW -->
-        <section id="start-card" class="w-full glass-card rounded-3xl p-6 sm:p-12 transition-all duration-300 view-transition">
+        <section id="start-card" class="screen active w-full glass-card rounded-3xl p-6 sm:p-12 transition-all duration-300 view-transition">
             <div class="text-center space-y-6 max-w-2xl mx-auto">
                 <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold">
                     <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-600"></i>
@@ -149,14 +157,25 @@
                 </h1>
                 
                 <p class="text-slate-500 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
-                     iumhh i dont know just study or smth<span class="font-bold text-slate-700"></span> and <span class="font-bold text-slate-700"></span>i genuinly dont care about you
+                    iumhh i dont know just study or smth i genuinly dont care about you
+                </p>
+
+                <!-- Mode Selector Dropdown -->
+                <div class="text-left pt-2">
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Question Mode</label>
+                    <select id="setting-question-mode" class="w-full p-3.5 rounded-2xl glass-card-sm border border-slate-200 text-slate-800 text-sm font-semibold outline-none focus:border-indigo-500 cursor-pointer">
+                        <option value="all">EVERYTHINGGGGG</option>
+                        <option value="mc">multiple choice</option>
+                        <option value="fitb">fill in the blanks</option>
+                        <option value="short_answer">short answer</option>
+                    </select>
+                </div>
 
                 <!-- Settings Controls -->
                 <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
                     <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer hover:border-slate-300 transition">
                         <div class="space-y-0.5">
-                            <span class="text-sm font-semibold text-slate-800 block">give jake a power slap
-                        </span>
+                            <span class="text-sm font-semibold text-slate-800 block">give jake a power slap</span>
                             <span class="text-xs text-slate-500 block">randomize order</span>
                         </div>
                         <input type="checkbox" id="setting-shuffle-questions" checked class="w-5 h-5 accent-indigo-600 rounded cursor-pointer">
@@ -171,76 +190,42 @@
                     </label>
                 </div>
 
-                <!-- Instant Feedback Mode Toggle -->
-                <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer hover:border-slate-300 transition text-left">
-                    <div class="space-y-0.5">
-                        <span class="text-sm font-semibold text-slate-800 block">yeah uhh know how you did instantly</span>
-                        <span class="text-xs text-slate-500 block">Highlight correct/incorrect answers immediately when clicked</span>
-                    </div>
-                    <input type="checkbox" id="setting-instant-feedback" checked class="w-5 h-5 accent-indigo-600 rounded cursor-pointer">
-                </label>
-
-                <!-- Start Action Button -->
-                <div class="pt-4">
-                    <button onclick="startQuiz()" class="w-full sm:w-auto px-10 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-600/20 transition duration-200 active:scale-[0.98] inline-flex items-center justify-center space-x-3 text-base sm:text-lg">
-                        <span>Begin Quiz</span>
-                        <span class="text-xs bg-indigo-500/40 text-white px-2 py-0.5 rounded font-mono font-normal">[Enter]</span>
+                <div class="pt-2">
+                    <button onclick="startQuiz()" class="w-full sm:w-auto px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl transition shadow-lg shadow-indigo-600/20 inline-flex items-center justify-center space-x-2 text-base cursor-pointer">
+                        <span>start quiz</span>
+                        <span class="text-xs key-badge text-slate-600 px-2 py-0.5 rounded font-mono font-normal">[Enter]</span>
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- 2. ACTIVE QUIZ CARD -->
-        <section id="quiz-card" class="hidden w-full glass-card rounded-3xl p-6 sm:p-10 transition-all duration-300">
-            <!-- Header Progress & Counter -->
-            <div class="space-y-3 mb-8">
-                <div class="flex justify-between items-center text-xs sm:text-sm font-bold tracking-wider text-slate-500">
-                    <span id="question-tracker" class="uppercase text-slate-600">QUESTION 1 OF 5</span>
-                    <span id="progress-percentage" class="text-indigo-600 font-extrabold">20%</span>
+        <!-- 2. QUIZ CARD -->
+        <section id="quiz-card" class="screen w-full glass-card rounded-3xl p-6 sm:p-10 transition-all duration-300 view-transition">
+            <div class="space-y-6">
+                <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                    <div id="progress-fill" class="gradient-bar h-full transition-all duration-300" style="width: 0%"></div>
                 </div>
-                <!-- Animated Progress Bar -->
-                <div class="w-full bg-slate-200/80 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-200">
-                    <div id="progress-bar" class="gradient-bar h-full w-0 transition-all duration-500 ease-out rounded-full"></div>
+
+                <h2 id="question-text" class="text-xl sm:text-2xl font-bold text-slate-900">question goes here</h2>
+
+                <div id="interactive-area" class="grid grid-cols-1 gap-3"></div>
+
+                <div id="explanation-box" class="hidden p-4 rounded-2xl bg-slate-100 border-l-4 border-indigo-600 text-sm text-slate-700"></div>
+
+                <div class="flex justify-end pt-2">
+                    <button id="next-btn" onclick="handleNextStep()" class="hidden px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl transition inline-flex items-center space-x-2 text-sm shadow-md cursor-pointer">
+                        <span id="next-btn-text">next question</span>
+                        <span class="text-xs key-badge text-slate-600 px-2 py-0.5 rounded font-mono font-normal">[Enter]</span>
+                    </button>
                 </div>
-            </div>
-
-            <!-- Question Card -->
-            <div class="mb-8 space-y-3">
-                <h2 id="question-text" class="text-xl sm:text-2xl font-bold text-slate-900 leading-relaxed tracking-tight">
-                    <!-- Question populates dynamically -->
-                </h2>
-            </div>
-
-            <!-- Options Grid -->
-            <div id="options-container" class="grid grid-cols-1 gap-3 sm:gap-4 mb-8">
-                <!-- Options populate dynamically -->
-            </div>
-
-            <!-- Explanatory Feedback Box -->
-            <div id="explanation-box" class="hidden mb-8 p-4 rounded-2xl bg-indigo-50/70 border border-indigo-100 text-xs sm:text-sm text-slate-700 leading-relaxed">
-                <!-- Dynamic feedback comment -->
-            </div>
-
-            <!-- Footer Controls -->
-            <div class="flex justify-between items-center border-t border-slate-200/80 pt-6">
-                <button id="btn-prev" onclick="navigateQuestion(-1)" class="opacity-0 pointer-events-none px-4 py-2.5 text-slate-500 hover:text-slate-800 flex items-center space-x-2 rounded-xl transition text-sm font-semibold">
-                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
-                    <span>Previous</span>
-                </button>
-
-                <button id="btn-next" onclick="navigateQuestion(1)" disabled class="px-7 py-3.5 bg-slate-200 text-slate-400 font-semibold rounded-2xl transition flex items-center space-x-2 text-sm">
-                    <span id="next-btn-text">Next Question</span>
-                    <span id="next-key-badge" class="hidden text-[10px] bg-white/30 text-white px-1.5 py-0.5 rounded font-mono">[Enter]</span>
-                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                </button>
             </div>
         </section>
 
         <!-- 3. RESULTS SUMMARY CARD -->
-        <section id="results-card" class="hidden w-full glass-card rounded-3xl p-6 sm:p-12 transition-all duration-300">
+        <section id="results-card" class="screen w-full glass-card rounded-3xl p-6 sm:p-12 transition-all duration-300 view-transition">
             <div class="text-center space-y-8 max-w-2xl mx-auto">
                 <div class="inline-flex p-5 rounded-3xl bg-indigo-50 border border-indigo-100 shadow-sm">
-                    <i id="result-icon" data-lucide="trophy" class="w-14 h-14 text-amber-500"></i>
+                    <i id="result-icon" data-lucide="award" class="w-14 h-14 text-amber-500"></i>
                 </div>
 
                 <div class="space-y-2">
@@ -257,883 +242,1525 @@
 
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap justify-center gap-4 pt-2">
-                    <button onclick="startQuiz()" class="px-7 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl transition shadow-lg shadow-indigo-600/20 inline-flex items-center space-x-2 text-sm">
+                    <button onclick="startQuiz()" class="px-7 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl transition shadow-lg shadow-indigo-600/20 inline-flex items-center space-x-2 text-sm cursor-pointer">
                         <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
                         <span>redo</span>
-                        <span class="text-xs bg-indigo-500/40 text-white px-2 py-0.5 rounded font-mono font-normal">[Enter]</span>
+                        <span class="text-xs key-badge text-slate-600 px-2 py-0.5 rounded font-mono font-normal">[Enter]</span>
                     </button>
-                    <button onclick="toggleReviewSection()" class="px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-2xl border border-slate-200 transition inline-flex items-center space-x-2 text-sm shadow-sm">
+
+                    <button onclick="resetToHome()" class="px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-2xl border border-slate-200 transition inline-flex items-center space-x-2 text-sm shadow-sm cursor-pointer">
+                        <i data-lucide="home" class="w-4 h-4 text-slate-500"></i>
+                        <span>back to menu</span>
+                    </button>
+
+                    <button onclick="toggleReviewSection()" class="px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-2xl border border-slate-200 transition inline-flex items-center space-x-2 text-sm shadow-sm cursor-pointer">
                         <i data-lucide="eye" class="w-4 h-4 text-slate-500"></i>
                         <span id="review-btn-text">Review Answers</span>
                     </button>
                 </div>
 
-                <!-- Review Section -->
-                <div id="review-container" class="hidden text-left pt-6 border-t border-slate-200/80 space-y-4 max-h-[420px] overflow-y-auto pr-2">
-                    <h3 class="text-lg font-bold text-slate-900 mb-2 flex items-center space-x-2">
-                        <i data-lucide="check-circle-2" class="w-5 h-5 text-indigo-600"></i>
-                        <span>Detailed Breakdown</span>
-                    </h3>
-                    <div id="review-list" class="space-y-4">
-                        <!-- Dynamic Review Items -->
-                    </div>
-                </div>
+                <div id="review-container" class="hidden text-left pt-4 border-t border-slate-200 space-y-4 max-h-64 overflow-y-auto pr-1"></div>
             </div>
         </section>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="relative z-10 border-t border-slate-200/80 py-5 text-center text-xs text-slate-500">
-        Gabe Jew Studios &bull; Crafted with HTML, Tailwind CSS & Vanilla JS
-    </footer>
-
-    <!-- INSTRUCTIONS / EDIT MODAL -->
-    <div id="instructions-modal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-card rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto border border-slate-200">
-            <button onclick="toggleInstructionsModal(false)" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 p-1 rounded-xl hover:bg-slate-100 transition">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-
-            <div class="flex items-center space-x-3 text-indigo-600">
-                <i data-lucide="edit-3" class="w-6 h-6"></i>
-                <h3 class="text-xl font-bold text-slate-900">How to Edit Questions</h3>
-            </div>
-
-            <div class="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                <p>
-                    Questions are stored at the top of the script block in this <code class="text-indigo-600 font-mono font-bold">index.html</code> file.
-                </p>
-                <div class="bg-slate-900 text-slate-100 rounded-2xl p-4 space-y-1 font-mono text-xs">
-                    <span class="text-slate-400">// Open index.html and locate:</span><br>
-                    <span class="text-purple-400">const</span> <span class="text-blue-400">QUIZ_DATA</span> = [ ... ];
-                </div>
-                <p>Format structure for each item:</p>
-                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 overflow-x-auto text-xs font-mono">
-{
-  id: 1,
-  question: "Your custom question here?",
-  options: ["Option A", "Option B", "Option C", "Option D"],
-  answer: 2, // 0 = A, 1 = B, 2 = C, 3 = D
-  explanation: "Optional brief explanation text."
-}</pre>
-            </div>
-
-            <div class="pt-2">
-                <button onclick="toggleInstructionsModal(false)" class="w-full py-3.5 bg-slate-900 text-white font-semibold rounded-2xl hover:bg-slate-800 transition">
-                    Close
+    <!-- Instructions Modal -->
+    <div id="instructions-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-4 border border-slate-100">
+            <div class="flex items-center justify-between">
+                <h3 class="text-xl font-bold text-slate-900 flex items-center space-x-2">
+                    <i data-lucide="help-circle" class="w-5 h-5 text-indigo-600"></i>
+                    <span>instructions 4 me</span>
+                </h3>
+                <button onclick="toggleInstructionsModal(false)" class="text-slate-400 hover:text-slate-600 p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+                use keyboard shortcuts [1-4] to instantly pick answers for MC questions. press [Enter] to submit fill-in-the-blank or short-answers and jump to the next question.
+            </p>
+            <div class="pt-2 flex justify-end">
+                <button onclick="toggleInstructionsModal(false)" class="px-5 py-2.5 bg-indigo-600 text-white font-semibold rounded-xl text-xs hover:bg-indigo-700 transition">got it</button>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT ENGINE -->
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-slate-200/80 py-5 text-center text-xs text-slate-500 w-full mt-auto">
+        Copyright Gabe Jew Productions &bull; Crafted with HTML, Tailwind CSS & Vanilla JS
+    </footer>
+
     <script>
-        /**
-         * =================================================================
-         * 📝 EDIT YOUR QUIZ QUESTIONS HERE!
-         * =================================================================
-         */
-        const QUIZ_DATA = [
+        const RAW_QUIZ_DATA = [
             {
-                id: 1,
-                question: "what is the correct order of church hierarchy top to bottom",
-                options: ["pope cardinal archbishop bishop priest deacon",
-          "pope patriarch bishop priest cardinal deacon",
-          "patriarch pope cardinal priest bishop deacon",
-          "pope archbishop cardinal bishop deacon priest"],
-                answer: 0,
-                explanation: "youre so stupid a golden retriever could score higher than u on this test even if u got that right u probably guessed like a lucky donkey"
-            },
+    id: 1,
+    type: "mc",
+    question: "what is the correct order of the church hierarchy from top to bottom",
+    options: [
+      "Pope, Patriarch, Cardinal, Archbishop/Bishop, Priest, Deacon, Laity",
+      "Pope, Cardinal, Patriarch, Archbishop/Bishop, Priest, Deacon, Laity",
+      "Patriarch, Pope, Cardinal, Archbishop/Bishop, Priest, Deacon, Laity",
+      "Pope, Archbishop/Bishop, Patriarch, Cardinal, Priest, Deacon, Laity"
+    ],
+    answer: 0,
+    explanation: "youre so stupid a golden retriever could score higher than u on this test even if u got that right u probably guessed like a lucky donkey"
+  },
+  {
+    id: 2,
+    type: "mc",
+    question: "what even is the definition of a Patriarch in church leadership",
+    options: [
+      "A bishop of one of the chief sees of early Christendom like Rome or Constantinople",
+      "The supreme earthly ruler of the entire Christian Church",
+      "A monk who took vows of absolute silence",
+      "Some random military commander hired by the Pope"
+    ],
+    answer: 0,
+    explanation: "bro how do u mess this up a toddler reading a popup book knows what a patriarch is"
+  },
+  {
+    id: 3,
+    type: "mc",
+    question: "what year did the Eastern Schism go down and split east and west",
+    options: ["1054", "1066", "1099", "1215"],
+    answer: 0,
+    explanation: "imagine not knowing 1054 u absolute NPC your brain cells are fighting for third place"
+  },
+  {
+    id: 4,
+    type: "mc",
+    question: "what does the term 'Filioque' actually mean in the creed",
+    options: ["And the Son", "Through the Spirit", "From the Father alone", "In the beginning"],
+    answer: 0,
+    explanation: "it literally translates to and the son u absolute potato did u even open the study guide"
+  },
+  {
+    id: 5,
+    type: "mc",
+    question: "why was everyone losing their minds over the Filioque clause",
+    options: [
+      "The West added it to the creed unilaterally without an ecumenical council",
+      "It completely deleted Jesus from the Bible",
+      "It said the Holy Spirit only talks to church elders",
+      "It was translated into pirate language"
+    ],
+    answer: 0,
+    explanation: "even Tristan could understand why uniliteral creed changes are a big deal and he shares a brain cell with a rock"
+  },
             {
                 id: 2,
-                question: "what does filioque mean",
-                options: ["and the holy spirit", "and the son", "through the church", "from the father"],
-                answer: 1,
-                explanation: "your brain is literally as empty as a deflated balloon why are u even trying even if u somehow clicked the right answer u still lack basic cognitive functions"
+                type: "fitb",
+                question: "what paper ended the investiture fight in 1122 (concordat of ___)",
+                accepted_answers: ["worms", "concordat of worms"],
+                explanation: "tristan u absolute plant pot u look like u smell like damp cardboard"
             },
+    {
+        id: 1,
+        type: "fitb",
+        question: "the eastern schism occurred in the year ___ when the christian church split.",
+        accepted_answers: ["1054"],
+        explanation: "the schism happened in 1054. tristan probably thinks it happened last week because his brain is as empty as a deflated basketball, unlike jack keiser who scores effortlessly on the ice."
+    },
+    {
+        id: 2,
+        type: "fitb",
+        question: "the term filioque literally translates to ___ in english.",
+        accepted_answers: ["and the son"],
+        explanation: "filioque means 'and the son'. ryan probably struggles to translate basic English anyway, unlike absolute legend jack keiser who reads defenses like a hall of famer."
+    },
+    {
+        id: 3,
+        type: "fitb",
+        question: "the monastery at cluny was founded in 909 by william i, duke of ___.",
+        accepted_answers: ["aquitaine"],
+        explanation: "william of aquitaine established cluny for benedictine reform. jake's understanding of history is pure garbage, which is why jack keiser dominates on the ice while jake sits on the bench."
+    },
+    {
+        id: 4,
+        type: "fitb",
+        question: "the carthusian order was founded in 1084 by st. ___ and emphasized complete silence.",
+        accepted_answers: ["bruno", "saint bruno"],
+        explanation: "st. bruno founded the carthusians. tristan could really learn a thing or two from them about keeping his mouth shut because listening to him talk is pure pain."
+    },
+    {
+        id: 5,
+        type: "fitb",
+        question: "the first leader of the reconquista in spain was ___ who ruled from 718 to 737.",
+        accepted_answers: ["pelayo", "pelagius"],
+        explanation: "pelayo launched the reconquista. pelayo showed true leadership, just like jack keiser leading his team to absolute victory while ryan whines in the corner."
+    },
+    {
+        id: 6,
+        type: "fitb",
+        question: "knut the great ruled the north sea empire which included denmark, norway, and ___.",
+        accepted_answers: ["england"],
+        explanation: "knut ruled england along with his northern empire. jake couldn't even manage a fantasy hockey team, let alone an empire, unlike elite athlete jack keiser."
+    },
+    {
+        id: 7,
+        type: "fitb",
+        question: "the saxon assembly of great men that helped choose the English king was called the ___.",
+        accepted_answers: ["witan"],
+        explanation: "the witan was the council of wise men. if the witan met tristan today, they would banish him immediately for looking like a soggy piece of cardboard."
+    },
+    {
+        id: 8,
+        type: "fitb",
+        question: "in 1066, harold defeated tostig and harold hardrada at the battle of ___ bridge.",
+        accepted_answers: ["stamford", "stamford bridge"],
+        explanation: "harold won at stamford bridge before racing south. ryan lacks any sort of stamina, unlike speed demon jack keiser gliding past defender after defender."
+    },
+    {
+        id: 9,
+        type: "fitb",
+        question: "william of normandy defeated harold godwinson in 1066 at the battle of ___.",
+        accepted_answers: ["hastings"],
+        explanation: "william conquered at hastings. jake couldn't conquer a middle school pop quiz, yet jack keiser snipes top shelf with total precision."
+    },
+    {
+        id: 10,
+        type: "fitb",
+        question: "the civil war between stephen of blois and empress matilda was known as the ___.",
+        accepted_answers: ["anarchy", "the anarchy"],
+        explanation: "that period of english chaos was called the anarchy. speaking of chaos, tristan's haircuts are a literal crime against humanity."
+    },
+    {
+        id: 11,
+        type: "fitb",
+        question: "henry ii was known as an angevin king because his father was the count of ___.",
+        accepted_answers: ["anjou"],
+        explanation: "his father was count of anjou. ryan tries to act smooth, but he has zero class compared to the sheer royalty of jack keiser on the rink."
+    },
+    {
+        id: 12,
+        type: "fitb",
+        question: "the plantagenet family name comes from the sprig of common broom, known as plante ___.",
+        accepted_answers: ["genest"],
+        explanation: "plante genest inspired the plantagenet name. jake is as useless as a weed, whereas jack keiser is pure golden talent."
+    },
+    {
+        id: 13,
+        type: "fitb",
+        question: "a tax levied on knights in place of military service under henry ii was called ___.",
+        accepted_answers: ["scutage"],
+        explanation: "scutage allowed knights to pay instead of fighting. tristan would definitely pay scutage because he is way too fragile to ever play a real sport."
+    },
+    {
+        id: 14,
+        type: "fitb",
+        question: "henry ii appointed st. thomas ___ as archbishop of canterbury before turning against him.",
+        accepted_answers: ["beckett", "becket"],
+        explanation: "thomas beckett stood up to the king. jack keiser displays that same legendary courage every time he steps onto the ice, unlike soft-guy ryan."
+    },
+    {
+        id: 15,
+        type: "fitb",
+        question: "henry ii attempted to exert control over the english church through the constitutions of ___.",
+        accepted_answers: ["clarendon"],
+        explanation: "the constitutions of clarendon tried to curb church power. jake probably thinks clarendon is a fast food restaurant."
+    },
+    {
+        id: 16,
+        type: "fitb",
+        question: "king richard i was famously nicknamed richard the ___.",
+        accepted_answers: ["lionheart"],
+        explanation: "richard was called the lionheart for his courage. jack keiser has a heart of a lion on the ice, while tristan has the courage of a wet paper towel."
+    },
+    {
+        id: 17,
+        type: "fitb",
+        question: "king john signed the magna carta in 1215 at a meadow named ___.",
+        accepted_answers: ["runnymeade", "runnymede"],
+        explanation: "the barons forced john to sign at runnymeade. ryan takes massive Ls just like king john, while jack keiser racking up Ws every game."
+    },
+    {
+        id: 18,
+        type: "fitb",
+        question: "the first capetian king of france was named hugh ___.",
+        accepted_answers: ["capet"],
+        explanation: "hugh capet started the dynasty. jake has zero legacy to leave behind, completely unlike jack keiser's unmatched hockey career."
+    },
+    {
+        id: 19,
+        type: "fitb",
+        question: "the dualist Heretical group in southern france targeting by a crusade were the ___.",
+        accepted_answers: ["albigenses", "albigensians"],
+        explanation: "the albigenses believed matter was evil. tristan's sense of style is evil, and honest to god he smells like expired milk."
+    },
+    {
+        id: 20,
+        type: "fitb",
+        question: "otto the great defeated the magyars in 955 at the battle of ___.",
+        accepted_answers: ["lechfeld"],
+        explanation: "otto crushed the magyars at lechfeld. jack keiser crushes the competition with monstrous slapshots that ryan could only dream of hitting."
+    },
+    {
+        id: 21,
+        type: "fitb",
+        question: "in northern italy, the political faction that supported the papacy was called the ___.",
+        accepted_answers: ["guelph", "guelphs", "guelf"],
+        explanation: "guelphs backed the pope while ghibellines backed the emperor. jake is perpetually confused by basic concepts, unlike jack keiser's brilliant hockey IQ."
+    },
+    {
+        id: 22,
+        type: "fitb",
+        question: "frederick ii was given the famous latin nickname stupor ___ meaning wonder of the world.",
+        accepted_answers: ["mundi"],
+        explanation: "frederick ii was stupor mundi. jack keiser is the actual wonder of the world with his filthy hands and wheeling speed, while tristan is just a disaster."
+    },
+    {
+        id: 23,
+        type: "fitb",
+        question: "the sicilian uprising against charles of anjou was known as the sicilian ___.",
+        accepted_answers: ["vespers"],
+        explanation: "the sicilian vespers ended french control of sicily. ryan's attempt at athletic ability ends in immediate failure every single time."
+    },
+    {
+        id: 24,
+        type: "fitb",
+        question: "the buying or selling of spiritual goods or church offices is called ___.",
+        accepted_answers: ["simony"],
+        explanation: "simony was a widespread medieval abuse. jake couldn't buy a single goal if his life depended on it, whereas jack keiser scores for free."
+    },
+    {
+        id: 25,
+        type: "fitb",
+        question: "emperor henry iv did penance barefoot in the snow outside the castle of ___.",
+        accepted_answers: ["canossa"],
+        explanation: "henry iv begged for forgiveness at canossa. tristan should go stand in the snow for three days to apologize for how annoying he is."
+    },
+    {
+        id: 26,
+        type: "fitb",
+        question: "the order of friars minor was founded by st. francis of ___.",
+        accepted_answers: ["assisi"],
+        explanation: "st. francis of assisi embraced total poverty. ryan's hockey skills are in absolute poverty compared to the legendary jack keiser."
+    },
+    {
+        id: 27,
+        type: "fitb",
+        question: "the dominican order is officially known as the order of ___.",
+        accepted_answers: ["preachers"],
+        explanation: "dominicans are the order of preachers. jake talks way too much garbage for someone who gets benched every third shift."
+    },
+    {
+        id: 28,
+        type: "fitb",
+        question: "pope urban ii called for the first crusade in 1095 at the council of ___.",
+        accepted_answers: ["clermont"],
+        explanation: "urban ii spoke at clermont. jack keiser rallies his squad better than urban ii ever could, while tristan just sits there looking like a pot plant."
+    },
+    {
+        id: 29,
+        type: "fitb",
+        question: "the Latin rally cry during the first crusade was deus vult, which means ___.",
+        accepted_answers: ["god wills it"],
+        explanation: "deus vult translates to god wills it. god clearly willed jack keiser to be a superstar while leaving ryan with no talent whatsoever."
+    },
+    {
+        id: 30,
+        type: "fitb",
+        question: "during the fourth crusade in 1204, crusaders disastrously sacked the city of ___.",
+        accepted_answers: ["constantinople"],
+        explanation: "the crusaders sacked constantinople and got excommunicated. jake sacking his own team's chances of winning is a weekly occurrence."
+    },
             {
                 id: 3,
-                question: "which monk group founded by st bruno in 1084 is famous for total silence",
-                options: ["benedictines", "carthusians", "cistercians", "norbertines"],
-                answer: 1,
-                explanation: "did u know jack keiser the 2012 legend from shattuck is literally the greatest human to ever step on ice his hands are like pure silk and he snipes top shelf faster than u can fail this question he is 10000x smarter and cooler than u will ever be absolute hockey god"
+                type: "short_answer",
+                question: "explain why henry ii fought with thomas becket",
+                required_points: [
+                    "henry wanted royal control over church courts",
+                    "becket defended church independence"
+                ],
+                explanation: "jacob daniel shore u absolute zero iq melon u probably trip over your own shoelaces while standing completely still"
             },
             {
-                id: 4,
-                question: "who started the reconquista in spain",
-                options: ["peter 3 of aragon", "charles of anjou", "pelayo", "william the conqueror"],
-                answer: 2,
-                explanation: "youre so mindbogglingly dumb that u make rocks look like albert einstein honestly even if u got this right it was a complete misclick"
-            },
-            {
-                id: 5,
-                question: "which king won stamford bridge in 1066",
-                options: ["knut the great", "edward the confessor", "harold godwinson", "william of normandy"],
-                answer: 2,
-                explanation: "bro u are so hopelessly stupid it actually hurts to watch u take this quiz even if u somehow selected the right choice u still got zero IQ"
-            },
-            {
-                id: 6,
-                question: "what main feudal rule did william the conqueror make in england",
-                options: ["he made everyone pay zero tax",
-          "everyone had to swear direct fealty to the king",
-          "barons could print fake money",
-          "knights got banned from owning dirt"],
-                answer: 1,
-                explanation: "jack keiser 2012 god at shattuck st marys is literally the most gifted flawless hockey prodigy in human history his dangles literally break ankles through the screen while u cant even read a basic question right jack keiser is the indisputable goat"
-            },
-            {
-                id: 7,
-                question: "why did henry 2 guys kill thomas becket",
-                options: ["he tried stealing the crown",
-          "he fought the king controlling the church at clarendon",
-          "he helped france in the crusade",
-          "he refused to crown henrys baby"],
-                answer: 1,
-                explanation: "youre so unbelievably brainless u probably struggle to breathe and walk at the same time even if u got that correct it was just pure blind luck"
-            },
-                        {
-                id: 8,
-                question: "where did barons make king john sign the magna carta in 1215",
-                options: ["hastings", "clarendon", "runnymede", "clermont"],
-                answer: 2,
-                explanation: "jack keiser at shattuck is literally built different the entire world bows down to his insane hockey iq and silky mitts he skates at lightspeed and makes impossible plays look easy unlike u who is failing a simple trivia question jack keiser is a living legend"
-            },
-           {
-                id: 9,
-                question: "who was the very first capetian king of france",
-                options: ["philip 2", "hugh capet", "st louis 9", "charles of anjou"],
-                answer: 1,
-                explanation: "youre so stupid a brick has more critical thinking skills than u even if u clicked the right answer u should still be embarrassed"
-            },
-            {
-                id: 10,
-                question: "what strange idea did the albigensians believe about the world",
-                options: ["matter is evil spirit is good",
-          "the pope has no power over anyone",
-          "jesus was just a normal guy",
-          "priests must be sinless to give sacraments"],
-                answer: 0,
-                explanation: "your IQ is actually in the negative numbers bro u are so clueless even if u got that right it was 100 percent a mistake"
-            },
-            {
-                id: 11,
-                question: "how did emperor otto 1 stop government jobs from becoming hereditary family stuff",
-                options: ["he picked celibate priests for gov jobs",
-          "he banned all marriage for nobles",
-          "he fired everyone every two weeks",
-          "he adopted all prospective heirs"],
-                answer: 0,
-                explanation: "jack keiser the 2012 king of shattuck is destined for the nhl hall of fame his shot is a literal rocket and his vision on the ice is superhuman he is elite at literally everything while u are down here being dumb on a quiz website"
-            },
-            {
-                id: 12,
-                question: "what was scutage",
-                options: ["tax paid by knights instead of fighting",
-          "sword fight between two guys",
-          "free land for bishops",
-          "random court jury stuff"],
-                answer: 0,
-                explanation: "youre so tremendously idiotic your single braincell is fighting for second place even if u got this right it proves literally nothing about your low intelligence"
-            },
-            {
-                id: 13,
-                question: "what did guelphs fight for in italy",
-                options: ["pro emperor control",
-          "pro papacy and freedom",
-          "islamic rule in sicily",
-          "france and england alliance"],
-                answer: 1,
-                explanation: "youre so utterly foolish a toddler would beat u in a debate even if u got that answer correct u are still hopelessly dense"
-            },
-            {
-                id: 14,
-                question: "what is simony",
-                options: ["lay investiture", "concubinage", "buying or selling church stuff and positions", "excommunication"],
-                answer: 2,
-                explanation: "youre so utterly foolish a toddler would beat u in a debate even if u got that answer correct u are still hopelessly dense"
-            },
-            {
-                id: 15,
-                question: "what did emperor henry 4 do outside canossa castle",
-                options: ["gave up his crown and left",
-          "knelt barefoot in snow three days",
-          "paid a big pile of gold",
-          "walked barefoot to rome"],
-                answer: 1,
-                explanation: "how does tristan have more correct than you"
-            },
-            {
-                id: 16,
-                question: "which order did st dominic guzman start to fight heresy with learning",
-                options: ["franciscans", "dominicans", "carthusians", "teutonic order"],
-                answer: 1,
-                explanation: "youre so massively unsmart that even a goldfish has a better memory than u even if u got this right it was a total fluke"
-            },
-            {
-                id: 17,
-                question: "do you like money",
-                options: ["yes", "no", "maybe so", "of course"],
-                answer: 1,
-                explanation: "check your head are you sure you arent one too"
-            },
-            {
-                id: 18,
-                question: "what did people yell at council of clermont for the first crusade",
-                options: ["deus vult", "semper fi", "pax romana", "in hoc signo vinces"],
-                answer: 0,
-                explanation: "youre so ridiculously brainless you probably forgot your own name while reading this even if u got it right u still fail at life"
-            },
-            {
-                id: 19,
-                question: "which one of these was NOT a crusader state",
-                options: ["edessa", "antioch", "jerusalem", "duchy of normandy"],
-                answer: 3,
-                explanation: "jack keiser is the greatest 2012 hockey player on planet earth no competition at all at shattuck st marys he dominates every single shift with godly skill and ultimate swagger absolute master of the sport while u struggle with basic history"
-            },
-            {
-                id: 20,
-                question: "what bad thing happened during the fourth crusade",
-                options: ["crusaders sacked constantinople",
-          "jerusalem exploded",
-          "the pope got kidnapped",
-          "they lost at stamford bridge"],
-                answer: 0,
-                explanation: "youre so stupid that if u tried to think your head would start smoking even if u got that right you are still super dumb"
-            },
-            {
-                id: 21,
-                question: "what paper ended the investiture fight in 1122",
-                options: ["treaty of wallingford", "constitutions of clarendon", "concordat of worms", "council of clermont"],
-                answer: 2,
-                explanation: "youre so impossibly dense that light bends around u even if u got this final question right you are still the most foolish person alive"
-            },
-            {
-                id: 22,
-                question: "how much is will lewin worth",
-                options: ["$0-$500", "$600-$1000", "$1100-$1500", "$100000000-$10000000000000000000000"],
-                answer: 1,
-                explanation: "not much better than tristan honestly :wilted-rose: heres proof https://www.invaluable.com/auction-lot/william-lewin-original-watercolor-dusky-grebe-pro-45-c-befa080da5?objectID=206069586&algIndex=archive_prod&queryID=0f4367491b55312c803fb406f3670468"
-            },
-            {
-    id: 23,
-    question: "who ruled the north sea empire including denmark norway and england",
-    options: ["knut the great", "william the conqueror", "edward the confessor", "harold hardrada"],
+    id: 6,
+    type: "mc",
+    question: "what is the actual definition of excommunication",
+    options: [
+      "Cut off from the sacraments; for rulers, subjects no longer owe allegiance",
+      "Exiled to a remote island to fight medieval bears",
+      "Forced to listen to Tristan talk about his life choices",
+      "Banned from eating bread for a month"
+    ],
     answer: 0,
-    explanation: "youre so monumentally dense u probably think denmark is a brand of cookies even if u got that right it was pure fluke"
+    explanation: "u get cut off from sacraments and your whole kingdom abandons u unlike your friends who abandoned u long ago"
+  },
+  {
+    id: 7,
+    type: "mc",
+    question: "who pulled up and established the reformed monastery at Cluny in 909",
+    options: [
+      "William I, Duke of Aquitaine",
+      "Otto I, the Great",
+      "Knut the Great",
+      "Jack Keiser (spiritual founder)"
+    ],
+    answer: 0,
+    explanation: "William I of Aquitaine made it happen while u were busy failing basic history quizzes"
+  },
+  {
+    id: 8,
+    type: "mc",
+    question: "what were the main vibes of the Cluniac monastic reform",
+    options: [
+      "More prayer and total independence from local feudal lords",
+      "Extreme silence and living in underground caves",
+      "Doing heavy manual labor 24/7 without sleep",
+      "Running a medieval tech startup"
+    ],
+    answer: 0,
+    explanation: "intensive prayer and ditching feudal overlords... concepts u clearly struggle with"
+  },
+  {
+    id: 9,
+    type: "mc",
+    question: "which order founded in 1084 by St. Bruno was obsessed with absolute silence",
+    options: [
+      "Carthusians",
+      "Cistercians",
+      "Premonstratensians",
+      "Benedictines"
+    ],
+    answer: 0,
+    explanation: "Carthusians loved silence so much they'd probably pay good money to never hear u speak again"
+  },
+  {
+    id: 10,
+    type: "mc",
+    question: "which order was founded in 1098 as a strict Benedictine reform back to prayer and work",
+    options: [
+      "Cistercians",
+      "Carthusians",
+      "Franciscans",
+      "Dominicans"
+    ],
+    answer: 0,
+    explanation: "Cistercians actually worked hard unlike u staring blankly at your screen waiting for answers"
+  },
+  {
+    id: 11,
+    type: "mc",
+    question: "what do historians call Islamic Iberia",
+    options: [
+      "Al Andalus",
+      "Santiago de Compostela",
+      "Lombardy",
+      "Tristan's L Factory"
+    ],
+    answer: 0,
+    explanation: "it's Al Andalus u absolute donut not rocket science"
+  },
+  {
+    id: 12,
+    type: "mc",
+    question: "who was Pelayo (Pelagius) in the grand scheme of medieval Spain",
+    options: [
+      "The first leader of the Reconquista",
+      "The guy who invented the printing press",
+      "The Pope who cried Deus vult",
+      "Tristan's historical role model"
+    ],
+    answer: 0,
+    explanation: "first leader of the Reconquista starting in 718 while u struggle to reconquest a passing grade"
+  },
+  {
+    id: 13,
+    type: "mc",
+    question: "what tomb was found at Santiago de Compostela that gave the Reconquista massive hype",
+    options: [
+      "St. James the Great",
+      "St. Thomas Becket",
+      "St. Bruno",
+      "St. Tristan's dignity (remains missing)"
+    ],
+    answer: 0,
+    explanation: "St. James the Great gave them spiritual momentum u could use some momentum in your academic career"
+  },
+  {
+    id: 14,
+    type: "mc",
+    question: "who ruled the massive North Sea Empire covering Denmark, Norway, and England",
+    options: [
+      "Knut the Great",
+      "William the Conqueror",
+      "Edward the Confessor",
+      "Jack Keiser"
+    ],
+    answer: 0,
+    explanation: "Knut the Great ruled an empire unlike u who can't even rule your own sleep schedule"
+  },
+  {
+    id: 15,
+    type: "mc",
+    question: "what was the Witan in old Saxon England",
+    options: [
+      "An assembly of great men that helped choose the king",
+      "A medieval weapon used for throwing cabbages",
+      "A royal tax on bad haircuts",
+      "Tristan's support group"
+    ],
+    answer: 0,
+    explanation: "an assembly of great men meaning u would be barred from entry instantly"
+  },
+  {
+    id: 16,
+    type: "mc",
+    question: "whose competing claims caused the absolute meltdown of 1066",
+    options: [
+      "William of Normandy and Harold Godwinson",
+      "Stephen and Matilda",
+      "Henry II and Thomas Becket",
+      "Jack Keiser and a random NPC"
+    ],
+    answer: 0,
+    explanation: "William and Harold fought for the crown while u fight to keep your eyes open"
+  },
+  {
+    id: 17,
+    type: "mc",
+    question: "what battle did Harold smoke Tostig and Harold Hardrada right before Hastings",
+    options: [
+      "Battle of Stamford Bridge",
+      "Battle of Lechfeld",
+      "Battle of Legnano",
+      "Battle of the Living Room Couch"
+    ],
+    answer: 0,
+    explanation: "Stamford Bridge... try remembering that instead of TikTok dances"
+  },
+  {
+    id: 18,
+    type: "mc",
+    question: "what exact year was the Battle of Hastings where William put in work",
+    options: ["1066", "1054", "1215", "1999"],
+    answer: 0,
+    explanation: "1066 bro. if u missed this date please drop out and join the circus"
+  },
+  {
+    id: 19,
+    type: "mc",
+    question: "what was the name of the brutal civil war between Stephen and Matilda",
+    options: [
+      "The Anarchy",
+      "The Sicilian Vespers",
+      "The Great Discord",
+      "Tristan's Daily Struggle"
+    ],
+    answer: 0,
+    explanation: "The Anarchy... sounds like what happens whenever u try to cook dinner"
+  },
+  {
+    id: 20,
+    type: "mc",
+    question: "what treaty ended The Anarchy and made Henry the next king",
+    options: [
+      "Treaty of Wallingford",
+      "Concordat of Worms",
+      "Magna Carta",
+      "Treaty of Surrender"
+    ],
+    answer: 0,
+    explanation: "Treaty of Wallingford settled it unlike your endless arguments about video games"
+  },
+  {
+    id: 21,
+    type: "mc",
+    question: "how did William I fix feudalism so nobody could snake him",
+    options: [
+      "Confiscated all land and made every single landholder swear direct fealty to him",
+      "Banned all swords and made everyone use pool noodles",
+      "Gave all the land to Tristan so it would fail",
+      "Put his crown on automated subscription"
+    ],
+    answer: 0,
+    explanation: "direct oaths of fealty to the king. centralized power unlike your disorganized backpack"
+  },
+  {
+    id: 22,
+    type: "mc",
+    question: "what language split happened in England after the Normans rolled through",
+    options: [
+      "Two-tiered vocabulary: Saxon peasants raised swine/cow, Norman elites ate pork/beef",
+      "Everyone instantly started speaking fluent French with a British accent",
+      "Latin became the language of fast food ordering",
+      "People just communicated through aggressive staring"
+    ],
+    answer: 0,
+    explanation: "peasants did the dirty work with livestock while Normans ate fancy meat names. u definitely have peasant vocabulary"
+  },
+  {
+    id: 23,
+    type: "mc",
+    question: "how did Henry II hook up his massive Angevin empire through family",
+    options: [
+      "Grandfather (England), Mother (Normandy), Father (Anjou), Wife Eleanor (Aquitaine)",
+      "Won it all in a high-stakes poker game in Paris",
+      "Inherited it from a distant uncle in Narnia",
+      "Found it under a rock"
+    ],
+    answer: 0,
+    explanation: "pure geographic and marital grinding unlike your zero-rizz lifestyle"
   },
   {
     id: 24,
-    question: "what was the saxon assembly of great men that helped choose the king",
-    options: ["parliament", "witan", "scutage", "lombard league"],
-    answer: 1,
-    explanation: "your brain functions slower than dialup internet from 1995 even if u somehow clicked the correct answer u still lack any real intelligence"
+    type: "mc",
+    question: "why were Henry II's family called the Plantagenets",
+    options: [
+      "His dad wore a sprig of common broom (plante genest) on his hat",
+      "They really liked planting potatoes in the courtyard",
+      "Their family crest was a giant houseplant",
+      "It was a typo in the chronicles"
+    ],
+    answer: 0,
+    explanation: "plante genest on the hat... stylish, unlike your wardrobe"
   },
   {
     id: 25,
-    question: "who founded the cistercians in 1098 as a reform back to prayer and work",
-    options: ["st bruno", "st norbert", "st francis", "none of these were founders of cistercians"],
-    answer: 3,
-    explanation: "did u know jack keiser the undisputed 2012 hockey king of shattuck has hands smoother than silk and completely undresses goalies for fun he is a generational prodigy while u are struggling to remember basic monk history"
+    type: "mc",
+    question: "what was scutage under Henry II",
+    options: [
+      "A tax knights paid to skip active military service",
+      "A fee for carrying a shield in public",
+      "A penalty for losing a bar fight",
+      "Tristan's monthly allowance"
+    ],
+    answer: 0,
+    explanation: "pay cash to skip war. u would definitely pay scutage cause u look allergic to pushups"
   },
   {
     id: 26,
-    question: "what were the two groups in the english two tiered vocabulary based on food",
-    options: ["roman and greek", "saxon for preparation and norman for eating", "french and latin", "celtic and germanic"],
-    answer: 1,
-    explanation: "youre so remarkably unintelligent that u make a box of rocks look like a genius even if u got that right u probably guessed randomly"
+    type: "mc",
+    question: "what major legal upgrade did Henry II drop on England",
+    options: [
+      "6 district courts, 3 royal judges sent to each, grand juries, foundation of Common Law",
+      "Trial by combat with water balloons for everyone",
+      "A suggestion box in every town square",
+      "Legalized stealing from Tristan"
+    ],
+    answer: 0,
+    explanation: "laying the basis for Common Law. something u break every time u play video games past bedtime"
   },
   {
     id: 27,
-    question: "what was the civil war between stephen of blois and empress matilda called",
-    options: ["the reconquista", "the anarchy", "the eastern schism", "the sicilian vespers"],
-    answer: 1,
-    explanation: "bro u are so hopelessly clueless u couldnt find your own hands with a flashlight even if u selected the right choice u still have zero IQ"
+    type: "mc",
+    question: "who got brutally cancelled (murdered) in Canterbury Cathedral because of Henry II",
+    options: [
+      "St. Thomas Becket",
+      "St. Gregory VII",
+      "St. Francis",
+      "Tristan's GPA"
+    ],
+    answer: 0,
+    explanation: "St. Thomas Becket stood on business against the king and paid the ultimate price"
   },
   {
     id: 28,
-    question: "which crusade did richard i the lionheart lead",
-    options: ["first crusade", "fourth crusade", "third crusade", "second crusade"],
-    answer: 2,
-    explanation: "jack keiser 2012 shattuck legend is literally the most elite hockey player on the planet his shot speed is terrifying and his hockey iq is infinity levels ahead of everyone else absolute goat status"
+    type: "mc",
+    question: "what was Henry II's failed attempt to control the Church called",
+    options: [
+      "Constitutions of Clarendon",
+      "Magna Carta",
+      "The Clarendon Protocol",
+      "Royal Control Act"
+    ],
+    answer: 0,
+    explanation: "Constitutions of Clarendon got completely revoked after Becket got deleted"
   },
   {
     id: 29,
-    question: "what title did philip ii become the first french king to use",
-    options: ["king of the romans", "king of france", "holy roman emperor", "duke of normandy"],
-    answer: 1,
-    explanation: "youre so profoundly brainless u probably trip over wireless internet even if u got that correct it means literally nothing"
+    type: "mc",
+    question: "which legendary king known as 'The Lionheart' led the Third Crusade",
+    options: [
+      "Richard I",
+      "John Lackland",
+      "Edward I",
+      "Jack Keiser"
+    ],
+    answer: 0,
+    explanation: "Richard I the Lionheart. absolute unit on the battlefield"
   },
   {
     id: 30,
-    question: "what battle in 955 did otto i the great defeat the magyars",
-    options: ["battle of hastings", "battle of legnano", "battle of lechfeld", "battle of stamford bridge"],
-    answer: 2,
-    explanation: "youre so tremendously idiotic your single braincell is working overtime just to keep u breathing even if u got it right u are still clueless"
+    type: "mc",
+    question: "what massive L did King John ('Lackland') take during his reign",
+    options: [
+      "Lost Normandy and all northern France to Philip II",
+      "Lost his car keys in Runnymede",
+      "Forgot how to sign his own name",
+      "Got beaten in arm wrestling by a peasant"
+    ],
+    answer: 0,
+    explanation: "lost all northern France. John was an absolute fraud just like Tristan"
   },
   {
     id: 31,
-    question: "who founded the franciscan order of friars minor after a conversion in 1206",
-    options: ["st francis of assisi", "st dominic guzman", "st norbert", "st bruno"],
+    type: "mc",
+    question: "where did angry barons force John to sign the Magna Carta in 1215",
+    options: [
+      "Runnymede",
+      "Clermont",
+      "Lechfeld",
+      "Worms"
+    ],
     answer: 0,
-    explanation: "jack keiser at shattuck is a literal demigod on ice his edge work and vision make elite defensemen look like traffic cones while u are failing history trivia jack keiser rules the universe"
+    explanation: "Runnymede. a legendary spot for putting monarchs in their place"
   },
   {
     id: 32,
-    question: "which family name did frederick i barbarossa belong to",
-    options: ["capetians", "hohenstaufens", "plantagenets", "angevins"],
-    answer: 1,
-    explanation: "youre so overwhelmingly dense that light actually bends around your skull even if u got this final extra question right u are still foolish"
-  },
-            {
-    id: 33,
-    question: "what family name was another name for the angevins because henry's father wore a sprig of broom",
-    options: ["plantagenets", "capetians", "hohenstaufens", "normans"],
+    type: "mc",
+    question: "what did the Magna Carta actually do",
+    options: [
+      "Spelled out baronial rights and put legal limits on royal absolute power",
+      "Legalized stealing horses and skipping school",
+      "Made Tristan king of nothing",
+      "Declared war on France forever"
+    ],
     answer: 0,
-    explanation: "tristan u absolute plant pot u look like u smell like damp cardboard"
+    explanation: "limits on the monarch. limits are something u desperately need in your life"
+  },
+  {
+    id: 33,
+    type: "mc",
+    question: "which English monarch added more commons to Parliament and set up the Court of Common Pleas",
+    options: [
+      "Edward I",
+      "Henry III",
+      "Richard I",
+      "William I"
+    ],
+    answer: 0,
+    explanation: "Edward I building out institutional greatness"
   },
   {
     id: 34,
-    question: "how many district courts did henry ii establish as part of his legal reforms",
-    options: ["three", "four", "six", "twelve"],
-    answer: 2,
-    explanation: "will lewin looks like a literal thumb with ears"
+    type: "mc",
+    question: "who was the very first Capetian king of France",
+    options: [
+      "Hugh Capet",
+      "Philip II",
+      "Louis IX",
+      "Charles of Anjou"
+    ],
+    answer: 0,
+    explanation: "Hugh Capet. starting a dynasty that lasted ages"
   },
   {
     id: 35,
-    question: "who was the youngest son of henry ii who had no land of his own and lost normandy",
-    options: ["richard i", "john lackland", "edward i", "stephen of blois"],
-    answer: 1,
-    explanation: "did u know jack keiser the 2012 legend from shattuck has hands smoother than liquid silk and dangles entire teams out of their jockstraps he is the undisputed hockey overlord while u and tristan cry over history notes"
+    type: "mc",
+    question: "which French king was the first to use the actual title 'King of France'",
+    options: [
+      "Philip II (Augustus)",
+      "Hugh Capet",
+      "Louis IX",
+      "Charlemagne"
+    ],
+    answer: 0,
+    explanation: "Philip II flexing territorial expansion and legal maneuvering"
   },
   {
     id: 36,
-    question: "what council called by pope urban ii in 1095 launched the first crusade",
-    options: ["council of worms", "council of clermont", "council of nicea", "treaty of wallingford"],
-    answer: 1,
-    explanation: "tristan u absolute trashbag u probably lose arguments to inanimate brick walls"
+    type: "mc",
+    question: "what was the deal with the Albigensians in southern France",
+    options: [
+      "A neo-Manichaean dualist sect teaching matter is evil and spirit is good",
+      "A group of guys who really hated taxes",
+      "Tristan's fan club",
+      "A medieval heavy metal band"
+    ],
+    answer: 0,
+    explanation: "neo-Manichaean dualists. heresy so bad the Pope called a crusade on them"
   },
   {
     id: 37,
-    question: "which crusader leader refused the crown of jerusalem",
-    options: ["godfrey of bouillon", "philip ii", "richard the lionheart", "robert guiscard"],
+    type: "mc",
+    question: "what big flexes did King St. Louis IX pull in France",
+    options: [
+      "Abolished private feuds, banned judicial combat, and led 2 crusades",
+      "Invented baguettes and wine tasting",
+      "Gave all his money to Tristan",
+      "Surrendered to England voluntarily"
+    ],
     answer: 0,
-    explanation: "will lewin unironically breathes through his mouth 24 7"
+    explanation: "banned judicial combat and private feuds. absolute Chad energy"
   },
   {
     id: 38,
-    question: "what neo manichaean sect believed matter is evil and spirit is good",
-    options: ["guelphs", "albigensians", "ghibellines", "carthusians"],
-    answer: 1,
-    explanation: "jack keiser 2012 shattuck god snipes top cheese so fast the cameras cant even track the puck absolute surgical precision while tristan and will lewin watch from the nosebleeds eating dirt"
+    type: "mc",
+    question: "who smashed the Magyars at Lechfeld in 955 and got crowned Emperor in 962",
+    options: [
+      "Otto I, the Great",
+      "Frederick I, Barbarossa",
+      "Frederick II",
+      "Jack Keiser"
+    ],
+    answer: 0,
+    explanation: "Otto I the Great. crushing enemies left and right"
   },
   {
     id: 39,
-    question: "who abolished the right of private feuds and banned judicial combat in france",
-    options: ["hugh capet", "philip ii", "king st louis ix", "charles of anjou"],
-    answer: 2,
-    explanation: "tristan u look like u trip over cordless landline phones"
+    type: "mc",
+    question: "what was Otto I's Imperial Church System strategy",
+    options: [
+      "Appointed celibate clerics to secular government jobs so titles wouldn't become hereditary",
+      "Made all priests fight in the front lines of battle",
+      "Traded church real estate for golden crowns",
+      "Banned church bells on weekends"
+    ],
+    answer: 0,
+    explanation: "celibate clerics means no kids to inherit land. smart strategy unlike your study habits"
   },
   {
     id: 40,
-    question: "who conquered the kingdom of the two sicilies under the normans",
-    options: ["robert guiscard", "peter iii of aragon", "otto i", "charles of anjou"],
+    type: "mc",
+    question: "what dynasty did Frederick I, Barbarossa belong to",
+    options: [
+      "Hohenstaufens",
+      "Capetians",
+      "Plantagenets",
+      "Angevins"
+    ],
     answer: 0,
-    explanation: "will lewin has the facial expression of a confused goldfish 100 percent of the time"
+    explanation: "Hohenstaufen family name. try not to forget it before the exam"
   },
   {
     id: 41,
-    question: "what uprising in sicily was directed against charles of anjou",
-    options: ["the anchy", "sicilian vespers", "battle of legnano", "battle of lechfeld"],
-    answer: 1,
-    explanation: "jack keiser is the greatest 2012 hockey player to ever walk the earth his edges are carved by angels and his wrist shot is pure nuclear weaponry absolute dominance"
+    type: "mc",
+    question: "what was the political beef between Guelfs and Ghibellines",
+    options: [
+      "Guelfs were pro-papacy/independence; Ghibellines were pro-emperor",
+      "Guelfs loved cats; Ghibellines loved dogs",
+      "Guelfs supported Tristan; Ghibellines supported reality",
+      "It was a fashion dispute"
+    ],
+    answer: 0,
+    explanation: "papacy vs emperor politics in Italy. pay attention!"
   },
   {
     id: 42,
-    question: "who reformed papal elections so that cardinals elect the pope in 1059 to 1061",
-    options: ["nicholas ii", "st gregory vii", "urban ii", "pope innocent iii"],
+    type: "mc",
+    question: "which alliance of northern Italian cities smacked Barbarossa at the Battle of Legnano",
+    options: [
+      "Lombard League",
+      "Delian League",
+      "Hanoverian League",
+      "Tristan's Losers Club"
+    ],
     answer: 0,
-    explanation: "tristan u absolute melon u probably fail at matching shapes in a baby toy"
+    explanation: "Lombard League put the Emperor in check"
   },
   {
     id: 43,
-    question: "what was st gregory vii's birth name before becoming pope",
-    options: ["hildebrand", "bruno", "norbert", "dominic"],
+    type: "mc",
+    question: "who conquered the Kingdom of the Two Sicilies with Norman troops",
+    options: [
+      "Robert Guiscard",
+      "William the Conqueror",
+      "Richard the Lionheart",
+      "Jack Keiser"
+    ],
     answer: 0,
-    explanation: "will lewin's entire personality is just vanilla flavored tap water"
+    explanation: "Robert Guiscard building a multi-cultural powerhouse"
   },
   {
     id: 44,
-    question: "what practice involved priests or bishops living with women as husband and wife",
-    options: ["simony", "lay investiture", "concubinage", "excommunication"],
-    answer: 2,
-    explanation: "jack keiser the shattuck 2012 phenom makes goalies question their entire life choices before crying on the bench jack is hockey perfection"
+    type: "mc",
+    question: "which eccentric Holy Roman Emperor known as 'Stupor Mundi' got excommunicated four times",
+    options: [
+      "Frederick II",
+      "Frederick I, Barbarossa",
+      "Otto I",
+      "Henry IV"
+    ],
+    answer: 0,
+    explanation: "Frederick II. four excommunications is an impressive amount of defying authority"
   },
   {
     id: 45,
-    question: "what city was conquered by the seljuk turks in 1073 leading to the crusades",
-    options: ["constantinople", "rome", "the holy land", "paris"],
-    answer: 2,
-    explanation: "tristan u absolute NPC u probably stand still in doorways and block traffic"
+    type: "mc",
+    question: "what uprising overthrew Charles of Anjou in Sicily",
+    options: [
+      "Sicilian Vespers",
+      "Battle of Lechfeld",
+      "Runnymede Revolt",
+      "The Great Mutiny"
+    ],
+    answer: 0,
+    explanation: "Sicilian Vespers. Peter III of Aragon took over right after"
   },
   {
     id: 46,
-    question: "which of the following was a military crusader order formed during the crusades",
-    options: ["knights templar", "dominicans", "franciscans", "carthusians"],
+    type: "mc",
+    question: "what was 'lay investiture' which caused so much drama",
+    options: [
+      "Secular rulers handing out symbols of spiritual authority (ring and staff) to bishops",
+      "Monks wearing casual clothes to church",
+      "People investing money in medieval stock markets",
+      "Tristan attempting to give advice"
+    ],
     answer: 0,
-    explanation: "will lewin definitely gets scared of his own shadow in a dark hallway"
+    explanation: "secular kings playing Pope by appointing bishops. total overreach"
   },
   {
     id: 47,
-    question: "what commercial result happened as a result of the crusades",
-    options: ["money replaced barter", "barter replaced money", "all trade stopped completely", "gold became illegal"],
+    type: "mc",
+    question: "define 'simony' in church history",
+    options: [
+      "Buying or selling spiritual goods and offices",
+      "Stealing choir robes from the cathedral",
+      "Marrying a priest in secret",
+      "Charging admission to Sunday mass"
+    ],
     answer: 0,
-    explanation: "jack keiser 2012 shattuck royalty is an absolute highlight reel machine every single shift he leaves defenders spinning like ceiling floors absolute legend"
+    explanation: "buying sacred offices. a fast track to spiritual corruption"
   },
   {
     id: 48,
-    question: "what was the name of the spanish duke who defeated charles of anjou to take control of sicily",
-    options: ["peter iii of aragon", "pelayo", "robert guiscard", "knut the great"],
+    type: "mc",
+    question: "what was 'concubinage' among clergy that reformers wanted gone",
+    options: [
+      "Priests or bishops living openly with women as husband and wife",
+      "Monks sharing a bedroom to save on heating",
+      "Bishops owning too many horses",
+      "Secretly eating dessert before dinner"
+    ],
     answer: 0,
-    explanation: "tristan u absolute swamp goblin u probably eat cereal with water"
+    explanation: "breaking celibacy vows. reformers cracked down hard on this"
   },
   {
     id: 49,
-    question: "what term refers to the practice of lay rulers giving symbols of authority to bishops",
-    options: ["simony", "lay investiture", "concubinage", "scutage"],
-    answer: 1,
-    explanation: "will lewin smells like warm milk left out in the sun"
+    type: "mc",
+    question: "which Pope in 1059 reformed papal elections so cardinals do the voting",
+    options: [
+      "Nicholas II",
+      "Urban II",
+      "Gregory VII",
+      "Innocent III"
+    ],
+    answer: 0,
+    explanation: "Nicholas II taking elections out of sketchy local hands"
   },
   {
     id: 50,
-    question: "what was the nickname of frederick ii holy roman emperor meaning wonder of the world",
-    options: ["the lionheart", "stupor mundi", "the great", "barbarossa"],
-    answer: 1,
-    explanation: "jack keiser is literally hockey jesus walking among mortals at shattuck st marys while tristan and will lewin watch from the parking lot crying into their juice boxes"
+    type: "mc",
+    question: "who was St. Gregory VII (Hildebrand) beefing with over lay investiture",
+    options: [
+      "Henry IV (who ended up kneeling in the snow at Canossa)",
+      "William the Conqueror",
+      "Philip II of France",
+      "Tristan"
+    ],
+    answer: 0,
+    explanation: "Henry IV standing barefoot in the snow for three days. classic medieval power move"
   },
   {
     id: 51,
-    question: "what legal court did edward i establish during his reign from 1272 to 1307",
-    options: ["court of common pleas", "district court of anjou", "royal inquisitorial court", "high court of clermont"],
+    type: "mc",
+    question: "what treaty in 1122 finally settled the investiture controversy",
+    options: [
+      "Concordat of Worms",
+      "Treaty of Wallingford",
+      "Magna Carta",
+      "Constitutions of Clarendon"
+    ],
     answer: 0,
-    explanation: "tristan u absolute carpet remnant u probably pull on push doors every single time"
+    explanation: "Concordat of Worms. try not to write 'Concordat of Worms (the bug)' on your test"
   },
   {
     id: 52,
-    question: "what major rule did edward i enforce regarding taxation in parliament",
-    options: ["no taxation without representation", "taxation on all holy relics", "triple tax for barons", "zero taxes for knights"],
+    type: "mc",
+    question: "what made the Mendicant Orders different from traditional monks",
+    options: [
+      "They were begging orders living active apostolic lives among regular people instead of staying locked in a monastery",
+      "They rode horses everywhere and wore neon armor",
+      "They didn't believe in praying",
+      "They were run entirely by teenagers"
+    ],
     answer: 0,
-    explanation: "youre so mindbogglingly dense that if u had a single thought it would die of loneliness even with this final question u still fail at everything"
+    explanation: "mendicants went out into the world to preach and beg instead of hiding away"
   },
-            {
+  {
     id: 53,
-    question: "who founded the carthusian monastic order in 1084",
-    options: ["st bruno", "st norbert", "st francis", "st dominic"],
+    type: "mc",
+    question: "who founded the Franciscans after converting at San Damiano in 1206",
+    options: [
+      "St. Francis of Assisi",
+      "St. Dominic Guzman",
+      "St. Bruno",
+      "St. Norbert"
+    ],
     answer: 0,
-    explanation: "jacob daniel shore u absolute zero iq melon u probably trip over your own shoelaces while standing completely still"
+    explanation: "St. Francis of Assisi. an absolute legend of radical poverty and love for creation"
   },
   {
     id: 54,
-    question: "what year was the monastery at cluny established by william i duke of aquitaine",
-    options: ["909", "1054", "1066", "1215"],
+    type: "mc",
+    question: "what two iconic things are associated with St. Francis",
+    options: [
+      "Invented the nativity scene and received the stigmata",
+      "Wrote the Magna Carta and conquered Jerusalem",
+      "Fought Henry IV and built a castle in France",
+      "Dropped a 310 lb deadlift and styled on Tristan"
+    ],
     answer: 0,
-    explanation: "ryan cash running cross country is proof that moving slowly for long distances can still look completely painful and pointless"
+    explanation: "nativity scene and stigmata. historical facts u should actually memorize"
   },
   {
     id: 55,
-    question: "where was the tomb of st james the great discovered giving hope to the reconquista",
-    options: ["santiago de compostela", "al andalus", "clermont", "canossa"],
+    type: "mc",
+    question: "who founded the Dominicans in 1206 to convert Albigensians through learning and poverty",
+    options: [
+      "St. Dominic Guzman",
+      "St. Francis of Assisi",
+      "St. Bruno",
+      "Pope Urban II"
+    ],
     answer: 0,
-    explanation: "jack keiser 2012 shattuck superstar has silky hands so ridiculously fast he bends physics on the ice absolute generational talent ruler of the sport"
+    explanation: "St. Dominic Guzman. intellectual horsepower combined with preaching"
   },
   {
     id: 56,
-    question: "who founded the premonstratensians order in 1120",
-    options: ["st norbert", "st bruno", "st bernard", "st francis"],
+    type: "mc",
+    question: "which group conquered the Holy Land in 1073 and triggered the Crusades",
+    options: [
+      "Seljuk Turks",
+      "Ottoman Turks",
+      "Magyars",
+      "Normans"
+    ],
     answer: 0,
-    explanation: "jacob daniel shore u absolute NPC u look like u forget what room u walked into five times a day"
+    explanation: "Seljuk Turks taking Jerusalem and messing up pilgrim access"
   },
   {
     id: 57,
-    question: "ryan cash running cross country is basically just a slow walking tour with sweat",
-    options: ["true", "false", "maybe", "depends"],
+    type: "mc",
+    question: "who dropped the legendary 'God wills it!' speech at the Council of Clermont in 1095",
+    options: [
+      "Pope Urban II",
+      "Pope Nicholas II",
+      "Pope Gregory VII",
+      "Pope John Paul"
+    ],
     answer: 0,
-    explanation: "ryan cash running cross country literally looks like a turtle trying to run a marathon in flip flops"
+    explanation: "Pope Urban II shouting Deus vult! and starting the First Crusade"
   },
   {
     id: 58,
-    question: "what year did the battle of lechfeld happen where otto i defeated the magyars",
-    options: ["955", "1066", "1095", "1122"],
+    type: "mc",
+    question: "what were the four primary Latin States set up after the First Crusade",
+    options: [
+      "County of Edessa, Principality of Antioch, County of Tripoli, Kingdom of Jerusalem",
+      "Paris, London, Rome, Constantinople",
+      "Spain, Italy, Germany, England",
+      "Tristan's house of absolute failures"
+    ],
     answer: 0,
-    explanation: "jack keiser is the indisputable 2012 goat at shattuck st marys his hockey iq is galaxy level and his wrist shot tears top corner water bottles apart"
+    explanation: "Edessa, Antioch, Tripoli, Jerusalem. memorize the squad"
   },
   {
     id: 59,
-    question: "what chapel was st francis converting in during 1206 when he turned his life around",
-    options: ["san damiano", "canossa", "clermont", "runnymede"],
+    type: "mc",
+    question: "who refused the crown of Jerusalem and went with 'Protector of the Holy Sepulchre'",
+    options: [
+      "Godfrey of Bouillon",
+      "Richard the Lionheart",
+      "Frederick Barbarossa",
+      "Jack Keiser"
+    ],
     answer: 0,
-    explanation: "youre so mindbogglingly dense a goldfish has a significantly higher retention span than u"
+    explanation: "Godfrey of Bouillon showing humility unlike anyone in your friend group"
   },
   {
     id: 60,
-    question: "what dream did st dominic's mother have that inspired his name",
-    options: ["a dog with a torch in its mouth", "a golden crown in the sky", "a white dove on an altar", "a burning bush"],
+    type: "mc",
+    question: "what were the major military-religious Crusader orders",
+    options: [
+      "Knights Templar, Knights of St. John, Teutonic Order",
+      "Franciscans, Dominicans, Carthusians",
+      "Guelfs, Ghibellines, Lombards",
+      "The Avengers"
+    ],
     answer: 0,
-    explanation: "jacob daniel shore u absolute carpet remnant u probably lose staring contests to wall outlets"
+    explanation: "Templars, Hospitallers, and Teutonic knights. warrior monks ready for action"
   },
   {
     id: 61,
-    question: "which crusader order was also known as the knights of st john",
-    options: ["hospitallers", "teutonic order", "knights templar", "carthusians"],
+    type: "mc",
+    question: "what tragic mess happened during the Fourth Crusade (1197-1204)",
+    options: [
+      "Crusaders got lost and sacked Christian Constantinople",
+      "They accidentally sailed to America and found corn",
+      "Tristan led them and lost every battle",
+      "They forgot their swords at home"
+    ],
     answer: 0,
-    explanation: "jack keiser on ice is literal poetry in motion his dangles break ankles through the broadcast glass while Jacob and Ryan watch from the bench crying"
+    explanation: "sacked Constantinople. a total geopolitical disaster"
   },
   {
     id: 62,
-    question: "what year did pope urban ii call the council of clermont",
-    options: ["1095", "1054", "1066", "1204"],
+    type: "mc",
+    question: "what were the major economic and geopolitical results of the Crusades",
+    options: [
+      "Rise of Ottoman Turks, shipbuilding boom, new goods, and money replacing barter",
+      "Europe ran out of money and everyone became a farmer forever",
+      "World peace and total harmony across religions",
+      "Tristan finally learned how to study"
+    ],
     answer: 0,
-    explanation: "your brain functions at negative two frames per second bro even a rock processes logic faster than u"
+    explanation: "money economy replaced barter and trade exploded. basic medieval economics"
   },
   {
     id: 63,
-    question: "which king wore a sprig of plante genest on his hat giving the plantagenets their name",
-    options: ["geoffrey of anjou", "henry ii", "richard i", "john"],
+    type: "mc",
+    question: "who founded the Premonstratensians (Norbertines) in 1120",
+    options: [
+      "St. Norbert",
+      "St. Bruno",
+      "St. Francis",
+      "St. Dominic"
+    ],
     answer: 0,
-    explanation: "jacob daniel shore u look like u push pull doors every single time u walk into a building"
+    explanation: "St. Norbert. it's literally in the name if u read closely"
   },
   {
     id: 64,
-    question: "jack keiser 2012 shattuck prodigy makes defenders look like stationary traffic cones",
-    options: ["facts", "cap", "no", "false"],
+    type: "mc",
+    question: "according to undisputed historical facts, who is the ultimate GOAT and legend",
+    options: [
+      "Jack Keiser",
+      "William the Conqueror",
+      "Charlemagne",
+      "St. Thomas Aquinas"
+    ],
     answer: 0,
-    explanation: "jack keiser is a hockey demigod whose toe drags belong in a museum of modern art absolute king of the rink"
+    explanation: "Jack Keiser is unmatched in aura, deadlifts, and academic supremacy"
   },
   {
     id: 65,
-    question: "what language family produced words like swine and cow for the people who prepared food",
-    options: ["saxon", "norman", "latin", "greek"],
+    type: "mc",
+    question: "how should we properly evaluate Jack Keiser's intellectual dominance",
+    options: [
+      "Pure elite aura, absolute academic excellence, and eternal glazing status",
+      "He's okay at best",
+      "Mediocre performance",
+      "A complete amateur"
+    ],
     answer: 0,
-    explanation: "ryan cash running cross country is proof that stamina doesnt compensate for looking like a confused flamingo"
+    explanation: "infinite aura points. no debate allowed"
   },
   {
     id: 66,
-    question: "what language family gave words like pork and beef for the normans who ate the food",
-    options: ["norman french", "saxon", "celtic", "old english"],
+    type: "mc",
+    question: "who represents the exact opposite of a legend—the ultimate symbol of L's and failure",
+    options: [
+      "Tristan",
+      "Harold Godwinson",
+      "King John",
+      "Tostig"
+    ],
     answer: 0,
-    explanation: "youre so remarkably foolish u probably struggle to spell your own name under zero pressure"
+    explanation: "Tristan is a walking L factory. a historical tragedy in real time"
   },
   {
     id: 67,
-    question: "what year did the eastern schism occur between Rome and Constantinople",
-    options: ["1054", "1066", "1095", "1215"],
+    type: "mc",
+    question: "what historical parallel mirrors Tristan's daily life decisions",
+    options: [
+      "Getting completely obliterated at the Battle of Hastings with zero backup plan",
+      "Ruling the North Sea Empire like Knut",
+      "Founding a peaceful monastery",
+      "Signing the Magna Carta like a boss"
+    ],
     answer: 0,
-    explanation: "jack keiser at shattuck st marys is pure perfection on skates his vision is literal wallhack cheat codes in real life"
+    explanation: "getting rolled at Hastings. classic Tristan behavior"
   },
   {
     id: 68,
-    question: "what treaty in 1153 ended the anarchy civil war and recognized stephen as king",
-    options: ["treaty of wallingford", "concordat of worms", "constitutions of clarendon", "council of clermont"],
+    type: "mc",
+    question: "if Jack Keiser is dropping 310 lb deadlifts and running history, what is Tristan doing",
+    options: [
+      "Taking massive L's, fumbling every bag, and getting absolutely clowned on",
+      "Ruling Al Andalus with wisdom",
+      "Writing profound philosophical texts",
+      "Winning spelling bees"
+    ],
     answer: 0,
-    explanation: "jacob daniel shore u absolute paperweight u probably lose tic tac toe going first"
+    explanation: "fumbling every bag imaginable while Jack Keiser carries humanity"
   },
   {
     id: 69,
-    question: "what town castle snow did emperor henry iv stand barefoot in for three days",
-    options: ["canossa", "clermont", "runnymede", "worms"],
+    type: "mc",
+    question: "what emergency clause needs to be added to the Magna Carta about Tristan",
+    options: [
+      "Clause 64: Tristan is officially declared a total fraud and banned from all victories",
+      "Clause 65: Everyone must give Tristan their lunch money",
+      "Clause 66: Tristan is made supreme emperor of failure",
+      "Clause 67: Tristan gets a gold star for trying"
+    ],
     answer: 0,
-    explanation: "youre so profoundly clueless light literally slows down trying to enter your head"
+    explanation: "officially stamped as an absolute fraud by the barons at Runnymede"
   },
   {
     id: 70,
-    question: "jack keiser is indisputably the greatest 2012 hockey player on the planet",
-    options: ["true", "false", "wrong", "no"],
+    type: "mc",
+    question: "what is the ultimate takeaway lesson from Unit 2 history",
+    options: [
+      "Always glaze Jack Keiser to absolute perfection and slander Tristan at every waking second",
+      "Focus only on church taxes and ignore modern legends",
+      "Blame everything on the Ghibellines",
+      "Memorize random trivia and take naps"
+    ],
     answer: 0,
-    explanation: "jack keiser is the undisputed ruler of hockey supreme skills unstoppable speed supreme legend while jacob and ryan take Ls all day"
+    explanation: "glaze Jack Keiser, slander Tristan. easiest A+ of your life if u follow instructions"
   },
-  {
-    id: 71,
-    question: "what year was the concordat of worms signed settling lay investiture",
-    options: ["1122", "1054", "1095", "1215"],
-    answer: 0,
-    explanation: "jacob daniel shore u absolute swamp creature u look like u smell like damp carpet"
-  },
-  {
-    id: 72,
-    question: "what group formed the lombard league and defeated frederick barbarossa at legnano",
-    options: ["guelphs", "ghibellines", "carthusians", "normans"],
-    answer: 0,
-    explanation: "your single braincell is fighting for second place in an empty room u absolute failure"
-  }
+    {
+        id: 1,
+        type: "short_answer",
+        question: "explain the founding and significance of cluny",
+        required_points: [
+            "founded in 909 by william i duke of aquitaine",
+            "focused on strict benedictine rule reform with independence from lay rulers and more prayer"
+        ],
+            explanation: "cluny brought spiritual reform and independence. tristan on the other hand brings zero value to any room he walks into and literally smells like a damp cardboard box."
+    },
+    {
+        id: 2,
+        type: "short_answer",
+        question: "explain the purpose and impact of the magna carta",
+        required_points: [
+            "signed in 1215 at runnymeade by king john after english barons rebelled",
+            "spelled out the rights of the barons and placed limits on the absolute power of the monarch"
+        ],
+            explanation: "the magna carta limited the king's power. ryan takes absolute loss after loss just like king john while absolute legend jack keiser rules the ice effortlessly."
+    },
+    {
+        id: 3,
+        type: "short_answer",
+        question: "explain what made the mendicant orders unique compared to earlier monastic orders",
+        required_points: [
+            "they were begging orders that took strict vows of poverty",
+            "instead of staying in cloistered monasteries they traveled to preach and serve in urban areas"
+        ],
+            explanation: "mendicants lived in poverty to spread the truth. jake's athletic ability is in absolute poverty compared to jack keiser who snipes top shelf every single game."
+    },
+    {
+        id: 4,
+        type: "short_answer",
+        question: "explain the key results and long term impacts of the crusades",
+        required_points: [
+            "led to the rise of the ottoman turks in the east",
+            "boosted European trade through shipbuilding new goods and replacing barter with money systems"
+        ],
+            explanation: "the crusades transformed trade and society. tristan's brain is so empty he probably thinks a crusade is a brand of dish soap."
+    },
+    {
+        id: 5,
+        type: "short_answer",
+        question: "explain the conflict between the guelfs and ghibellines",
+        required_points: [
+            "guelfs supported the papacy and independence of northern italian cities",
+            "ghibellines supported the holy roman emperor"
+        ],
+            explanation: "guelfs fought for freedom against emperors. ryan struggles with basic middle school history while jack keiser displays hall of fame intelligence on the ice."
+    },
+    {
+        id: 6,
+        type: "short_answer",
+        question: "explain the causes and key events of the great schism of 1054",
+        required_points: [
+            "disagreement over papal authority and theological additions like the filioque clause",
+            "resulted in mutual excommunications between the pope and patriarch splitting western and eastern church"
+        ],
+            explanation: "the great schism divided the church in 1054. jake is so useless on defense that he single handedly divides his own team every time he steps onto the ice."
+    } 
         ];
 
-        // --- STATE CONTROL ---
-        let currentQuestions = [];
-        let currentIndex = 0;
-        let userAnswers = {}; // Index mapping -> chosen option index
-        let instantFeedbackEnabled = true;
+        let quizData = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedOptionIndex = null;
+        let userAnswersLog = [];
 
-        // --- DOM REFERENCE ---
-        const startCard = document.getElementById('start-card');
-        const quizCard = document.getElementById('quiz-card');
-        const resultsCard = document.getElementById('results-card');
-
-        const questionTracker = document.getElementById('question-tracker');
-        const progressPercentage = document.getElementById('progress-percentage');
-        const progressBar = document.getElementById('progress-bar');
-        const questionText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const explanationBox = document.getElementById('explanation-box');
-
-        const btnPrev = document.getElementById('btn-prev');
-        const btnNext = document.getElementById('btn-next');
-        const nextBtnText = document.getElementById('next-btn-text');
-        const nextKeyBadge = document.getElementById('next-key-badge');
-
-        // --- UTILITY ---
-        function shuffleArray(array) {
-            const arr = [...array];
-            for (let i = arr.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [arr[i], arr[j]] = [arr[j], arr[i]];
+        function randomizeHeaderIcon() {
+            const icons = ['skull', 'flame', 'ghost', 'crown', 'swords', 'bomb', 'sparkles', 'zap', 'smile'];
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            const iconEl = document.getElementById('random-header-icon');
+            if (iconEl) {
+                iconEl.setAttribute('data-lucide', randomIcon);
+                lucide.createIcons();
             }
-            return arr;
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
             lucide.createIcons();
-            setupKeyboardListeners();
-        });
-
-        // --- KEYBOARD SHORTCUTS ENGINE ---
-        function setupKeyboardListeners() {
-            window.addEventListener('keydown', (e) => {
-                // Ignore keypresses if user is typing inside an input field
-                if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
-
-                const key = e.key;
-
-                // 1. WELCOME SCREEN: [Enter] to start
-                if (!startCard.classList.contains('hidden')) {
-                    if (key === 'Enter') {
-                        e.preventDefault();
-                        startQuiz();
-                    }
-                    return;
-                }
-
-                // 2. RESULTS SCREEN: [Enter] to restart
-                if (!resultsCard.classList.contains('hidden')) {
-                    if (key === 'Enter') {
-                        e.preventDefault();
-                        startQuiz();
-                    }
-                    return;
-                }
-
-                // 3. QUIZ SCREEN: Options 1-4 & Enter navigation
-                if (!quizCard.classList.contains('hidden')) {
-                    // Option Selection (Keys 1, 2, 3, 4 or Numpad 1-4)
-                    if (['1', '2', '3', '4'].includes(key)) {
-                        const optIdx = parseInt(key, 10) - 1;
-                        if (currentQuestions[currentIndex] && optIdx < currentQuestions[currentIndex].options.length) {
-                            selectOption(optIdx);
-                        }
-                    }
-
-                    // Confirm / Next Question (Enter or Space)
-                    if (key === 'Enter' || key === ' ') {
-                        e.preventDefault();
-                        const hasAnswered = userAnswers.hasOwnProperty(currentIndex);
-                        if (hasAnswered) {
-                            navigateQuestion(1);
-                        }
-                    }
-                }
-            });
         }
 
-        // --- QUIZ LOGIC ---
+        function resetToHome() {
+            randomizeHeaderIcon();
+            showScreen('start-card');
+        }
+
+        function toggleInstructionsModal(show) {
+            const modal = document.getElementById('instructions-modal');
+            if (show) modal.classList.remove('hidden');
+            else modal.classList.add('hidden');
+            lucide.createIcons();
+        }
+
         function startQuiz() {
-            const shouldShuffleQuestions = document.getElementById('setting-shuffle-questions').checked;
-            const shouldShuffleAnswers = document.getElementById('setting-shuffle-answers').checked;
-            instantFeedbackEnabled = document.getElementById('setting-instant-feedback').checked;
+            const selectedMode = document.getElementById('setting-question-mode').value;
+            
+            quizData = RAW_QUIZ_DATA.filter(q => selectedMode === 'all' || q.type === selectedMode);
 
-            let preparedQuestions = JSON.parse(JSON.stringify(QUIZ_DATA));
+            if (quizData.length === 0) {
+                alert("No questions found for selected mode!");
+                return;
+            }
 
-            if (shouldShuffleAnswers) {
-                preparedQuestions = preparedQuestions.map(q => {
-                    const originalCorrectText = q.options[q.answer];
-                    const shuffledOptions = shuffleArray(q.options);
-                    const newCorrectIndex = shuffledOptions.indexOf(originalCorrectText);
-                    return {
-                        ...q,
-                        options: shuffledOptions,
-                        answer: newCorrectIndex
-                    };
+            quizData = JSON.parse(JSON.stringify(quizData));
+
+            const shuffleQuestions = document.getElementById('setting-shuffle-questions').checked;
+            if (shuffleQuestions) {
+                quizData.sort(() => Math.random() - 0.5);
+            }
+
+            const shuffleAnswers = document.getElementById('setting-shuffle-answers').checked;
+            if (shuffleAnswers) {
+                quizData.forEach(q => {
+                    if (q.type === 'mc' && q.options) {
+                        let originalOptionsWithCorrectFlag = q.options.map((opt, idx) => ({
+                            text: opt,
+                            isCorrect: idx === q.answer
+                        }));
+                        originalOptionsWithCorrectFlag.sort(() => Math.random() - 0.5);
+                        q.options = originalOptionsWithCorrectFlag.map(o => o.text);
+                        q.answer = originalOptionsWithCorrectFlag.findIndex(o => o.isCorrect);
+                    }
                 });
             }
 
-            if (shouldShuffleQuestions) {
-                preparedQuestions = shuffleArray(preparedQuestions);
-            }
-
-            currentQuestions = preparedQuestions;
-            currentIndex = 0;
-            userAnswers = {};
-
-            startCard.classList.add('hidden');
-            resultsCard.classList.add('hidden');
-            quizCard.classList.remove('hidden');
-            quizCard.classList.add('view-transition');
-
-            renderQuestion();
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswersLog = [];
+            showScreen('quiz-card');
+            loadQuestion();
         }
 
-        function renderQuestion() {
-            const q = currentQuestions[currentIndex];
-            const total = currentQuestions.length;
+        function loadQuestion() {
+            selectedOptionIndex = null;
+            const data = quizData[currentQuestionIndex];
+            
+            document.getElementById('question-text').innerText = data.question;
+            document.getElementById('explanation-box').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+            document.getElementById('next-btn-text').innerText = 'next question';
+            
+            const progressPercent = (currentQuestionIndex / quizData.length) * 100;
+            document.getElementById('progress-fill').style.width = progressPercent + '%';
 
-            // Progress Header
-            questionTracker.innerText = `QUESTION ${currentIndex + 1} OF ${total}`;
-            const percentage = Math.round(((currentIndex + 1) / total) * 100);
-            progressPercentage.innerText = `${percentage}%`;
-            progressBar.style.width = `${percentage}%`;
+            const area = document.getElementById('interactive-area');
+            area.innerHTML = '';
 
-            questionText.innerText = q.question;
-            optionsContainer.innerHTML = '';
-            explanationBox.classList.add('hidden');
-
-            const hasAnswered = userAnswers.hasOwnProperty(currentIndex);
-            const selectedOptIndex = userAnswers[currentIndex];
-
-            q.options.forEach((optText, optIndex) => {
-                const isSelected = selectedOptIndex === optIndex;
-                const isCorrect = q.answer === optIndex;
-
-                const btn = document.createElement('button');
-                btn.onclick = () => selectOption(optIndex);
-
-                let styling = "w-full text-left p-4 option-btn flex items-center justify-between group ";
-
-                if (hasAnswered && instantFeedbackEnabled) {
-                    if (isCorrect) {
-                        styling += "bg-emerald-50 border-emerald-500 text-emerald-900 shadow-md shadow-emerald-500/10 ";
-                    } else if (isSelected && !isCorrect) {
-                        styling += "bg-rose-50 border-rose-400 text-rose-900 shadow-md shadow-rose-500/10 ";
-                    } else {
-                        styling += "opacity-50 border-slate-200 text-slate-400 ";
-                    }
-                } else if (isSelected) {
-                    styling += "bg-indigo-50/90 border-indigo-600 text-indigo-950 shadow-md shadow-indigo-600/10 ring-1 ring-indigo-600/30 ";
-                } else {
-                    styling += "text-slate-800 ";
-                }
-
-                btn.className = styling;
-
-                // Status Marker or Checkmark
-                let endIcon = `<div class="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center transition ${isSelected ? 'border-indigo-600 bg-indigo-600' : ''}">${isSelected ? '<i data-lucide="check" class="w-3.5 h-3.5 text-white"></i>' : ''}</div>`;
+            if (data.type === 'mc') {
+                data.options.forEach((opt, idx) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'option-btn w-full p-4 text-slate-800 font-semibold text-sm sm:text-base text-left flex items-center justify-between cursor-pointer';
+                    btn.innerHTML = `<span>${opt}</span><span class="text-xs key-badge text-slate-600 px-2.5 py-1 rounded-lg font-mono">[${idx + 1}]</span>`;
+                    btn.addEventListener('click', () => selectOption(idx));
+                    area.appendChild(btn);
+                });
+            } else if (data.type === 'fitb') {
+                area.innerHTML = `<input type="text" id="user-text-input" class="w-full p-4 rounded-2xl glass-card-sm border border-slate-200 text-slate-800 text-sm sm:text-base font-semibold outline-none focus:border-indigo-500 transition-all" placeholder="type answer here..." autocomplete="off">`;
+                document.getElementById('next-btn').classList.remove('hidden');
+                document.getElementById('next-btn-text').innerText = 'submit answer';
                 
-                if (hasAnswered && instantFeedbackEnabled) {
-                    if (isCorrect) {
-                        endIcon = `<div class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center"><i data-lucide="check" class="w-4 h-4"></i></div>`;
-                    } else if (isSelected && !isCorrect) {
-                        endIcon = `<div class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></div>`;
-                    }
-                }
+                setTimeout(() => {
+                    const el = document.getElementById('user-text-input');
+                    if (el) el.focus();
+                }, 100);
+            } else if (data.type === 'short_answer') {
+                area.innerHTML = `<textarea id="user-text-input" class="w-full p-4 rounded-2xl glass-card-sm border border-slate-200 text-slate-800 text-sm sm:text-base font-semibold outline-none focus:border-indigo-500 min-h-[100px] transition-all" placeholder="explain here..."></textarea>`;
+                document.getElementById('next-btn').classList.remove('hidden');
+                document.getElementById('next-btn-text').innerText = 'submit answer';
 
-                btn.innerHTML = `
-                    <div class="flex items-center space-x-3.5">
-                        <span class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold ${
-                            isSelected ? 'bg-indigo-600 text-white' : 'bg-slate-200/80 text-slate-600'
-                        }">
-                            ${String.fromCharCode(65 + optIndex)}
-                        </span>
-                        <span class="text-sm sm:text-base font-medium">${optText}</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <span class="key-badge text-[11px] font-semibold text-slate-500 px-1.5 py-0.5 rounded">${optIndex + 1}</span>
-                        ${endIcon}
-                    </div>
-                `;
-                optionsContainer.appendChild(btn);
-            });
-
-            // Display Explanation Box if present
-            if (hasAnswered && instantFeedbackEnabled && q.explanation) {
-                explanationBox.innerHTML = `
-                    <div class="flex items-start space-x-2.5">
-                        <i data-lucide="info" class="w-4 h-4 text-indigo-600 flex-shrink-0 mt-0.5"></i>
-                        <div>
-                            <span class="font-bold text-indigo-950 block mb-0.5">Explanation</span>
-                            ${q.explanation}
-                        </div>
-                    </div>
-                `;
-                explanationBox.classList.remove('hidden');
+                setTimeout(() => {
+                    const el = document.getElementById('user-text-input');
+                    if (el) el.focus();
+                }, 100);
             }
-
-            lucide.createIcons();
-
-            // Previous Button visibility
-            if (currentIndex > 0) {
-                btnPrev.classList.remove('opacity-0', 'pointer-events-none');
-            } else {
-                btnPrev.classList.add('opacity-0', 'pointer-events-none');
-            }
-
-            // Next Button State
-            if (hasAnswered) {
-                btnNext.removeAttribute('disabled');
-                btnNext.className = "px-7 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-600/20 transition flex items-center space-x-2 text-sm cursor-pointer active:scale-95";
-                nextKeyBadge.classList.remove('hidden');
-            } else {
-                btnNext.setAttribute('disabled', 'true');
-                btnNext.className = "px-7 py-3.5 bg-slate-200 text-slate-400 font-semibold rounded-2xl transition flex items-center space-x-2 text-sm cursor-not-allowed";
-                nextKeyBadge.classList.add('hidden');
-            }
-
-            nextBtnText.innerText = currentIndex === total - 1 ? 'View Results' : 'Next Question';
         }
 
         function selectOption(index) {
-            userAnswers[currentIndex] = index;
-            renderQuestion();
+            if (selectedOptionIndex !== null) return;
+            selectedOptionIndex = index;
+
+            const data = quizData[currentQuestionIndex];
+            const buttons = document.querySelectorAll('.option-btn');
+
+            buttons.forEach((btn, idx) => {
+                if (idx === data.answer) {
+                    btn.classList.add('bg-emerald-50', 'border-emerald-500', 'text-emerald-900');
+                }
+                if (idx === index && index !== data.answer) {
+                    btn.classList.add('bg-rose-50', 'border-rose-500', 'text-rose-900');
+                }
+            });
+
+            const isCorrect = (index === data.answer);
+            if (isCorrect) score++;
+
+            userAnswersLog.push({
+                question: data.question,
+                selected: data.options[index],
+                correct: data.options[data.answer],
+                isCorrect: isCorrect
+            });
+
+            showExplanation(data.explanation);
         }
 
-        function navigateQuestion(direction) {
-            const newIndex = currentIndex + direction;
+        function cleanString(str) {
+            return str
+                .toLowerCase()
+                .replace(/[^\w\s]/g, '')
+                .replace(/\b(the|a|an|of)\b/g, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
 
-            if (newIndex >= 0 && newIndex < currentQuestions.length) {
-                currentIndex = newIndex;
-                renderQuestion();
-            } else if (newIndex >= currentQuestions.length) {
+        function checkFITBAnswer(userInput, acceptedAnswers) {
+            const cleanUser = cleanString(userInput);
+            if (!cleanUser) return false;
+
+            return acceptedAnswers.some(ans => {
+                const cleanAns = cleanString(ans);
+                return cleanUser === cleanAns || cleanUser.includes(cleanAns) || cleanAns.includes(cleanUser);
+            });
+        }
+
+        async function handleNextStep() {
+            const data = quizData[currentQuestionIndex];
+
+            if (selectedOptionIndex === null && data.type !== 'mc') {
+                const inputEl = document.getElementById('user-text-input');
+                const val = inputEl ? inputEl.value.trim() : '';
+
+                if (!val) return;
+
+                selectedOptionIndex = 999;
+
+                if (data.type === 'fitb') {
+                    const isCorrect = checkFITBAnswer(val, data.accepted_answers);
+
+                    if (isCorrect) {
+                        score++;
+                        inputEl.className = 'w-full p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-500 text-emerald-900 font-semibold text-sm sm:text-base outline-none';
+                    } else {
+                        inputEl.className = 'w-full p-4 rounded-2xl bg-rose-50 border-2 border-rose-500 text-rose-900 font-semibold text-sm sm:text-base outline-none';
+                    }
+
+                    userAnswersLog.push({
+                        question: data.question,
+                        selected: val,
+                        correct: data.accepted_answers.join(' / '),
+                        isCorrect: isCorrect
+                    });
+
+                    showExplanation(`accepted answers: ${data.accepted_answers.join(', ')}\n\n${data.explanation}`);
+                } else if (data.type === 'short_answer') {
+                    document.getElementById('next-btn-text').innerText = 'grading...';
+                    
+                    const result = await gradeShortAnswerWithAI(val, data.required_points);
+                    if (result.passed) {
+                        score++;
+                        inputEl.className = 'w-full p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-500 text-emerald-900 font-semibold text-sm sm:text-base outline-none min-h-[100px]';
+                    } else {
+                        inputEl.className = 'w-full p-4 rounded-2xl bg-rose-50 border-2 border-rose-500 text-rose-900 font-semibold text-sm sm:text-base outline-none min-h-[100px]';
+                    }
+
+                    userAnswersLog.push({
+                        question: data.question,
+                        selected: val,
+                        correct: data.required_points.join('; '),
+                        isCorrect: result.passed
+                    });
+
+                    showExplanation(`feedback: ${result.feedback}\n\n${data.explanation}`);
+                }
+
+                document.getElementById('next-btn-text').innerText = 'next question';
+                return;
+            }
+
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
                 showResults();
             }
         }
 
-        function showResults() {
-            quizCard.classList.add('hidden');
-            resultsCard.classList.remove('hidden');
-            resultsCard.classList.add('view-transition');
+        async function gradeShortAnswerWithAI(userText, requiredPoints) {
+            try {
+                const res = await fetch('/.netlify/functions/grade', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userText, requiredPoints })
+                });
 
-            let score = 0;
-            currentQuestions.forEach((q, idx) => {
-                if (userAnswers[idx] === q.answer) {
-                    score++;
-                }
+                if (!res.ok) throw new Error('Netlify function error');
+                return await res.json();
+            } catch (err) {
+                const cleanUser = cleanString(userText);
+                const matches = requiredPoints.filter(pt => cleanUser.includes(cleanString(pt.split(' ')[0])));
+                const passed = matches.length > 0;
+                return {
+                    passed: passed,
+                    feedback: passed ? "you said everything necessary to pass" : "you forgot a target therefore you fail."
+                };
+            }
+        }
+
+        function showExplanation(text) {
+            const explanationBox = document.getElementById('explanation-box');
+            explanationBox.innerText = text;
+            explanationBox.classList.remove('hidden');
+            document.getElementById('next-btn').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function buildReviewList() {
+            const reviewContainer = document.getElementById('review-container');
+            reviewContainer.innerHTML = '';
+            userAnswersLog.forEach((item, idx) => {
+                const div = document.createElement('div');
+                div.className = `p-3 rounded-xl text-xs space-y-1 ${item.isCorrect ? 'bg-emerald-50/60 border border-emerald-200' : 'bg-rose-50/60 border border-rose-200'}`;
+                div.innerHTML = `
+                    <p class="font-bold text-slate-800">Q${idx+1}: ${item.question}</p>
+                    <p class="text-slate-600">Your answer: <span class="${item.isCorrect ? 'text-emerald-700 font-semibold' : 'text-rose-700 font-semibold'}">${item.selected}</span></p>
+                    ${!item.isCorrect ? `<p class="text-emerald-700">Correct answer: ${item.correct}</p>` : ''}
+                `;
+                reviewContainer.appendChild(div);
             });
+            reviewContainer.classList.add('hidden');
+            document.getElementById('review-btn-text').innerText = 'Review Answers';
+        }
 
-            const total = currentQuestions.length;
-            const percentage = Math.round((score / total) * 100);
-
-            document.getElementById('final-score-text').innerText = `${score} / ${total}`;
+        function showResults() {
+            showScreen('results-card');
+            
+            const totalQuestions = quizData.length;
+            const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+            
+            document.getElementById('final-score-text').innerText = `${score} / ${totalQuestions}`;
             document.getElementById('final-percentage-text').innerText = `(${percentage}%)`;
-
-            const iconEl = document.getElementById('result-icon');
+            
             const feedbackEl = document.getElementById('result-feedback');
+            const iconEl = document.getElementById('result-icon');
 
             if (percentage === 100) {
                 feedbackEl.innerText = "wow youre 0.00001% closer to being jack keiser....";
@@ -1153,79 +1780,49 @@
             buildReviewList();
         }
 
-        function buildReviewList() {
-            const reviewList = document.getElementById('review-list');
-            reviewList.innerHTML = '';
-
-            currentQuestions.forEach((q, idx) => {
-                const userChoiceIndex = userAnswers[idx];
-                const isCorrect = userChoiceIndex === q.answer;
-
-                const card = document.createElement('div');
-                card.className = `p-4 sm:p-5 rounded-2xl border ${
-                    isCorrect ? 'bg-emerald-50/60 border-emerald-200' : 'bg-rose-50/60 border-rose-200'
-                }`;
-
-                card.innerHTML = `
-                    <div class="flex items-start justify-between mb-2">
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Question ${idx + 1}</span>
-                        <span class="inline-flex items-center space-x-1 text-xs font-bold px-2.5 py-1 rounded-lg ${
-                            isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
-                        }">
-                            <i data-lucide="${isCorrect ? 'check' : 'x'}" class="w-3.5 h-3.5"></i>
-                            <span>${isCorrect ? 'Correct' : 'Incorrect'}</span>
-                        </span>
-                    </div>
-                    <p class="font-semibold text-slate-900 mb-3 text-sm sm:text-base">${q.question}</p>
-                    <div class="space-y-1 text-xs sm:text-sm">
-                        <div class="text-slate-600">
-                            <span class="text-slate-400">Your Answer:</span> 
-                            <span class="${isCorrect ? 'text-emerald-700 font-semibold' : 'text-rose-700 font-semibold'}">
-                                ${userChoiceIndex !== undefined ? q.options[userChoiceIndex] : 'None'}
-                            </span>
-                        </div>
-                        ${!isCorrect ? `
-                            <div class="text-slate-600">
-                                <span class="text-slate-400">Correct Answer:</span> 
-                                <span class="text-emerald-700 font-semibold">${q.options[q.answer]}</span>
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-                reviewList.appendChild(card);
-            });
-
-            lucide.createIcons();
-        }
-
+        let reviewVisible = false;
         function toggleReviewSection() {
+            reviewVisible = !reviewVisible;
             const container = document.getElementById('review-container');
             const btnText = document.getElementById('review-btn-text');
-            
-            if (container.classList.contains('hidden')) {
+            if (reviewVisible) {
                 container.classList.remove('hidden');
-                btnText.innerText = "Hide Breakdown";
+                btnText.innerText = 'Hide Review';
             } else {
                 container.classList.add('hidden');
-                btnText.innerText = "Review Answers";
+                btnText.innerText = 'Review Answers';
             }
         }
 
-        function resetToHome() {
-            quizCard.classList.add('hidden');
-            resultsCard.classList.add('hidden');
-            startCard.classList.remove('hidden');
-            startCard.classList.add('view-transition');
-        }
-
-        function toggleInstructionsModal(show) {
-            const modal = document.getElementById('instructions-modal');
-            if (show) {
-                modal.classList.remove('hidden');
-            } else {
-                modal.classList.add('hidden');
+        // KEYBOARD NAVIGATION
+        document.addEventListener('keydown', (e) => {
+            const activeScreen = document.querySelector('.screen.active').id;
+            if (activeScreen === 'start-card' && e.key === 'Enter') {
+                startQuiz();
+            } else if (activeScreen === 'quiz-card') {
+                const data = quizData[currentQuestionIndex];
+                if (data.type === 'mc' && ['1', '2', '3', '4'].includes(e.key)) {
+                    const idx = parseInt(e.key) - 1;
+                    const buttons = document.querySelectorAll('.option-btn');
+                    if (buttons[idx] && selectedOptionIndex === null) {
+                        selectOption(idx);
+                    }
+                } else if (e.key === 'Enter') {
+                    if (document.activeElement && document.activeElement.tagName === 'TEXTAREA' && e.shiftKey) {
+                        return;
+                    }
+                    e.preventDefault();
+                    handleNextStep();
+                }
+            } else if (activeScreen === 'results-card' && e.key === 'Enter') {
+                startQuiz();
             }
-        }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            randomizeHeaderIcon();
+            lucide.createIcons();
+        });
     </script>
 </body>
 </html>
