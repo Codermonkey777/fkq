@@ -1,576 +1,735 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>fahhhhhhhhhhhh</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizStudio - Modern Light Edition</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Font Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+        }
 
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #f8fafc;
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.08) 0px, transparent 50%);
-      color: #0f172a;
-      min-height: 100vh;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.5rem;
-    }
+        /* Subtle Ambient Glow Backdrops for Light Theme */
+        .glow-bg {
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.08) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(168, 85, 247, 0.05) 0px, transparent 60%);
+            background-attachment: fixed;
+        }
 
-    .main-wrapper {
-      width: 100%;
-      max-width: 680px;
-      margin: auto;
-    }
+        /* Modern Frosted White Glass Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.07), 0 1px 3px rgba(0, 0, 0, 0.03);
+        }
 
-    .glass-card {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(226, 232, 240, 0.8);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.07);
-      border-radius: 24px;
-      padding: 2.5rem;
-    }
+        .glass-card-sm {
+            background: rgba(248, 250, 252, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
 
-    .glass-card-sm {
-      background: rgba(241, 245, 249, 0.6);
-      border: 1px solid rgba(226, 232, 240, 0.8);
-      border-radius: 16px;
-      padding: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      margin-bottom: 0.75rem;
-      transition: border-color 0.2s;
-    }
+        /* Hover & Elevate Styling */
+        .option-btn {
+            background-color: #f1f5f9;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-    .glass-card-sm:hover {
-      border-color: #cbd5e1;
-    }
+        .option-btn:hover:not(:disabled) {
+            border-color: rgba(99, 102, 241, 0.6);
+            background-color: #ffffff;
+            box-shadow: 0 8px 20px -6px rgba(99, 102, 241, 0.15);
+            transform: translateY(-2px);
+        }
 
-    .screen {
-      display: none;
-      width: 100%;
-    }
+        /* Keyboard Badge Styling */
+        .key-badge {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
 
-    .screen.active {
-      display: block;
-    }
+        /* Animated Progress Bar Gradient */
+        .gradient-bar {
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6, #06b6d4);
+            background-size: 200% 100%;
+            animation: gradientMove 4s ease infinite;
+        }
 
-    h1 {
-      font-size: 2.25rem;
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      color: #0f172a;
-      margin-top: 0;
-      margin-bottom: 1rem;
-      line-height: 1.2;
-    }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    p {
-      color: #64748b;
-      font-size: 1rem;
-      line-height: 1.5;
-      margin-top: 0;
-    }
+        /* Smooth View Transitions */
+        .view-transition {
+            animation: fadeInScale 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
 
-    .btn {
-      background-color: #4f46e5;
-      color: #ffffff;
-      border: none;
-      padding: 0.85rem 1.75rem;
-      border-radius: 16px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.2);
-    }
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.98) translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
 
-    .btn:hover {
-      background-color: #4338ca;
-      transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      background-color: #ffffff;
-      color: #334155;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    }
-
-    .btn-secondary:hover {
-      background-color: #f8fafc;
-      border-color: #cbd5e1;
-    }
-
-    .options-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin: 1.5rem 0;
-    }
-
-    .option-btn {
-      width: 100%;
-      background: #f8fafc;
-      border: 1.5px solid #e2e8f0;
-      color: #1e293b;
-      padding: 1rem 1.25rem;
-      border-radius: 16px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: left;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .option-btn:hover {
-      background: #ffffff;
-      border-color: #6366f1;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.08);
-    }
-
-    .option-btn.correct {
-      background: #ecfdf5 !important;
-      border-color: #10b981 !important;
-      color: #065f46 !important;
-    }
-
-    .option-btn.incorrect {
-      background: #fff1f2 !important;
-      border-color: #ef4444 !important;
-      color: #991b1b !important;
-    }
-
-    .option-btn.neutral-pick {
-      background: #eef2ff !important;
-      border-color: #6366f1 !important;
-      color: #3730a3 !important;
-    }
-
-    .key-badge {
-      background: #e2e8f0;
-      padding: 0.2rem 0.5rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-family: monospace;
-      color: #475569;
-    }
-
-    .progress-bar {
-      width: 100%;
-      background: #e2e8f0;
-      height: 8px;
-      border-radius: 9999px;
-      overflow: hidden;
-      margin-bottom: 1.5rem;
-    }
-
-    .progress-fill {
-      background: #4f46e5;
-      height: 100%;
-      width: 0%;
-      transition: width 0.3s ease;
-    }
-
-    .badge-top {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.35rem 0.85rem;
-      border-radius: 9999px;
-      background: #eef2ff;
-      border: 1px solid #c7d2fe;
-      color: #4338ca;
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .explanation-box {
-      background: #f1f5f9;
-      border-left: 4px solid #4f46e5;
-      padding: 1rem;
-      border-radius: 12px;
-      font-size: 0.9rem;
-      color: #334155;
-      margin-top: 1rem;
-      display: none;
-    }
-
-    footer {
-      border-top: 1px solid rgba(226, 232, 240, 0.8);
-      padding: 1.25rem 0;
-      text-align: center;
-      font-size: 0.75rem;
-      color: #64748b;
-      width: 100%;
-    }
-  </style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-[#f8fafc] text-slate-900 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white glow-bg">
 
-  <div class="main-wrapper">
-    <div class="glass-card">
-
-      <!-- START SCREEN -->
-      <section id="start-screen" class="screen active">
-        <div style="text-align: center; max-width: 500px; margin: 0 auto;">
-          <div class="badge-top">
-            <span>✨ Supports 1-4 & Enter Shortcuts</span>
-          </div>
-
-          <h1>
-            jack keiser is the best <span style="background: linear-gradient(to right, #4f46e5, #9333ea, #0284c7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">2012 hockey player.</span>
-          </h1>
-          
-          <p>
-            whatever i dont even care i guess you can use <b>[1-4]</b> because i coded that and uhh use <b>[Enter]</b> or click for next question
-          </p>
-
-          <!-- Settings Controls -->
-          <div style="display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin: 1.5rem 0; text-align: left;">
-            <label class="glass-card-sm">
-              <div>
-                <span style="font-size: 0.875rem; font-weight: 600; color: #1e293b; display: block;">shuffle the questions ahh</span>
-                <span style="font-size: 0.75rem; color: #64748b; display: block;">rando ahh question order</span>
-              </div>
-              <input type="checkbox" id="setting-shuffle-questions" checked style="width: 1.25rem; height: 1.25rem; accent-color: #4f46e5; cursor: pointer;">
-            </label>
-
-            <label class="glass-card-sm">
-              <div>
-                <span style="font-size: 0.875rem; font-weight: 600; color: #1e293b; display: block;">shuffle the oder of the answers (or smth)</span>
-                <span style="font-size: 0.75rem; color: #64748b; display: block;">rando ahh question answers order</span>
-              </div>
-              <input type="checkbox" id="setting-shuffle-answers" checked style="width: 1.25rem; height: 1.25rem; accent-color: #4f46e5; cursor: pointer;">
-            </label>
-
-            <label class="glass-card-sm">
-              <div>
-                <span style="font-size: 0.875rem; font-weight: 600; color: #1e293b; display: block;">show right/wrong right away</span>
-                <span style="font-size: 0.75rem; color: #64748b; display: block;">reveal correctness instantly upon picking</span>
-              </div>
-              <input type="checkbox" id="setting-instant-feedback" checked style="width: 1.25rem; height: 1.25rem; accent-color: #4f46e5; cursor: pointer;">
-            </label>
-          </div>
-
-          <div style="margin-top: 1.5rem;">
-            <button onclick="startQuiz()" class="btn" style="width: 100%;">
-              <span>start quiz</span>
-              <span class="key-badge" style="background: rgba(255,255,255,0.2); color: white;">[Enter]</span>
+    <!-- Header Navigation -->
+    <header class="border-b border-slate-200/80 bg-white/70 backdrop-blur-xl sticky top-0 z-40">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer group" onclick="resetToHome()">
+                <div class="bg-indigo-600 p-2.5 rounded-2xl text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition duration-300">
+                    <i data-lucide="zap" class="w-5 h-5 fill-white"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-lg tracking-tight text-slate-900">
+                        QuizStudio
+                    </span>
+                    <span class="text-[10px] text-indigo-600 tracking-wider uppercase font-bold">Interactive Learning</span>
+                </div>
+            </div>
+            
+            <button onclick="toggleInstructionsModal(true)" class="flex items-center space-x-2 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 px-3.5 py-2 rounded-xl transition shadow-sm">
+                <i data-lucide="code-2" class="w-4 h-4 text-indigo-600"></i>
+                <span class="hidden sm:inline">Edit Questions</span>
             </button>
-          </div>
         </div>
-      </section>
+    </header>
 
-      <!-- QUIZ SCREEN -->
-      <section id="quiz-screen" class="screen">
-        <div class="progress-bar">
-          <div id="progress-fill" class="progress-fill"></div>
-        </div>
+    <!-- Main Container -->
+    <main class="relative z-10 flex-grow max-w-4xl w-full mx-auto p-4 sm:p-6 flex items-center justify-center">
 
-        <h2 id="question-text" style="font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 1.25rem;">question goes here</h2>
+        <!-- 1. START / LANDING VIEW -->
+        <section id="start-card" class="w-full glass-card rounded-3xl p-6 sm:p-12 transition-all duration-300 view-transition">
+            <div class="text-center space-y-6 max-w-2xl mx-auto">
+                <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-semibold">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-600"></i>
+                    <span>Supports 1-4 & Enter Shortcuts</span>
+                </div>
 
-        <div id="options-grid" class="options-grid">
-          <!-- Dynamic option buttons inserted here -->
-        </div>
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                    Test Your Knowledge with <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-600 bg-clip-text text-transparent">Precision</span>
+                </h1>
+                
+                <p class="text-slate-500 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
+                    Challenge yourself with an ultra-responsive quiz interface. Use your keyboard numbers <span class="font-bold text-slate-700">[1-4]</span> and <span class="font-bold text-slate-700">[Enter]</span> for lighting-fast navigation!
+                </p>
 
-        <div id="explanation-box" class="explanation-box">
-          <!-- Explanation inserted here -->
-        </div>
+                <!-- Settings Controls -->
+                <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+                    <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer hover:border-slate-300 transition">
+                        <div class="space-y-0.5">
+                            <span class="text-sm font-semibold text-slate-800 block">Shuffle Questions</span>
+                            <span class="text-xs text-slate-500 block">Randomize question order</span>
+                        </div>
+                        <input type="checkbox" id="setting-shuffle-questions" checked class="w-5 h-5 accent-indigo-600 rounded cursor-pointer">
+                    </label>
 
-        <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
-          <button id="next-btn" onclick="nextQuestion()" class="btn" style="display: none;">
-            <span>next question</span>
-            <span class="key-badge" style="background: rgba(255,255,255,0.2); color: white;">[Enter]</span>
-          </button>
-        </div>
-      </section>
+                    <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer hover:border-slate-300 transition">
+                        <div class="space-y-0.5">
+                            <span class="text-sm font-semibold text-slate-800 block">Shuffle Options</span>
+                            <span class="text-xs text-slate-500 block">Randomize answer locations</span>
+                        </div>
+                        <input type="checkbox" id="setting-shuffle-answers" checked class="w-5 h-5 accent-indigo-600 rounded cursor-pointer">
+                    </label>
+                </div>
 
-      <!-- RESULTS SCREEN -->
-      <section id="results-screen" class="screen">
-        <div style="text-align: center; max-width: 400px; margin: 0 auto; padding: 1rem 0;">
-          <h2 style="font-size: 2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">you failed</h2>
-          <p id="result-feedback" style="margin-bottom: 0.5rem;">but you finished. good.</p>
-          <p id="score-text" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #4f46e5; margin-bottom: 1.5rem;">you scored 0/20!</p>
+                <!-- Instant Feedback Mode Toggle -->
+                <label class="flex items-center justify-between p-4 glass-card-sm rounded-2xl cursor-pointer hover:border-slate-300 transition text-left">
+                    <div class="space-y-0.5">
+                        <span class="text-sm font-semibold text-slate-800 block">Instant Answer Feedback</span>
+                        <span class="text-xs text-slate-500 block">Highlight correct/incorrect answers immediately when clicked</span>
+                    </div>
+                    <input type="checkbox" id="setting-instant-feedback" checked class="w-5 h-5 accent-indigo-600 rounded cursor-pointer">
+                </label>
 
-          <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-bottom: 1.5rem;">
-            <button onclick="startQuiz()" class="btn">
-              <span>do it again</span>
-              <span class="key-badge" style="background: rgba(255,255,255,0.2); color: white;">[Enter]</span>
+                <!-- Start Action Button -->
+                <div class="pt-4">
+                    <button onclick="startQuiz()" class="w-full sm:w-auto px-10 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-600/20 transition duration-200 active:scale-[0.98] inline-flex items-center justify-center space-x-3 text-base sm:text-lg">
+                        <span>Begin Quiz</span>
+                        <span class="text-xs bg-indigo-500/40 text-white px-2 py-0.5 rounded font-mono font-normal">[Enter]</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ACTIVE QUIZ CARD -->
+        <section id="quiz-card" class="hidden w-full glass-card rounded-3xl p-6 sm:p-10 transition-all duration-300">
+            <!-- Header Progress & Counter -->
+            <div class="space-y-3 mb-8">
+                <div class="flex justify-between items-center text-xs sm:text-sm font-bold tracking-wider text-slate-500">
+                    <span id="question-tracker" class="uppercase text-slate-600">QUESTION 1 OF 5</span>
+                    <span id="progress-percentage" class="text-indigo-600 font-extrabold">20%</span>
+                </div>
+                <!-- Animated Progress Bar -->
+                <div class="w-full bg-slate-200/80 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-200">
+                    <div id="progress-bar" class="gradient-bar h-full w-0 transition-all duration-500 ease-out rounded-full"></div>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="mb-8 space-y-3">
+                <h2 id="question-text" class="text-xl sm:text-2xl font-bold text-slate-900 leading-relaxed tracking-tight">
+                    <!-- Question populates dynamically -->
+                </h2>
+            </div>
+
+            <!-- Options Grid -->
+            <div id="options-container" class="grid grid-cols-1 gap-3 sm:gap-4 mb-8">
+                <!-- Options populate dynamically -->
+            </div>
+
+            <!-- Explanatory Feedback Box -->
+            <div id="explanation-box" class="hidden mb-8 p-4 rounded-2xl bg-indigo-50/70 border border-indigo-100 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                <!-- Dynamic feedback comment -->
+            </div>
+
+            <!-- Footer Controls -->
+            <div class="flex justify-between items-center border-t border-slate-200/80 pt-6">
+                <button id="btn-prev" onclick="navigateQuestion(-1)" class="opacity-0 pointer-events-none px-4 py-2.5 text-slate-500 hover:text-slate-800 flex items-center space-x-2 rounded-xl transition text-sm font-semibold">
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                    <span>Previous</span>
+                </button>
+
+                <button id="btn-next" onclick="navigateQuestion(1)" disabled class="px-7 py-3.5 bg-slate-200 text-slate-400 font-semibold rounded-2xl transition flex items-center space-x-2 text-sm">
+                    <span id="next-btn-text">Next Question</span>
+                    <span id="next-key-badge" class="hidden text-[10px] bg-white/30 text-white px-1.5 py-0.5 rounded font-mono">[Enter]</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 3. RESULTS SUMMARY CARD -->
+        <section id="results-card" class="hidden w-full glass-card rounded-3xl p-6 sm:p-12 transition-all duration-300">
+            <div class="text-center space-y-8 max-w-2xl mx-auto">
+                <div class="inline-flex p-5 rounded-3xl bg-indigo-50 border border-indigo-100 shadow-sm">
+                    <i id="result-icon" data-lucide="trophy" class="w-14 h-14 text-amber-500"></i>
+                </div>
+
+                <div class="space-y-2">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Quiz Completed!</h2>
+                    <p id="result-feedback" class="text-slate-500 text-sm sm:text-base">Outstanding job finishing the assessment!</p>
+                </div>
+
+                <!-- Score Metric Card -->
+                <div class="p-8 glass-card-sm border border-slate-200 rounded-3xl inline-block w-full sm:w-auto min-w-[280px]">
+                    <div class="text-xs font-extrabold text-indigo-600 uppercase tracking-widest mb-1">Final Score</div>
+                    <div class="text-5xl font-black text-slate-900 tracking-tight" id="final-score-text">0 / 0</div>
+                    <div class="text-sm font-bold text-slate-500 mt-2" id="final-percentage-text">(0%)</div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap justify-center gap-4 pt-2">
+                    <button onclick="startQuiz()" class="px-7 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl transition shadow-lg shadow-indigo-600/20 inline-flex items-center space-x-2 text-sm">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                        <span>Retake Quiz</span>
+                        <span class="text-xs bg-indigo-500/40 text-white px-2 py-0.5 rounded font-mono font-normal">[Enter]</span>
+                    </button>
+                    <button onclick="toggleReviewSection()" class="px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-2xl border border-slate-200 transition inline-flex items-center space-x-2 text-sm shadow-sm">
+                        <i data-lucide="eye" class="w-4 h-4 text-slate-500"></i>
+                        <span id="review-btn-text">Review Answers</span>
+                    </button>
+                </div>
+
+                <!-- Review Section -->
+                <div id="review-container" class="hidden text-left pt-6 border-t border-slate-200/80 space-y-4 max-h-[420px] overflow-y-auto pr-2">
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 flex items-center space-x-2">
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-indigo-600"></i>
+                        <span>Detailed Breakdown</span>
+                    </h3>
+                    <div id="review-list" class="space-y-4">
+                        <!-- Dynamic Review Items -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-slate-200/80 py-5 text-center text-xs text-slate-500">
+        QuizStudio &bull; Crafted with HTML, Tailwind CSS & Vanilla JS
+    </footer>
+
+    <!-- INSTRUCTIONS / EDIT MODAL -->
+    <div id="instructions-modal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-card rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto border border-slate-200">
+            <button onclick="toggleInstructionsModal(false)" class="absolute top-6 right-6 text-slate-400 hover:text-slate-700 p-1 rounded-xl hover:bg-slate-100 transition">
+                <i data-lucide="x" class="w-6 h-6"></i>
             </button>
-            <button onclick="toggleReviewSection()" class="btn btn-secondary">
-              <span id="review-btn-text">review stuff</span>
-            </button>
-          </div>
 
-          <div id="review-container" style="display: none; text-align: left; border-top: 1px solid #e2e8f0; padding-top: 1rem; max-height: 240px; overflow-y: auto; gap: 0.5rem; flex-direction: column;">
-            <!-- Review items injected dynamically -->
-          </div>
+            <div class="flex items-center space-x-3 text-indigo-600">
+                <i data-lucide="edit-3" class="w-6 h-6"></i>
+                <h3 class="text-xl font-bold text-slate-900">How to Edit Questions</h3>
+            </div>
+
+            <div class="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p>
+                    Questions are stored at the top of the script block in this <code class="text-indigo-600 font-mono font-bold">index.html</code> file.
+                </p>
+                <div class="bg-slate-900 text-slate-100 rounded-2xl p-4 space-y-1 font-mono text-xs">
+                    <span class="text-slate-400">// Open index.html and locate:</span><br>
+                    <span class="text-purple-400">const</span> <span class="text-blue-400">QUIZ_DATA</span> = [ ... ];
+                </div>
+                <p>Format structure for each item:</p>
+                <pre class="bg-slate-900 text-slate-100 rounded-2xl p-4 overflow-x-auto text-xs font-mono">
+{
+  id: 1,
+  question: "Your custom question here?",
+  options: ["Option A", "Option B", "Option C", "Option D"],
+  answer: 2, // 0 = A, 1 = B, 2 = C, 3 = D
+  explanation: "Optional brief explanation text."
+}</pre>
+            </div>
+
+            <div class="pt-2">
+                <button onclick="toggleInstructionsModal(false)" class="w-full py-3.5 bg-slate-900 text-white font-semibold rounded-2xl hover:bg-slate-800 transition">
+                    Close
+                </button>
+            </div>
         </div>
-      </section>
-
     </div>
-  </div>
 
-  <footer>
-    Copyright Gabe Jew Productions &bull; Crafted with HTML & Vanilla JS
-  </footer>
+    <!-- JAVASCRIPT ENGINE -->
+    <script>
+        /**
+         * =================================================================
+         * 📝 EDIT YOUR QUIZ QUESTIONS HERE!
+         * =================================================================
+         */
+        const QUIZ_DATA = [
+            {
+                id: 1,
+                question: "Which language runs natively inside web browsers?",
+                options: ["Java", "C++", "Python", "JavaScript"],
+                answer: 3,
+                explanation: "JavaScript is the primary programming language natively executed by modern web browsers."
+            },
+            {
+                id: 2,
+                question: "What does CSS stand for in web development?",
+                options: ["Cascading Style Sheets", "Central Style Service", "Control Sheet System", "Colorful Style System"],
+                answer: 0,
+                explanation: "CSS stands for Cascading Style Sheets, used to style HTML markup."
+            },
+            {
+                id: 3,
+                question: "Which HTML tag is used to attach client-side scripts?",
+                options: ["<script>", "<style>", "<code_block>", "<js>"],
+                answer: 0,
+                explanation: "The <script> tag embeds executable JavaScript code."
+            },
+            {
+                id: 4,
+                question: "What CSS layout model provides a 1-dimensional alignment mechanism?",
+                options: ["Grid", "Flexbox", "Table", "Position"],
+                answer: 1,
+                explanation: "Flexbox (Flexible Box Layout) arranges items along a single axis (row or column)."
+            },
+            {
+                id: 5,
+                question: "Which HTTP status code represents 'Not Found'?",
+                options: ["200", "500", "404", "403"],
+                answer: 2,
+                explanation: "HTTP 404 indicates that the requested server resource could not be found."
+            }
+        ];
 
-  <script>
-    const RAW_QUIZ_DATA = [
-      {
-        id: 1,
-        question: "what is the correct order of church hierarchy top to bottom",
-        options: [
-          "pope cardinal archbishop bishop priest deacon",
-          "pope patriarch bishop priest cardinal deacon",
-          "patriarch pope cardinal priest bishop deacon",
-          "pope archbishop cardinal bishop deacon priest"
-        ],
-        answer: 0,
-        explanation: "youre so stupid a golden retriever could score higher than u on this test even if u got that right u probably guessed like a lucky donkey"
-      },
-      {
-        id: 2,
-        question: "what does filioque mean in latin",
-        options: ["and the holy spirit", "and the son", "through the church", "from the father"],
-        answer: 1,
-        explanation: "your brain is literally as empty as a deflated balloon why are u even trying even if u somehow clicked the right answer u still lack basic cognitive functions"
-      },
-      {
-        id: 3,
-        question: "which monk group founded by st bruno in 1084 is famous for total silence",
-        options: ["benedictines", "carthusians", "cistercians", "norbertines"],
-        answer: 1,
-        explanation: "did u know jack keiser the 2012 legend from shattuck is literally the greatest human to ever step on ice his hands are like pure silk and he snipes top shelf faster than u can fail this question he is 10000x smarter and cooler than u will ever be absolute hockey god"
-      },
-      {
-        id: 4,
-        question: "who started the reconquista in spain",
-        options: ["peter 3 of aragon", "charles of anjou", "pelayo", "william the conqueror"],
-        answer: 2,
-        explanation: "youre so mindbogglingly dumb that u make rocks look like albert einstein honestly even if u got this right it was a complete misclick"
-      },
-      {
-        id: 5,
-        question: "which king won stamford bridge in 1066",
-        options: ["knut the great", "edward the confessor", "harold godwinson", "william of normandy"],
-        answer: 2,
-        explanation: "bro u are so hopelessly stupid it actually hurts to watch u take this quiz even if u somehow selected the right choice u still got zero IQ"
-      },
-      {
-        id: 6,
-        question: "what main feudal rule did william the conqueror make in england",
-        options: [
-          "he made everyone pay zero tax",
-          "everyone had to swear direct fealty to the king",
-          "barons could print fake money",
-          "knights got banned from owning dirt"
-        ],
-        answer: 1,
-        explanation: "jack keiser 2012 god at shattuck st marys is literally the most gifted flawless hockey prodigy in human history his dangles literally break ankles through the screen while u cant even read a basic question right jack keiser is the indisputable goat"
-      },
-      {
-        id: 7,
-        question: "what was scutage under king henry 2",
-        options: [
-          "tax paid by knights instead of fighting",
-          "sword fight between two guys",
-          "free land for bishops",
-          "random court jury stuff"
-        ],
-        answer: 0,
-        explanation: "youre so tremendously idiotic your single braincell is fighting for second place even if u got this right it proves literally nothing about your low intelligence"
-      },
-      {
-        id: 8,
-        question: "why did henry 2 guys kill thomas becket",
-        options: [
-          "he tried stealing the crown",
-          "he fought the king controlling the church at clarendon",
-          "he helped france in the crusade",
-          "he refused to crown henrys baby"
-        ],
-        answer: 1,
-        explanation: "youre so unbelievably brainless u probably struggle to breathe and walk at the same time even if u got that correct it was just pure blind luck"
-      },
-      {
-        id: 9,
-        question: "where did barons make king john sign the magna carta in 1215",
-        options: ["hastings", "clarendon", "runnymede", "clermont"],
-        answer: 2,
-        explanation: "jack keiser at shattuck is literally built different the entire world bows down to his insane hockey iq and silky mitts he skates at lightspeed and makes impossible plays look easy unlike u who is failing a simple trivia question jack keiser is a living legend"
-      },
-      {
-        id: 10,
-        question: "who was the very first capetian king of france",
-        options: ["philip 2", "hugh capet", "st louis 9", "charles of anjou"],
-        answer: 1,
-        explanation: "youre so stupid a brick has more critical thinking skills than u even if u clicked the right answer u should still be embarrassed"
-      },
-      {
-        id: 11,
-        question: "what strange idea did the albigensians believe about the world",
-        options: [
-          "matter is evil spirit is good",
-          "the pope has no power over anyone",
-          "jesus was just a normal guy",
-          "priests must be sinless to give sacraments"
-        ],
-        answer: 0,
-        explanation: "your IQ is actually in the negative numbers bro u are so clueless even if u got that right it was 100 percent a mistake"
-      },
-      {
-        id: 12,
-        question: "how did emperor otto 1 stop government jobs from becoming hereditary family stuff",
-        options: [
-          "he picked celibate priests for gov jobs",
-          "he banned all marriage for nobles",
-          "he fired everyone every two weeks",
-          "he adopted all prospective heirs"
-        ],
-        answer: 0,
-        explanation: "jack keiser the 2012 king of shattuck is destined for the nhl hall of fame his shot is a literal rocket and his vision on the ice is superhuman he is elite at literally everything while u are down here being dumb on a quiz website"
-      },
-      {
-        id: 13,
-        question: "what did guelphs fight for in italy",
-        options: [
-          "pro emperor control",
-          "pro papacy and freedom",
-          "islamic rule in sicily",
-          "france and england alliance"
-        ],
-        answer: 1,
-        explanation: "youre so utterly foolish a toddler would beat u in a debate even if u got that answer correct u are still hopelessly dense"
-      },
-      {
-        id: 14,
-        question: "what was simony back then",
-        options: ["lay investiture", "concubinage", "buying or selling church stuff and positions", "excommunication"],
-        answer: 2,
-        explanation: "youre so insanely dumb it actually defies science how u function daily even if u managed to pick the right one u still lack any real brainpower"
-      },
-      {
-        id: 15,
-        question: "what did emperor henry 4 do outside canossa castle in the snow",
-        options: [
-          "gave up his crown and left",
-          "knelt barefoot in snow three days",
-          "paid a big pile of gold",
-          "walked barefoot to rome"
-        ],
-        answer: 1,
-        explanation: "jack keiser 2012 shattuck superstar is perfection personified on skates his hockey iq is infinity level and he embarrasses defensemen for fun supreme ruler of the rink unlike u who is supreme ruler of being stupid"
-      },
-      {
-        id: 16,
-        question: "which order did st dominic guzman start to fight heresy with learning",
-        options: ["franciscans", "dominicans", "carthusians", "teutonic order"],
-        answer: 1,
-        explanation: "youre so massively unsmart that even a goldfish has a better memory than u even if u got this right it was a total fluke"
-      },
-      {
-        id: 17,
-        question: "what did people yell at council of clermont for the first crusade",
-        options: ["deus vult", "semper fi", "pax romana", "in hoc signo vinces"],
-        answer: 0,
-        explanation: "youre so ridiculously brainless you probably forgot your own name while reading this even if u got it right u still fail at life"
-      },
-      {
-        id: 18,
-        question: "which one of these was NOT a crusader state",
-        options: ["edessa", "antioch", "jerusalem", "duchy of normandy"],
-        answer: 3,
-        explanation: "jack keiser is the greatest 2012 hockey player on planet earth no competition at all at shattuck st marys he dominates every single shift with godly skill and ultimate swagger absolute master of the sport while u struggle with basic history"
-      },
-      {
-        id: 19,
-        question: "what bad thing happened during the fourth crusade",
-        options: [
-          "crusaders sacked constantinople",
-          "jerusalem exploded",
-          "the pope got kidnapped",
-          "they lost at stamford bridge"
-        ],
-        answer: 0,
-        explanation: "youre so stupid that if u tried to think your head would start smoking even if u got that right you are still super dumb"
-      },
-      {
-        id: 20,
-        question: "what paper ended the investiture fight in 1122",
-        options: ["treaty of wallingford", "constitutions of clarendon", "concordat of worms", "council of clermont"],
-        answer: 2,
-        explanation: "youre so impossibly dense that light bends around u even if u got this final question right you are still the most foolish person alive"
-      }
-    ];
+        // --- STATE CONTROL ---
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let userAnswers = {}; // Index mapping -> chosen option index
+        let instantFeedbackEnabled = true;
 
-    let quizData = [];
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let selectedOptionIndex = null;
-    let userAnswersLog = [];
+        // --- DOM REFERENCE ---
+        const startCard = document.getElementById('start-card');
+        const quizCard = document.getElementById('quiz-card');
+        const resultsCard = document.getElementById('results-card');
 
-    function showScreen(screenId) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById(screenId).classList.add('active');
-    }
+        const questionTracker = document.getElementById('question-tracker');
+        const progressPercentage = document.getElementById('progress-percentage');
+        const progressBar = document.getElementById('progress-bar');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationBox = document.getElementById('explanation-box');
 
-    function startQuiz() {
-      quizData = JSON.parse(JSON.stringify(RAW_QUIZ_DATA));
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        const nextBtnText = document.getElementById('next-btn-text');
+        const nextKeyBadge = document.getElementById('next-key-badge');
 
-      const shuffleQuestions = document.getElementById('setting-shuffle-questions').checked;
-      if (shuffleQuestions) {
-        quizData.sort(() => Math.random() - 0.5);
-      }
+        // --- UTILITY ---
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
 
-      const shuffleAnswers = document.getElementById('setting-shuffle-answers').checked;
-      if (shuffleAnswers) {
-        quizData.forEach(q => {
-          let originalOptionsWithCorrectFlag = q.options.map((opt, idx) => ({
-            text: opt,
-            isCorrect: idx === q.answer
-          }));
-          originalOptionsWithCorrectFlag.sort(() => Math.random() - 0.5);
-          q.options = originalOptionsWithCorrectFlag.map(o => o.text);
-          q.answer = originalOptionsWithCorrectFlag.findIndex(o => o.isCorrect);
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            setupKeyboardListeners();
         });
-      }
 
-      currentQuestionIndex = 0;
-      score = 0;
-      userAnswersLog = [];
-      showScreen('quiz-screen');
-      loadQuestion();
-    }
+        // --- KEYBOARD SHORTCUTS ENGINE ---
+        function setupKeyboardListeners() {
+            window.addEventListener('keydown', (e) => {
+                // Ignore keypresses if user is typing inside an input field
+                if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
 
-    function loadQuestion() {
-      selectedOptionIndex = null;
-      const data = quizData[currentQuestionIndex];
-      
-      document.getElementById('question-text').innerText = data.question;
-      document.getElementById('explanation-box').style.display = 'none';
-      document.getElementById('next-btn').style.display = 'none';
-      
-      const progressPercent
+                const key = e.key;
+
+                // 1. WELCOME SCREEN: [Enter] to start
+                if (!startCard.classList.contains('hidden')) {
+                    if (key === 'Enter') {
+                        e.preventDefault();
+                        startQuiz();
+                    }
+                    return;
+                }
+
+                // 2. RESULTS SCREEN: [Enter] to restart
+                if (!resultsCard.classList.contains('hidden')) {
+                    if (key === 'Enter') {
+                        e.preventDefault();
+                        startQuiz();
+                    }
+                    return;
+                }
+
+                // 3. QUIZ SCREEN: Options 1-4 & Enter navigation
+                if (!quizCard.classList.contains('hidden')) {
+                    // Option Selection (Keys 1, 2, 3, 4 or Numpad 1-4)
+                    if (['1', '2', '3', '4'].includes(key)) {
+                        const optIdx = parseInt(key, 10) - 1;
+                        if (currentQuestions[currentIndex] && optIdx < currentQuestions[currentIndex].options.length) {
+                            selectOption(optIdx);
+                        }
+                    }
+
+                    // Confirm / Next Question (Enter or Space)
+                    if (key === 'Enter' || key === ' ') {
+                        e.preventDefault();
+                        const hasAnswered = userAnswers.hasOwnProperty(currentIndex);
+                        if (hasAnswered) {
+                            navigateQuestion(1);
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- QUIZ LOGIC ---
+        function startQuiz() {
+            const shouldShuffleQuestions = document.getElementById('setting-shuffle-questions').checked;
+            const shouldShuffleAnswers = document.getElementById('setting-shuffle-answers').checked;
+            instantFeedbackEnabled = document.getElementById('setting-instant-feedback').checked;
+
+            let preparedQuestions = JSON.parse(JSON.stringify(QUIZ_DATA));
+
+            if (shouldShuffleAnswers) {
+                preparedQuestions = preparedQuestions.map(q => {
+                    const originalCorrectText = q.options[q.answer];
+                    const shuffledOptions = shuffleArray(q.options);
+                    const newCorrectIndex = shuffledOptions.indexOf(originalCorrectText);
+                    return {
+                        ...q,
+                        options: shuffledOptions,
+                        answer: newCorrectIndex
+                    };
+                });
+            }
+
+            if (shouldShuffleQuestions) {
+                preparedQuestions = shuffleArray(preparedQuestions);
+            }
+
+            currentQuestions = preparedQuestions;
+            currentIndex = 0;
+            userAnswers = {};
+
+            startCard.classList.add('hidden');
+            resultsCard.classList.add('hidden');
+            quizCard.classList.remove('hidden');
+            quizCard.classList.add('view-transition');
+
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = currentQuestions[currentIndex];
+            const total = currentQuestions.length;
+
+            // Progress Header
+            questionTracker.innerText = `QUESTION ${currentIndex + 1} OF ${total}`;
+            const percentage = Math.round(((currentIndex + 1) / total) * 100);
+            progressPercentage.innerText = `${percentage}%`;
+            progressBar.style.width = `${percentage}%`;
+
+            questionText.innerText = q.question;
+            optionsContainer.innerHTML = '';
+            explanationBox.classList.add('hidden');
+
+            const hasAnswered = userAnswers.hasOwnProperty(currentIndex);
+            const selectedOptIndex = userAnswers[currentIndex];
+
+            q.options.forEach((optText, optIndex) => {
+                const isSelected = selectedOptIndex === optIndex;
+                const isCorrect = q.answer === optIndex;
+
+                const btn = document.createElement('button');
+                btn.onclick = () => selectOption(optIndex);
+
+                let styling = "w-full text-left p-4 option-btn flex items-center justify-between group ";
+
+                if (hasAnswered && instantFeedbackEnabled) {
+                    if (isCorrect) {
+                        styling += "bg-emerald-50 border-emerald-500 text-emerald-900 shadow-md shadow-emerald-500/10 ";
+                    } else if (isSelected && !isCorrect) {
+                        styling += "bg-rose-50 border-rose-400 text-rose-900 shadow-md shadow-rose-500/10 ";
+                    } else {
+                        styling += "opacity-50 border-slate-200 text-slate-400 ";
+                    }
+                } else if (isSelected) {
+                    styling += "bg-indigo-50/90 border-indigo-600 text-indigo-950 shadow-md shadow-indigo-600/10 ring-1 ring-indigo-600/30 ";
+                } else {
+                    styling += "text-slate-800 ";
+                }
+
+                btn.className = styling;
+
+                // Status Marker or Checkmark
+                let endIcon = `<div class="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center transition ${isSelected ? 'border-indigo-600 bg-indigo-600' : ''}">${isSelected ? '<i data-lucide="check" class="w-3.5 h-3.5 text-white"></i>' : ''}</div>`;
+                
+                if (hasAnswered && instantFeedbackEnabled) {
+                    if (isCorrect) {
+                        endIcon = `<div class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center"><i data-lucide="check" class="w-4 h-4"></i></div>`;
+                    } else if (isSelected && !isCorrect) {
+                        endIcon = `<div class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center"><i data-lucide="x" class="w-4 h-4"></i></div>`;
+                    }
+                }
+
+                btn.innerHTML = `
+                    <div class="flex items-center space-x-3.5">
+                        <span class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold ${
+                            isSelected ? 'bg-indigo-600 text-white' : 'bg-slate-200/80 text-slate-600'
+                        }">
+                            ${String.fromCharCode(65 + optIndex)}
+                        </span>
+                        <span class="text-sm sm:text-base font-medium">${optText}</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="key-badge text-[11px] font-semibold text-slate-500 px-1.5 py-0.5 rounded">${optIndex + 1}</span>
+                        ${endIcon}
+                    </div>
+                `;
+                optionsContainer.appendChild(btn);
+            });
+
+            // Display Explanation Box if present
+            if (hasAnswered && instantFeedbackEnabled && q.explanation) {
+                explanationBox.innerHTML = `
+                    <div class="flex items-start space-x-2.5">
+                        <i data-lucide="info" class="w-4 h-4 text-indigo-600 flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <span class="font-bold text-indigo-950 block mb-0.5">Explanation</span>
+                            ${q.explanation}
+                        </div>
+                    </div>
+                `;
+                explanationBox.classList.remove('hidden');
+            }
+
+            lucide.createIcons();
+
+            // Previous Button visibility
+            if (currentIndex > 0) {
+                btnPrev.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                btnPrev.classList.add('opacity-0', 'pointer-events-none');
+            }
+
+            // Next Button State
+            if (hasAnswered) {
+                btnNext.removeAttribute('disabled');
+                btnNext.className = "px-7 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-600/20 transition flex items-center space-x-2 text-sm cursor-pointer active:scale-95";
+                nextKeyBadge.classList.remove('hidden');
+            } else {
+                btnNext.setAttribute('disabled', 'true');
+                btnNext.className = "px-7 py-3.5 bg-slate-200 text-slate-400 font-semibold rounded-2xl transition flex items-center space-x-2 text-sm cursor-not-allowed";
+                nextKeyBadge.classList.add('hidden');
+            }
+
+            nextBtnText.innerText = currentIndex === total - 1 ? 'View Results' : 'Next Question';
+        }
+
+        function selectOption(index) {
+            userAnswers[currentIndex] = index;
+            renderQuestion();
+        }
+
+        function navigateQuestion(direction) {
+            const newIndex = currentIndex + direction;
+
+            if (newIndex >= 0 && newIndex < currentQuestions.length) {
+                currentIndex = newIndex;
+                renderQuestion();
+            } else if (newIndex >= currentQuestions.length) {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizCard.classList.add('hidden');
+            resultsCard.classList.remove('hidden');
+            resultsCard.classList.add('view-transition');
+
+            let score = 0;
+            currentQuestions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.answer) {
+                    score++;
+                }
+            });
+
+            const total = currentQuestions.length;
+            const percentage = Math.round((score / total) * 100);
+
+            document.getElementById('final-score-text').innerText = `${score} / ${total}`;
+            document.getElementById('final-percentage-text').innerText = `(${percentage}%)`;
+
+            const iconEl = document.getElementById('result-icon');
+            const feedbackEl = document.getElementById('result-feedback');
+
+            if (percentage === 100) {
+                feedbackEl.innerText = "Flawless score! You mastered every single question!";
+                iconEl.setAttribute('data-lucide', 'award');
+                iconEl.className = "w-14 h-14 text-amber-500";
+            } else if (percentage >= 70) {
+                feedbackEl.innerText = "Great work! You demonstrated solid understanding.";
+                iconEl.setAttribute('data-lucide', 'thumbs-up');
+                iconEl.className = "w-14 h-14 text-indigo-600";
+            } else {
+                feedbackEl.innerText = "Good effort! Review your breakdown below and try again.";
+                iconEl.setAttribute('data-lucide', 'refresh-cw');
+                iconEl.className = "w-14 h-14 text-slate-400";
+            }
+
+            lucide.createIcons();
+            buildReviewList();
+        }
+
+        function buildReviewList() {
+            const reviewList = document.getElementById('review-list');
+            reviewList.innerHTML = '';
+
+            currentQuestions.forEach((q, idx) => {
+                const userChoiceIndex = userAnswers[idx];
+                const isCorrect = userChoiceIndex === q.answer;
+
+                const card = document.createElement('div');
+                card.className = `p-4 sm:p-5 rounded-2xl border ${
+                    isCorrect ? 'bg-emerald-50/60 border-emerald-200' : 'bg-rose-50/60 border-rose-200'
+                }`;
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Question ${idx + 1}</span>
+                        <span class="inline-flex items-center space-x-1 text-xs font-bold px-2.5 py-1 rounded-lg ${
+                            isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
+                        }">
+                            <i data-lucide="${isCorrect ? 'check' : 'x'}" class="w-3.5 h-3.5"></i>
+                            <span>${isCorrect ? 'Correct' : 'Incorrect'}</span>
+                        </span>
+                    </div>
+                    <p class="font-semibold text-slate-900 mb-3 text-sm sm:text-base">${q.question}</p>
+                    <div class="space-y-1 text-xs sm:text-sm">
+                        <div class="text-slate-600">
+                            <span class="text-slate-400">Your Answer:</span> 
+                            <span class="${isCorrect ? 'text-emerald-700 font-semibold' : 'text-rose-700 font-semibold'}">
+                                ${userChoiceIndex !== undefined ? q.options[userChoiceIndex] : 'None'}
+                            </span>
+                        </div>
+                        ${!isCorrect ? `
+                            <div class="text-slate-600">
+                                <span class="text-slate-400">Correct Answer:</span> 
+                                <span class="text-emerald-700 font-semibold">${q.options[q.answer]}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+                reviewList.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        function toggleReviewSection() {
+            const container = document.getElementById('review-container');
+            const btnText = document.getElementById('review-btn-text');
+            
+            if (container.classList.contains('hidden')) {
+                container.classList.remove('hidden');
+                btnText.innerText = "Hide Breakdown";
+            } else {
+                container.classList.add('hidden');
+                btnText.innerText = "Review Answers";
+            }
+        }
+
+        function resetToHome() {
+            quizCard.classList.add('hidden');
+            resultsCard.classList.add('hidden');
+            startCard.classList.remove('hidden');
+            startCard.classList.add('view-transition');
+        }
+
+        function toggleInstructionsModal(show) {
+            const modal = document.getElementById('instructions-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
