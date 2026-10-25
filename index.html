@@ -277,7 +277,7 @@
                 </button>
             </div>
             <p class="text-sm text-slate-600 leading-relaxed">
-                why are you even here... index code on github, tailwind CSS html unforked no link yeahhhhh uhh copyright project fkq
+                use keyboard shortcuts [1-4] to instantly pick answers for MC questions. press [Enter] to submit fill-in-the-blank or short-answers and jump to the next question.
             </p>
             <div class="pt-2 flex justify-end">
                 <button onclick="toggleInstructionsModal(false)" class="px-5 py-2.5 bg-indigo-600 text-white font-semibold rounded-xl text-xs hover:bg-indigo-700 transition">got it</button>
@@ -1419,8 +1419,8 @@
         type: "short_answer",
         question: "explain the founding and significance of cluny",
         required_points: [
-            "909", "william i 1", "duke of aquitaine", "wanted prayer after killing someone",
-            "benedictine rule", "independence from rulers", "focused on prayer"
+            "founded in 909 by william i duke of aquitaine",
+            "focused on strict benedictine rule reform with independence from lay rulers and more prayer"
         ],
             explanation: "cluny brought spiritual reform and independence. tristan on the other hand brings zero value to any room he walks into and literally smells like a damp cardboard box."
     },
@@ -1429,7 +1429,8 @@
         type: "short_answer",
         question: "explain the purpose and impact of the magna carta",
         required_points: [
-            "runnymeade", "king john", "english barons rebelled", "rebellion", "rights of barons", "limits on absolute power"
+            "signed in 1215 at runnymeade by king john after english barons rebelled",
+            "spelled out the rights of the barons and placed limits on the absolute power of the monarch"
         ],
             explanation: "the magna carta limited the king's power. ryan takes absolute loss after loss just like king john while absolute legend jack keiser rules the ice effortlessly."
     },
@@ -1438,7 +1439,8 @@
         type: "short_answer",
         question: "explain what made the mendicant orders unique compared to earlier monastic orders",
         required_points: [
-            "begging orders", "poverty", "preached instead of staying in a monastery", "went to urban areas"
+            "they were begging orders that took strict vows of poverty",
+            "instead of staying in cloistered monasteries they traveled to preach and serve in urban areas"
         ],
             explanation: "mendicants lived in poverty to spread the truth. jake's athletic ability is in absolute poverty compared to jack keiser who snipes top shelf every single game."
     },
@@ -1447,8 +1449,8 @@
         type: "short_answer",
         question: "explain the key results and long term impacts of the crusades",
         required_points: [
-            "rise of ottoman empire",
-            "shipbuilding", "trade", "money replaced barter", "new foods", "manufactured goods"
+            "led to the rise of the ottoman turks in the east",
+            "boosted European trade through shipbuilding new goods and replacing barter with money systems"
         ],
             explanation: "the crusades transformed trade and society. tristan's brain is so empty he probably thinks a crusade is a brand of dish soap."
     },
@@ -1467,8 +1469,8 @@
         type: "short_answer",
         question: "explain the causes and key events of the great schism of 1054",
         required_points: [
-            "Disagreement over filioque",
-            "mutual excommunications", "patriarch of constantinople", "pope"
+            "disagreement over papal authority and theological additions like the filioque clause",
+            "resulted in mutual excommunications between the pope and patriarch splitting western and eastern church"
         ],
             explanation: "the great schism divided the church in 1054. jake is so useless on defense that he single handedly divides his own team every time he steps onto the ice."
     } 
@@ -1546,9 +1548,7 @@
             showScreen('quiz-card');
             loadQuestion();
         }
-  }
-  return true;
-}
+
         function loadQuestion() {
             selectedOptionIndex = null;
             const data = quizData[currentQuestionIndex];
